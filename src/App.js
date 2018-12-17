@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Container from './Container'
-import AddressForm from './components/AddressForm'
+import AddressForm from './usersComponents/AddressForm'
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
 import AppNavbar from './components/Layout/AppNavbar'
 import Dashboard from './components/Layout/Dashboard'
