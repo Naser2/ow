@@ -9,7 +9,7 @@ export default class AppNavbar extends Component {
         <nav className="navbar navbar-expand-md navbar-dark bg-primary mb-4">
           <div className="container">
             <Link to="/" className="navbar-brand">
-              Clients Pannel
+              Admin Pannel
               </Link>
           <button className="navbar-toggler"
           type="button"
@@ -22,6 +22,9 @@ export default class AppNavbar extends Component {
       <li className="nav-item">
       <Link to="/" className="nav-link"> 
       Dashboard
+      </Link>
+      <Link to="/newAddress" className="nav-link"> 
+      AddressForm
       </Link>
       </li>
       </ul>

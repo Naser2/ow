@@ -1,9 +1,11 @@
-import React from 'react'
-import {Component} from 'react'
 
-class Clients extends Component{
-  render(){
-    const clients=[{
+import {Link} from 'react-router-dom'
+import React, { Component } from 'react'
+
+export default class Clients extends Component {
+  render() {
+    const clients = [
+      {
       id:'4554543435',
       first_name:'Ricko',
       last_name: 'Semba',
@@ -26,20 +28,54 @@ class Clients extends Component{
       email:'aimee@gmail.com',
       phone:'+1(234)692-4573',
       address: "83 Brookdale Ave, Brooklyn, NY 10220"
-    }]
-    if(clients){
-    return  (
-      <div className="row">
-        <div className="col-md-6">
-        <h2> <i className="fas fa-users"/> clients{' '}</h2>
-        </div>
-      </div>)
-    }else {
-       return <h1>Loadinn Clients</h1> 
     }
- 
-  }
-  
-}
+  ];
 
-export default Clients
+    if(clients){
+      return(
+      <div>
+        <div className="row">
+          <div className="col-md-6">
+            <h2>{' '}
+              <i className="fas fa-users" /> Clients{' '}
+            </h2>
+          </div>
+          <div className="col-md-6" />
+        </div>
+  
+        <table className="table table-stripped">
+          <thead className="thead-inverse">
+            <tr>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Address</th>
+              <th />
+            </tr>
+          </thead>
+          <tbody>
+  
+            { clients.map( client => {
+              console.log("Hello CLIENTTTT:", client)
+             return <tr key={client.id}>
+              <td>{client.first_name} {client.last_name}</td>
+              <td>{client.email}</td>
+              <td>{client.phone}</td>
+              <td>{client.address}</td>
+              <td>
+                <Link to={`/clients/${client.id}`} className="btn btn-secondary btn-sm">
+                <i className="fas fa-arrow-circle-right"></i>  Details 
+                </Link>
+              </td>
+            </tr>
+                  
+            })}
+            
+          </tbody>
+        </table>
+      </div>
+      );
+   } else {
+     return <h1>Loadinn Clients</h1> 
+  }
+ }
+}
