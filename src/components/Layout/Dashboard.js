@@ -1,11 +1,17 @@
 import React from 'react'
-import Clients from 'components/Clients/Clients'
-import SideBar from 'components/Layout/SideBar'
+import Clients from '../Clients/Clients'
+import Sidebar from '../Layout/Sidebar'
 
 export default function Dashboard() {
   return (
-    <div>
-      <h1>in Dashboard</h1> 
+    <div  className="row">
+      <div className="col-md-10">
+        <Clients /> 
+      </div>
+        
+      <div className="col-md-2">
+         <Sidebar/> 
+      </div>
     </div>
   )
 }
