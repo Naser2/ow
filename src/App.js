@@ -1,26 +1,21 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
 import Container from './Container'
+import AddressForm from './components/AddressForm'
+import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
 
 class App extends Component {
   render() {
     return (
       <div className="App">
         <header className="App-header">
-          {/* <img src={logo} className="App-logo" alt="logo" /> */}
-      
-            <Container />
-            {/* Edit <code>src/App.js</code> and save to reload. */}
          
-          {/* <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a> */}
+            <Router>
+             <Switch>
+               <Route exact path="/map" component={Container} />
+               <Route exact path="/newAddress" component={AddressForm} />
+             </Switch>
+           </Router>
+           
         </header>
       </div>
     );
