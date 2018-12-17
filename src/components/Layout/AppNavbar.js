@@ -1,13 +1,18 @@
 import React, { Component } from 'react'
 import {Link} from 'react-router-dom'
+import { SketchPicker } from 'react-color';
 
 
 export default class AppNavbar extends Component {
   render() {
+    const style ={
+      background: "rgba(27,202,255,.8)"
+      // rgba(27,202,255,.8)
+    }
     return (
-
-        <nav className="navbar navbar-expand-md navbar-dark bg-primary mb-4">
-          <div className="container">
+        
+        <nav style={style} className="navbar navbar-expand-md navbar-dark bg-primary mb-4">
+          <div style={style} className="container">
             <Link to="/" className="navbar-brand">
               Admin Pannel
               </Link>
@@ -31,7 +36,7 @@ export default class AppNavbar extends Component {
       </div>
         </div>
     </nav>
-       
+     
     )
   }
 }
