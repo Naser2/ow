@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
+import PropTypes from 'prop-types'
+
 
  class Map extends Component {
 
@@ -17,9 +19,7 @@ import ReactDOM from 'react-dom'
  
   }
 
-  loadMap = () => {
-    console.log(this.props)
-   
+  loadMap() {
     if (this.props && this.props.google) {
       // google is available
       const {google} = this.props;
@@ -36,12 +36,12 @@ import ReactDOM from 'react-dom'
         center: center,
         zoom: zoom
       })
-      this.map = new maps.Map(node, mapConfig);
+      this.map = new maps.Map(node, mapConfig)
     }
   }
-  render() {
-    console.log(this.props)
-    console.log(this.loadMap(), this.map, this.google, this.node)
+  render(){
+    // console.log(this.props)
+    // console.log(this.loadMap(), this.map, this.google, this.node)
     return (
       <div ref='map'>
         Loading map...
@@ -51,17 +51,19 @@ import ReactDOM from 'react-dom'
   }
 }
 
-// Map.propTypes = {
-//   google: React.PropTypes.object,
-//   zoom: React.PropTypes.number,
-//   initialCenter: React.PropTypes.object
-// }
-// Map.defaultProps = {
-//   zoom: 13,
-//   // San Francisco, by default
-//   initialCenter: {
-//     lat: 37.774929,
-//     lng: -122.419416
-//   }
-// }
+Map.propTypes = {
+  google: PropTypes.object,
+  zoom: PropTypes.number,
+  initialCenter: PropTypes.object
+}
+Map.defaultProps = {
+  zoom: 13,
+  // San Francisco, by default
+  initialCenter: {
+    lat: 37.774929,
+    lng: -122.419416
+  }
+}
+
+
 export default Map;
