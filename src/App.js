@@ -2,22 +2,29 @@ import React, { Component } from 'react';
 import Container from './Container'
 import AddressForm from './components/AddressForm'
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
+import AppNavbar from './components/Layout/AppNavbar'
+import Dashboard from './components/Layout/Dashboard'
+
 
 class App extends Component {
   render() {
     return (
+      <Router>
       <div className="App">
-        <header className="App-header">
-         
-            <Router>
+         <AppNavbar />
+         <div className="container">
+          
              <Switch>
+          
+            <Route exact path="/" component={Dashboard} />
+
                <Route exact path="/map" component={Container} />
-               <Route exact path="/newAddress" component={AddressForm} />
+               <Route exact path="/newAddress" component={AddressForm} /> */}
              </Switch>
-           </Router>
-           
-        </header>
+         
+         </div>
       </div>
+      </Router>
     );
   }
 }
