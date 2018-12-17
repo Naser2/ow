@@ -4,7 +4,7 @@ export default class AddressForm extends Component {
   render() {
     return (
       <div>
-        <form action="Get An Address "></form>
+        <form action="Register for An Address "></form>
       </div>
     )
   }
