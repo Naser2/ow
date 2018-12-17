@@ -1,13 +1,14 @@
+
 import React, { Component } from 'react'
 import Map from './Map'
 
-export default class MapContainer extends Component {
+export default class Container extends Component {
   render() {
+    console.log(this.props)
     const mapBasciStyle = {
       width: '100vw',
       height: '100vh'
     }
-
     if (!this.props.loaded){
       return <div>Loading...</div>
     }
@@ -21,6 +22,6 @@ export default class MapContainer extends Component {
 
 const GoogleApiComponent = () => ({
   apiKey: "AIzaSyAyesbQMyKVVbBgKVi2g6VX7mop2z96jBo"
-})(MapContainer)
+})(Container)
 
 export {GoogleApiComponent}
