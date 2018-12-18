@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom'
 import { SketchPicker } from 'react-color';
 
 
+
 export default class AppNavbar extends Component {
   render() {
     const style ={
@@ -30,6 +31,9 @@ export default class AppNavbar extends Component {
       </Link>
       <Link to="/newAddress" className="nav-link"> 
       AddressForm
+      </Link>
+      <Link to="/signup" className="nav-link"> 
+      signup
       </Link>
       </li>
       </ul>

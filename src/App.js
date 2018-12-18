@@ -4,6 +4,7 @@ import AddressForm from './usersComponents/AddressForm'
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
 import AppNavbar from './components/Layout/AppNavbar'
 import Dashboard from './components/Layout/Dashboard'
+import Signup from './usersComponents/Signup';
 
 
 class App extends Component {
@@ -20,6 +21,7 @@ class App extends Component {
 
                <Route exact path="/map" component={Container} />
                <Route exact path="/newAddress" component={AddressForm} /> 
+               <Route exact path="/signup" component={Signup} /> 
              </Switch>
          
          </div>
