@@ -11,8 +11,8 @@ export default class AppNavbar extends Component {
     }
     return (
         
-        <nav style={style} className="navbar navbar-expand-md navbar-dark bg-primary mb-4">
-          <div style={style} className="container">
+        <nav className="navbar navbar-expand-md navbar-dark bg-primary mb-4">
+          <div  className="container">
             <Link to="/" className="navbar-brand">
               Admin Pannel
               </Link>

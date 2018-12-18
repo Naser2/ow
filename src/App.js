@@ -10,7 +10,7 @@ class App extends Component {
   render() {
     return (
       <Router>
-      <div className="App">
+      <div className="App" style={{'background-color': "#0693e3"}}>
          <AppNavbar />
          <div className="container">
           
@@ -19,7 +19,7 @@ class App extends Component {
             <Route exact path="/" component={Dashboard} />
 
                <Route exact path="/map" component={Container} />
-               <Route exact path="/newAddress" component={AddressForm} /> */}
+               <Route exact path="/newAddress" component={AddressForm} /> 
              </Switch>
          
          </div>
