@@ -6,6 +6,7 @@ import AppNavbar from './components/Layout/AppNavbar'
 import Dashboard from './components/Layout/Dashboard'
 import Signup from './usersComponents/Signup';
 import Login from './usersComponents/Login'
+import Landing from './usersComponents/Landing'
 
 
 
@@ -18,8 +19,8 @@ class App extends Component {
          <AppNavbar />
          <div className="container">
              <Switch>
-               <Route exact path="/" component={Dashboard} />
-               <Route exact path="/map" component={Container} />
+             <Route exact path="/home" component={Landing} />
+               <Route exact path="/dashboard" component={Dashboard} />
                <Route exact path="/newAddress" component={AddressForm} /> 
                <Route exact path="/signup" component={Signup} /> 
                <Route exact path="/login" component={Login} /> 

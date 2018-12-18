@@ -75,7 +75,7 @@ handleAddressFormSubmit =(e)=>{
             'margin-left': "auto",
             display: "block",
             padding: "8px 16px",
-            'font-size':" 16px",
+            'fontSize':" 16px",
             color: "#ffff",
             // 'background-color': "#3fc1c9",
             // 'background-color':"#1273de",
