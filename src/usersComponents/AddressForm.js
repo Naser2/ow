@@ -1,42 +1,77 @@
 import React, { Component } from 'react'
 
 export default class AddressForm extends Component {
-  render() {
+  constructor() {
+
+    super();
+    this.state = {
+        first_name: '',
+        last_name: '',
+        phone: '',
+        email: '',
+        door_number:''
+    
+        }
+ 
+    }
+
+
+//Sets the firstName state value to the first_name field's value when the onChange event is fired
+handleAddressFormChange = (e) => {
+    console.log(e.target.value)
+    this.setState({
+       [ e.target.name]: e.target.value
+    })
+}
+
+handleAddressFormSubmit =()=>{
+  console.log("submitting New Addresssss")
+}
+  render(){
     return (
         <div class="container" style={{
           position: "relative", 
           padding: "20px 20x",   
           background: "#eee",
-        'box-sizing': "border-box",
+        'boxSizing': "border-box",
         // width:"324", height:"322",
         // padding: "10 10"
       ' background-color': "#6b6b6b",
       // ' padding': "80px 80px",
-      ' box-shadow': "0px 0px 15px black",
-      ' border-radius': "5px"
+      '  boxShadow': "0px 0px 15px black",
+      ' borderRadius': "5px"
         
         }}>
-        <div class="row"  >
-            <div class="col-sm-4"></div>
-            <div class="col-sm-4">
-                 <a class="btn big-register" style={{margin: "60px 80x"}}data-toggle="modal" href="javascript:void(0)" onclick="openRegisterModal();">Register your home</a></div>
-            <div class="col-sm-4"></div>
+        <div className="row"  >
+            <div className="col-sm-4"></div>
+            <div className="col-sm-4">
+                 <a className="btn big-register" style={{margin: "60px 80x"}} >Register your home</a></div>
+            <div className="col-sm-4"></div>
         </div>
        
-      <div class="form loginBox " style={{ padding: "50px 300px",}}>
-          <form method="post" action="/login" accept-charset="UTF-8">
-          <input id="first_name"  style={{overflow: "auto",  margin: "12px " }} class="form-control" type="text" placeholder="First Name" name="first_name"></input>
+      <div className="form AddressBox " style={{ padding: "20px 200px",}}>
+          <form >
+          <input id="first_name"  style={{overflow: "auto",  margin: "12px " }} className="form-control" type="text" placeholder="First Name" name="first_name" value={this.state.first_name}
+           onChange={ (e)=> this.handleAddressFormChange(e) }></input>
 
           <input id="last_name"  style={{overflow: "auto", margin: "12px",'border-collapse': "collapse",
-       
         //   'margin-block-end': "1.33em",
-        }} class="form-control" type="last_name" placeholder="Last Name" name="last_name"></input>
+        }} className="form-control" type="last_name" placeholder="Last Name" name="last_name"
+        value={this.state.last_name}
+           onChange={ (e)=> this.handleAddressFormChange(e) }></input>
 
-          <input id="email"  style={{overflow: "auto", margin: "12px" ,'border-collapse': "collapse"}} class="form-control" type="text" placeholder="Email" name="email"></input>
 
-          <input id="phone"  style={{overflow: "auto", margin: "12px", 'border-collapse': "collapse"}} class="form-control" type="phone" placeholder="Phone" name="phone"></input>
+          <input id="phone"  style={{overflow: "auto", margin: "12px", 'border-collapse': "collapse"}} className="form-control" type="phone" placeholder="Phone" name="phone"
+          value={this.state.phone}
+          onChange={ (e)=> this.handleAddressFormChange(e) }></input>
 
-          <input id="door_number"   style={{overflow: "auto",  margin: "12px",  'margin-block-end': "2.33em"}} class="form-control" type="door_number" placeholder="Door Number" name="phone"></input>
+          <input id="email"  style={{overflow: "auto", margin: "12px" ,'border-collapse': "collapse"}} className="form-control" type="text" placeholder="Email" name="email"
+          value={this.state.email}
+          onChange={ (e)=> this.handleAddressFormChange(e) }></input>
+
+          <input id="door_number"   style={{overflow: "auto",  margin: "12px",  'margin-block-end': "2.33em"}} className="form-control" type="door_number" placeholder="Door Number" name="door_number"
+          value={this.state.door_number}
+          onChange={ (e)=> this.handleAddressFormChange(e) }></input>
 
           <input class="btn btn-default btn-login"  style={{
 
@@ -47,13 +82,14 @@ export default class AddressForm extends Component {
             'font-size':" 16px",
             color: "#fff",
             // 'background-color': "#3fc1c9",
-            'background-color':"#1273de",
+            // 'background-color':"#1273de",
+            'backgroundColor': "#fccb00",
 
             'border': "0",
-            'border-radius': "2px",
+            'borderRadius': "2px",
             cursor: "pointer",
             transition: "background-color. 15s ease-in",
-            'margin-top': "16px",
+            'marginTop': "16px",
             
           //   'line-height': "46px",
           //   overflow: "auto",  'font-weight': "bold",' border-collapse': "collapse",
@@ -69,7 +105,7 @@ export default class AddressForm extends Component {
   //   'margin-block-end': "1.33em",
   //   'margin-inline-start': "0px",
   //  ' margin-inline-end': "0px",
-    }}type="button" value="Get Address" onclick="loginAjax()" ></input>
+    }} type="submit" value="Get Address" onclick={this.handleAddressFormSubmit}></input>
           </form>
       </div>
 </div>
