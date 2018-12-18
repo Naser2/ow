@@ -5,6 +5,8 @@ import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
 import AppNavbar from './components/Layout/AppNavbar'
 import Dashboard from './components/Layout/Dashboard'
 import Signup from './usersComponents/Signup';
+import Login from './usersComponents/Login'
+
 
 
 
@@ -15,17 +17,13 @@ class App extends Component {
       <div className="App" style={{'background-color': "#00bfff"}}> 
          <AppNavbar />
          <div className="container">
-          
              <Switch>
-          
-            <Route exact path="/" component={Dashboard} />
-
+               <Route exact path="/" component={Dashboard} />
                <Route exact path="/map" component={Container} />
                <Route exact path="/newAddress" component={AddressForm} /> 
                <Route exact path="/signup" component={Signup} /> 
-               
+               <Route exact path="/login" component={Login} /> 
              </Switch>
-         
          </div>
       </div>
       </Router>
