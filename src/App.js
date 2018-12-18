@@ -7,6 +7,7 @@ import Dashboard from './components/Layout/Dashboard'
 import Signup from './usersComponents/Signup';
 import Login from './usersComponents/Login'
 import Landing from './usersComponents/Landing'
+import UserProfile from './usersComponents/UserProfile';
 
 
 
@@ -20,7 +21,9 @@ class App extends Component {
          <div className="container">
              <Switch>
              <Route exact path="/home" component={Landing} />
+             <Route exact path="/map" component={Container} />
                <Route exact path="/dashboard" component={Dashboard} />
+               <Route exact path="/profile" component={UserProfile} />
                <Route exact path="/newAddress" component={AddressForm} /> 
                <Route exact path="/signup" component={Signup} /> 
                <Route exact path="/login" component={Login} /> 
