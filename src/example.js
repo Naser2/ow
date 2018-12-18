@@ -1,0 +1,1 @@
+lightblue: "#0693e3"

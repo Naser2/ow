@@ -10,42 +10,72 @@ export default class SignupForm extends Component {
   }
 
 //Handle Input Change
-  handleChange = (e) => {
+  handleFormChange = (e) => {
      this.setState({
       [ e.target.name]: e.target.value
      })
   }
 
-  //Submits New User Data
-handleAddressFormSubmit =(e)=>{
+//Submits New User Data
+handleSubmit =(e)=>{
   e.preventDefault()
   console.log("submitting Name " + this.state.first_name + "  LAST " + this.state.last_name +
-  " EMAIL  " + this.state.email  +  " PW   " + this.state.password)
+  " Phone  " + this.state.phone  +  " PW   " + this.state.password)
 }
 
   render() {
     return (
-      <div className="ui grid container middle aligned" >
-      <div className="column">
-      <div className="ui segment top attached"> Sign Up Page</div>
-        <form className="ui form segment top attached green" onSubmit={(e)=>this.props.handleSubmit(e,this.state)}>
-          <div className="field ui left icon input fluid">
-          <input type="text" name="name" placeholder="name" value={this.state.name}  onChange={this.handleChange}/>
-          <br />
-            <input type="text" name="username" placeholder="Username" value={this.state.username} onChange={this.handleChange}/>
-            <i className="users icon"></i>
-          </div>
-          <div className="field ui left icon input fluid">
-            <input type="text" name="password" placeholder="Password" value={this.state.password} onChange={this.handleChange} />  
-            <i className="key icon"></i>
-          </div>
-          <button className="ui button fluid positive" type="submit" value="Login"style={{background: '#0084cc'}}>Submit</button>
-        </form>  
-        <div className="ui segment bottom attached"> <a >Welcome  </a>.</div>
-      </div>
-    </div>
-  
-  
+      <div class="container" style={{
+        position: "relative", 
+        padding: "20px 20x",   
+        background: "#1273de",
+        'boxSizing': "border-box",
+        'background-color': "white",
+        'boxShadow': "0px 0px 15px black",
+        'borderRadius': "5px"
+      
+      }}>
+      <div className="row"  >
+          <div className="col-sm-4"></div>
+            <a className="btn big-register" style={{margin: "60px 80x"}} >Signup</a>
+         </div>
+
+     
+    <div className="form AddressBox " style={{ padding: "20px 200px",}}>
+        <form onSubmit={this.handleSubmit }>
+        <input id="first_name"  style={{overflow: "auto",  margin: "12px " }} className="form-control" type="text" placeholder="First Name" name="first_name" value={this.state.first_name}
+         onChange={ (e)=> this.handleFormChange(e) }></input>
+
+        <input id="last_name" style={{overflow: "auto", margin: "12px",'border-collapse': "collapse",
+      }} className="form-control" type="last_name" placeholder="Last Name" name="last_name"
+        value={this.state.last_name}
+        onChange={ (e)=> this.handleFormChange(e) }></input>
+
+        <input id="phone" style={{overflow: "auto", margin: "12px", 'border-collapse': "collapse"}} className="form-control" type="phone" placeholder="Phone" name="phone"
+        value={this.state.phone}
+        onChange={ (e)=> this.handleFormChange(e) }></input>
+        
+        <input id="password" style={{overflow: "auto", margin: "12px", 'border-collapse': "collapse"}} className="form-control" type="password" placeholder="Password" name="password"
+        value={this.state.password}
+        onChange={ (e)=> this.handleFormChange(e) }></input>
+
+        <input class="btn btn-default btn-login" style={{
+          'margin-right': "auto",
+          'margin-left': "auto",
+          display: "block",
+          padding: "8px 16px",
+          'font-size':" 16px",
+          color: "#ffff",
+          'backgroundColor': "#fccb00",
+          'border': "0",
+          'borderRadius': "2px",
+          cursor: "pointer",
+          transition: "background-color. 15s ease-in",
+          'marginTop': "16px"}}
+          type="submit" value="Sign"></input>
+         </form>
+     </div>
+ </div>
 
     )
   }

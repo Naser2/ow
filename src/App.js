@@ -7,11 +7,12 @@ import Dashboard from './components/Layout/Dashboard'
 import Signup from './usersComponents/Signup';
 
 
+
 class App extends Component {
   render() {
     return (
       <Router>
-      <div className="App" style={{'background-color': "#0693e3"}}>
+      <div className="App" style={{'background-color': "#00bfff"}}> 
          <AppNavbar />
          <div className="container">
           
@@ -22,6 +23,7 @@ class App extends Component {
                <Route exact path="/map" component={Container} />
                <Route exact path="/newAddress" component={AddressForm} /> 
                <Route exact path="/signup" component={Signup} /> 
+               
              </Switch>
          
          </div>
