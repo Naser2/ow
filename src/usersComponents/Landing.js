@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Search from '../Search'
+import Match from '../Match'
 
 export default class Landing extends Component {
   render() {
@@ -7,6 +8,7 @@ export default class Landing extends Component {
       <div>
         <h1>Landing Page</h1>
         <Search />
+    
         <Match />
       </div>
     )
