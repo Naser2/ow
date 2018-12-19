@@ -1,4 +1,10 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import SmartInput from 'react-phone-number-input/smart-input';
+import 'react-responsive-ui/style.css';
+import PhoneInput from 'react-phone-number-input/react-responsive-ui'
+// import PhoneInput from 'react-phone-number-input/react-responsive-ui';
+// import PhoneInput, { formatPhoneNumber } from 'react-phone-number-input'
+// import PhoneInput, { formatPhoneNumber, isValidPhoneNumber } from 'react-phone-number-input'
 
 export default class AddressForm extends Component {
   constructor() {
@@ -55,15 +61,16 @@ handleAddressFormSubmit =(e)=>{
         }} className="form-control" type="last_name" placeholder="Last Name" name="last_name"
           value={this.state.last_name}
           onChange={ (e)=> this.handleAddressFormChange(e) }></input>
+         {/* <PhoneInput
+         inputComponent={ SmartInput }
+         placeholder="Enter phone number"
+         value={ this.state.value }
+         onChange={ value => this.setState({ value }) }
+          /> */}
 
-
-          <input id="phone" style={{overflow: "auto", margin: "12px", 'border-collapse': "collapse"}} className="form-control" type="phone" placeholder="Phone" name="phone"
+           <input id="phone" style={{overflow: "auto", margin: "12px", 'border-collapse': "collapse"}} className="form-control" type="phone" placeholder="Phone" name="phone"
           value={this.state.phone}
-          onChange={ (e)=> this.handleAddressFormChange(e) }></input>
-
-          <input id="email" style={{overflow: "auto", margin: "12px" ,'border-collapse': "collapse"}} className="form-control" type="text" placeholder="Email" name="email"
-          value={this.state.email}
-          onChange={ (e)=> this.handleAddressFormChange(e) }></input>
+          onChange={ (e)=> this.handleAddressFormChange(e) }></input> 
 
           <input id="door_number" style={{overflow: "auto",  margin: "12px",  'margin-block-end': "2.33em"}} className="form-control" type="door_number" placeholder="Door Number" name="door_number"
           value={this.state.door_number}
