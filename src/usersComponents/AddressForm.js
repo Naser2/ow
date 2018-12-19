@@ -28,7 +28,7 @@ export default class AddressForm extends Component {
         postal_code:'',
         country:''
         } 
-
+        
       
     }
     componentDidMount() {
@@ -36,6 +36,7 @@ export default class AddressForm extends Component {
     }
   
     getRegistrantLocation = () => {
+      
         navigator.geolocation.getCurrentPosition(position => {
           this.setState({  lat: position.coords.latitude, lng: position.coords.longitude })
         }
@@ -54,7 +55,7 @@ handleAddressFormSubmit =(e)=>{
   // console.log("submitting FIRST Name " + this.state.first_name + "  LAST " + this.state.last_name +
   // + " PHONE  " + this.state.phone + " EMAIL  " + this.state.email  +  " DOOR NUM   " + this.state.door_number,  "COORDINATES", this.state )
 
-  fetch(`/addresses`,{
+  fetch(`${BASE_URL}/addresses`,{
     method: "POST",
     headers: {
       "Content-Type": "Application/json",
