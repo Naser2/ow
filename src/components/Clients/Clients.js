@@ -30,7 +30,7 @@ export default class Clients extends Component {
       address: "83 Brookdale Ave, Brooklyn, NY 10220"
     },
     {
-      id:'4554543435',
+      id:'45543435',
       first_name:'Ricko',
       last_name: 'Semba',
       email:'rickosemba@gmail.com',
@@ -38,7 +38,7 @@ export default class Clients extends Component {
       address: "54 W 31st St, New York, NY 10001"
     },
     {
-      id:'43333435',
+      id:'4333435',
       first_name:'Samira',
       last_name: 'Johnson',
       email:'samiraa@gmail.com',
@@ -46,7 +46,7 @@ export default class Clients extends Component {
       address: "765 E 67st St, New York, NY 10024"
     },
     {
-      id:'22245777',
+      id:'2224577',
       first_name:'Aimee',
       last_name: 'LeBoeuf',
       email:'aimee@gmail.com',
@@ -54,7 +54,7 @@ export default class Clients extends Component {
       address: "83 Brookdale Ave, Brooklyn, NY 10220"
     },
     {
-      id:'4554543435',
+      id:'455443435',
       first_name:'Ricko',
       last_name: 'Semba',
       email:'rickosemba@gmail.com',

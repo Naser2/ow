@@ -16,7 +16,7 @@ class App extends Component {
   render() {
     return (
       <Router>
-      <div className="App" style={{'background-color': "#00bfff"}}> 
+      <div className="App" style={{'backgroundColor': "#00bfff"}}> 
          <AppNavbar />
          <div className="container">
              <Switch>
