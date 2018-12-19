@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 // import Map from './Map'
 // import GoogleApiComponent from './GoogleApiComponent'
 import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
+ import {PlacesWithStandaloneSearchBox} from './usersComponents/StandAloneSearch';
  
 
  export class Container extends Component {
@@ -35,7 +36,10 @@ import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
       return <div>Loading...</div>
     }
     return (
+      <div>
+      <PlacesWithStandaloneSearchBox />
       <Map
+      
         center={{
           lat: latitude,
           lng: longitude
@@ -43,12 +47,13 @@ import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
       style={mapBasicStyle}
       google={this.props.google}
       zoom={16}
-      >
- 
+      > 
+      {/* <PlacesWithStandaloneSearchBox /> */}
+      
       <Marker onClick={this.onMarkerClick}
           position={{ lat: latitude, lng: longitude }}
               name={'Current location'} />
-
+         
       {/* <InfoWindow onClose={this.onInfoWindowClose}> */}
           {/* <div> */}
             {/* Selected to show here!! */}
@@ -56,6 +61,7 @@ import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
           {/* </div> */}
       {/* </InfoWindow> */}
     </Map>
+    </div>
     )
   }
 }
