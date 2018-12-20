@@ -18,16 +18,18 @@ class App extends Component {
     console.log(GitMapData)
     return (
       <Router>
-      <div className="App" style={{'backgroundColor': "#00bfff"}}> 
+      <div className="App" style={{backgroundColor: "#00bfff"}}> 
          <AppNavbar />
          <div className="container">
              <Switch>
-             <Route exact path="/home" component={Landing} />
+             <Route  exact path="/"   component={Landing} />
+             <Route  exact path= "/home" component={Landing} />
+             <Route  exact path= "/GitMapData" component={GitMapData} />
              <Route exact path="/map" component={Container} />
              <Route exact path="/map-data" component={GitMapData} /> 
                <Route exact path="/dashboard" component={Dashboard} />
                <Route exact path="/profile" component={UserProfile} />
-               <Route exact path="/newAddress" component={AddressForm} /> 
+               <Route exact path="/register-place" component={AddressForm} /> 
                <Route exact path="/signup" component={Signup} /> 
                <Route exact path="/login" component={Login} /> 
              </Switch>

@@ -66,6 +66,7 @@ import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
   }
 }
 
+
 export default GoogleApiWrapper ({
   apiKey: process.env.REACT_APP_OW_JS_API_KEY
 })(Container)

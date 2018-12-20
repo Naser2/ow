@@ -13,21 +13,20 @@ export default class AddressForm extends Component {
 
     super();
     this.state = {
-        // user_id: 1,
-        // first_name: '',
-        // last_name: '',
-        // phone: '',
-        // door_number:'',
-        // cardinal: '',
-        // street:'',
-        // neighborhood:'',
-        // lat: '',
-        // lng: '',
-        // city:'',
-        // state:'',
-        // postal_code:'',
-        // country:'',
-     currentLocation: {}
+        user_id: 1,
+        first_name: '',
+        last_name: '',
+        phone: '',
+        door_number:'',
+        cardinal: '',
+        street:'',
+        neighborhood:'',
+        lat: '',
+        lng: '',
+        city:'',
+        state:'',
+        postal_code:'',
+        country:'',
     }
         }
         
@@ -38,12 +37,15 @@ export default class AddressForm extends Component {
       this.getRegistrantLocation()
     }
   
-    getRegistrantLocation = () => {
-     
-        navigator.geolocation.getCurrentPosition(position => {
-         
-         return  this.setState({ currentLocation: { latitude: position.coords.latitude, longitude: position.coords.longitude }}, ()=> console.log(this.state.currentLocation))
-          
+    getRegistrantLocation = () => { 
+        navigator.geolocation.getCurrentPosition(position => {   
+          let  lat = { latitude: position.coords.latitude}.latitude
+           let  lng =  { longitude: position.coords.longitude}.longitude
+           console.log(position)
+         this.setState( {
+            lat: lat,
+            lng: lng 
+          }, ()=> console.log(this.state))        
         }
       )
     }
@@ -57,28 +59,29 @@ handleAddressFormChange = (e) => {
 //Submits new data
 handleAddressFormSubmit =(e)=>{
   e.preventDefault()
-  // console.log("submitting FIRST Name " + this.state.first_name + "  LAST " + this.state.last_name +
-  // + " PHONE  " + this.state.phone + " EMAIL  " + this.state.email  +  " DOOR NUM   " + this.state.door_number,  "COORDINATES", this.state )
+  console.log("submitting Data", this.state )
 
-  fetch(`${BASE_URL}/addresses`,{
+  fetch(`${BASE_URL}/addresses/`,{
     method: "POST",
     headers: {
       "Content-Type": "Application/json",
        Accept: "Application/json"
     },
-    body: JSON.stringify({address: this.state})
-  }).then((res) => res.json())
+    body: JSON.stringify({ address: this.state })
+  }).then(res => res.json())
   .then(address => console.log(address)) 
   
 }
   render(){
     return (
-        <div class="container" style={{
+        <div className="container" style={{
           position: "relative", 
-          padding: "20px 20x",   
+          padding: "40px 40x",   
           background: "#eee",
-          'boxSizing': "border-box",
-          'background-color': "#6b6b6b",
+           paddingBlockStart: "20px",
+           paddingBlockEnd: "20px",
+          // 'boxSizing': "border-box",
+          'backgroundColor': "white",
           'boxShadow': "0px 0px 15px black",
           'borderRadius': "5px"
         
@@ -95,22 +98,22 @@ handleAddressFormSubmit =(e)=>{
           <input id="first_name"  style={{overflow: "auto",  margin: "12px " }} className="form-control" type="text" placeholder="First Name" name="first_name" value={this.state.first_name}
            onChange={ (e)=> this.handleAddressFormChange(e) }></input>
 
-          <input id="last_name" style={{overflow: "auto", margin: "12px",'border-collapse': "collapse",
+          <input id="last_name" style={{overflow: "auto", margin: "12px",'borderCollapse': "collapse",
         }} className="form-control" type="last_name" placeholder="Last Name" name="last_name"
           value={this.state.last_name}
           onChange={ (e)=> this.handleAddressFormChange(e) }></input>
 
-          <input id="street" style={{overflow: "auto", margin: "12px",'border-collapse': "collapse",
+          <input id="street" style={{overflow: "auto", margin: "12px",'borderCollapse': "collapse",
         }} className="form-control" type="street" placeholder="Street" name="street"
           value={this.state.last_street}
           onChange={ (e)=> this.handleAddressFormChange(e) }></input>
           
 
-          <input id="city" style={{overflow: "auto", margin: "12px",'border-collapse': "collapse",
+          <input id="city" style={{overflow: "auto", margin: "12px",'borderCollapse': "collapse",
         }} className="form-control" type="city" placeholder="City" name="city"
           value={this.state.city}
           onChange={ (e)=> this.handleAddressFormChange(e) }></input>
-             <input id="city" style={{overflow: "auto", margin: "12px",'border-collapse': "collapse",
+             <input id="city" style={{overflow: "auto", margin: "12px",'borderCollapse': "collapse",
 
         }} className="form-control" type="state" placeholder="State" name="state"
           value={this.state.state}
@@ -122,23 +125,23 @@ handleAddressFormSubmit =(e)=>{
          onChange={ value => this.setState({ value }) }
           /> */}
 
-           <input id="phone" style={{overflow: "auto", margin: "12px", 'border-collapse': "collapse"}} className="form-control" type="phone" placeholder="Phone" name="phone"
+           <input id="phone" style={{overflow: "auto", margin: "12px", 'borderCollapse': "collapse"}} className="form-control" type="phone" placeholder="Phone" name="phone"
           value={this.state.phone}
           onChange={ (e)=> this.handleAddressFormChange(e) }></input> 
 
-          <input id="door_number" style={{overflow: "auto",  margin: "12px",  'margin-block-end': "2.33em"}} className="form-control" type="door_number" placeholder="Door Number" name="door_number"
+          <input id="door_number" style={{overflow: "auto",  margin: "12px",  'marginBlockEnd': "2.33em"}} className="form-control" type="door_number" placeholder="Door Number" name="door_number"
           value={this.state.door_number}
           onChange={ (e)=> this.handleAddressFormChange(e) }></input>
 
-           <input id="country" style={{overflow: "auto", margin: "12px",'border-collapse': "collapse",
+           <input id="country" style={{overflow: "auto", margin: "12px", 'borderCollapse': "collapse",
         }} className="form-control" type="country" placeholder="Country" name="country"
           value={this.state.country}
           onChange={ (e)=> this.handleAddressFormChange(e) }></input>
 
-          <input class="btn btn-default btn-login" style={{
+          <input className="btn btn-default btn-login" style={{
 
-            'margin-right': "auto",
-            'margin-left': "auto",
+            'marginRight': "auto",
+            'marginLeft': "auto",
             display: "block",
             padding: "8px 16px",
             'fontSize':" 16px",

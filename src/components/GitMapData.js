@@ -3,22 +3,13 @@ import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
 
 export default class GitMapData extends Component {
 
-
-
- 
-
-
-
   conponentDidMount(){
   
   }
 
   render() {
-  
-  
 
     return (
-
       
           <Fragment>
             <h1>Google Map from GitMap Data</h1>
@@ -31,6 +22,7 @@ export default class GitMapData extends Component {
           <Fragment>
           <script async  defer
                src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDIAnomskNQCLLdstSLzFV__q95FAFD2Ng&callback=initMap">
+
           </script>
           </Fragment>
 
@@ -41,7 +33,6 @@ export default class GitMapData extends Component {
         )
   }
 }
-
  GoogleApiWrapper ({
   apiKey: process.env.REACT_APP_OW_JS_API_KEY
 })("setMapData")
