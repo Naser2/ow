@@ -13,32 +13,37 @@ export default class AddressForm extends Component {
 
     super();
     this.state = {
-        user_id: 1,
-        first_name: '',
-        last_name: '',
-        phone: '',
-        door_number:'',
-        cardinal: '',
-        street:'',
-        neighborhood:'',
-        lat: '',
-        lng: '',
-        city:'',
-        state:'',
-        postal_code:'',
-        country:''
-        } 
+        // user_id: 1,
+        // first_name: '',
+        // last_name: '',
+        // phone: '',
+        // door_number:'',
+        // cardinal: '',
+        // street:'',
+        // neighborhood:'',
+        // lat: '',
+        // lng: '',
+        // city:'',
+        // state:'',
+        // postal_code:'',
+        // country:'',
+     currentLocation: {}
+    }
+        }
+        
         
       
-    }
+    
     componentDidMount() {
-      this.getRegistrantLocation();
+      this.getRegistrantLocation()
     }
   
     getRegistrantLocation = () => {
-      
+     
         navigator.geolocation.getCurrentPosition(position => {
-          this.setState({  lat: position.coords.latitude, lng: position.coords.longitude })
+         
+         return  this.setState({ currentLocation: { latitude: position.coords.latitude, longitude: position.coords.longitude }}, ()=> console.log(this.state.currentLocation))
+          
         }
       )
     }
@@ -62,7 +67,7 @@ handleAddressFormSubmit =(e)=>{
        Accept: "Application/json"
     },
     body: JSON.stringify({address: this.state})
-  }).then((res) => {res.json()})
+  }).then((res) => res.json())
   .then(address => console.log(address)) 
   
 }
