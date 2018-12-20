@@ -53,6 +53,7 @@ export default class AppNavbar extends Component {
                 </div>
            </React.Fragment>
             <li className="nav-item"><Link to="/home" className="nav-link"> Home</Link></li>
+            <li className="nav-item"><Link to="/gitMapData" className="nav-link"> Map data </Link></li>
             <li className="nav-item"><Link to="/dashboard" className="nav-link"> Dashboard</Link></li>
             <li><Link to="/newAddress" className="nav-link"> AddressForm</Link></li>
             <li className="nav-item"><Link to="/map" className="nav-link"> Map</Link></li>

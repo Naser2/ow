@@ -8,12 +8,14 @@ import Signup from './usersComponents/Signup';
 import Login from './usersComponents/Login'
 import Landing from './usersComponents/Landing'
 import UserProfile from './usersComponents/UserProfile';
+import GitMapData from './components/GitMapData';
 
 
 
 
 class App extends Component {
   render() {
+    console.log(GitMapData)
     return (
       <Router>
       <div className="App" style={{'backgroundColor': "#00bfff"}}> 
@@ -22,6 +24,7 @@ class App extends Component {
              <Switch>
              <Route exact path="/home" component={Landing} />
              <Route exact path="/map" component={Container} />
+             <Route exact path="/map-data" component={GitMapData} /> 
                <Route exact path="/dashboard" component={Dashboard} />
                <Route exact path="/profile" component={UserProfile} />
                <Route exact path="/newAddress" component={AddressForm} /> 
