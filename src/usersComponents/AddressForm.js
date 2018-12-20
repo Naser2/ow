@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 import SmartInput from 'react-phone-number-input/smart-input';
 import 'react-responsive-ui/style.css';
 import PhoneInput from 'react-phone-number-input/react-responsive-ui'
@@ -27,6 +28,7 @@ export default class AddressForm extends Component {
         state:'',
         postal_code:'',
         country:'',
+        data:[]
     }
         }
         
@@ -35,20 +37,45 @@ export default class AddressForm extends Component {
     
     componentDidMount() {
       this.getRegistrantLocation()
+      // this.getAdditionalGeoData()
     }
   
     getRegistrantLocation = () => { 
         navigator.geolocation.getCurrentPosition(position => {   
           let  lat = { latitude: position.coords.latitude}.latitude
            let  lng =  { longitude: position.coords.longitude}.longitude
+           axios.get(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=REACT_APP_OW_JS_API_KEY`)
+      
+      .then(res => {
+        const data = res.data;
+        console.log("IN AXIOS:", data)
+        this.setState({ data });
+      })
            console.log(position)
          this.setState( {
             lat: lat,
             lng: lng 
-          }, ()=> console.log(this.state))        
+          }, ()=> console.log(this.state))   
         }
       )
+      
     }
+
+    //Get Adittional Geo Data 
+    // getAdditionalGeoData = () => {
+    //   axios.get(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${this.state.lat}, + ${this.state.lng}key=process.env.REACT_APP_OW_JS_API_KEY`)
+      
+    //   .then(res => {
+    //     const data = res.data;
+    //     console.log(this.state.data)
+    //     this.setState({ data });
+    //   })
+    // }
+
+
+
+
+
 //Handles form change
 handleAddressFormChange = (e) => {
     console.log(e.target.value)
