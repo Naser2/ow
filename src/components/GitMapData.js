@@ -5,10 +5,6 @@ export default class GitMapData extends Component {
 
 
 
- 
-
-
-
   conponentDidMount(){
   
   }
