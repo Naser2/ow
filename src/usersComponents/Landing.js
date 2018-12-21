@@ -5,7 +5,11 @@ import {PlacesWithStandaloneSearchBox} from './StandAloneSearch';
 import MapWithASearchBox from './MapWithASearchBox';
 
 export default class Landing extends Component {
+
+
+    
   render() {
+      
     return ( 
       <div>
        <React.Fragment>
