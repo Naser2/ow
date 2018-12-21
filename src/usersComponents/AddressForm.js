@@ -3,6 +3,7 @@ import axios from 'axios';
 import SmartInput from 'react-phone-number-input/smart-input';
 import 'react-responsive-ui/style.css';
 import PhoneInput from 'react-phone-number-input/react-responsive-ui'
+import UserProfile from './UserProfile';
 // import PhoneInput from 'react-phone-number-input/react-responsive-ui';
 // import PhoneInput, { formatPhoneNumber } from 'react-phone-number-input'
 // import PhoneInput, { formatPhoneNumber, isValidPhoneNumber } from 'react-phone-number-input'
@@ -15,7 +16,6 @@ export default class AddressForm extends Component {
     super();
     this.state = {
         user_id: 1,
-        phone: '',
         door_number:'',
         cardinal: '',
         street:'',
@@ -30,7 +30,9 @@ export default class AddressForm extends Component {
         }
    
       getAdditionalGeoData = () => {
-        axios.get(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${this.state.lat},${this.state.lng}&key=`
+        let cardinal 
+        axios.get(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${this.state.lat},${this.state.lng}&key=
+       getKey()`
         ).then(res => {
           
           const data = res.data;
@@ -41,27 +43,45 @@ export default class AddressForm extends Component {
           const state = data.results[0].address_components[5].long_name;
           const postal_code = data.results[0].address_components[7].long_name;
           const country = data.results[0].address_components[6].short_name;
+          const lat =  this.state.lat
+          const lng = this.state.lng 
           console.log("STREET:", street)
           console.log("NEIGHBORHOOD", neighborbhood)
           console.log("CITY:", city)
           console.log("STATE:", state)
           console.log("POSTAL CODE:", postal_code)
           console.log("COUNTRY:", country)  
+          console.log("Lat in AXIOS:", lat)  
           this.setState({
             street: street,
+            cardinal: cardinal,
+            lat: lat,
+            lng: lng,
             neighborhood: neighborbhood,
             city:city,
             state:state,
             postal_code:postal_code,
             country:country
+
+            // t.integer :door_number
+            // t.string :cardinal
+            // t.string :street
+            // t.string :lat
+            // t.string :lng
+            // t.string :neighborhood
+            // t.string :city
+            // t.string :state
+            // t.string :postal_code
+            // t.string :country
                });
         })
-      }
+      } 
+  
 
       getRegistrantLocation = () => { 
         navigator.geolocation.getCurrentPosition(position => {   
-          let  lat = { latitude: position.coords.latitude}.latitude
-            let  lng =  { longitude: position.coords.longitude}.longitude 
+            const lat = { latitude: position.coords.latitude}.latitude
+            const lng =  { longitude: position.coords.longitude}.longitude 
             this.setState( {
             lat: lat,
             lng: lng 
@@ -81,7 +101,7 @@ export default class AddressForm extends Component {
    //Submits new data
     handleAddressFormSubmit =(e)=>{
       e.preventDefault()
-      console.log("submitting Data", this.state )
+      console.log("SUBMITTING NEW ADDRESSE:", this.state )
 
       fetch(`${BASE_URL}/addresses`,{
         method: "POST",
@@ -89,7 +109,7 @@ export default class AddressForm extends Component {
           "Content-Type": "Application/json",
           Accept: "Application/json"
         },
-        body: JSON.stringify({ address: this.state })
+        body: JSON.stringify(this.state )
       }).then(res => {
         return res.json()
       })
@@ -103,6 +123,7 @@ export default class AddressForm extends Component {
 
 
   render(){
+    <UserProfile adresse={this.state} />
     console.log("AT RENDER:", this.state)
     return (
         <div className="container" style={{
@@ -126,10 +147,10 @@ export default class AddressForm extends Component {
        
       <div className="form AddressBox " style={{ padding: "20px 200px",}}>
           <form onSubmit={this.handleAddressFormSubmit} >
-          
+
           <input id="street" style={{overflow: "auto", margin: "12px",'borderCollapse': "collapse",
         }} className="form-control" type="street" placeholder="Street" name="street"
-          value={this.state.last_street}
+          value={this.state.street}
           onChange={ (e)=> this.handleAddressFormChange(e) }></input>
 
           <input id="neighborhood" style={{overflow: "auto", margin: "12px", 'borderCollapse': "collapse"}} className="form-control" type="neighborhood" placeholder="Phone" name="neighborhood"
