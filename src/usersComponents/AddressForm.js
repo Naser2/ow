@@ -15,8 +15,6 @@ export default class AddressForm extends Component {
     super();
     this.state = {
         user_id: 1,
-        first_name: '',
-        last_name: '',
         phone: '',
         door_number:'',
         cardinal: '',
@@ -128,14 +126,7 @@ export default class AddressForm extends Component {
        
       <div className="form AddressBox " style={{ padding: "20px 200px",}}>
           <form onSubmit={this.handleAddressFormSubmit} >
-          <input id="first_name"  style={{overflow: "auto",  margin: "12px " }} className="form-control" type="text" placeholder="First Name" name="first_name" value={this.state.first_name}
-           onChange={ (e)=> this.handleAddressFormChange(e) }></input>
-
-          <input id="last_name" style={{overflow: "auto", margin: "12px",'borderCollapse': "collapse",
-        }} className="form-control" type="last_name" placeholder="Last Name" name="last_name"
-          value={this.state.last_name}
-          onChange={ (e)=> this.handleAddressFormChange(e) }></input>
-
+          
           <input id="street" style={{overflow: "auto", margin: "12px",'borderCollapse': "collapse",
         }} className="form-control" type="street" placeholder="Street" name="street"
           value={this.state.last_street}
