@@ -1,15 +1,9 @@
 import React, { Component } from 'react';
-<<<<<<< HEAD
-// import SmartInput from 'react-phone-number-input/smart-input';
-// import 'react-responsive-ui/style.css';
-// import PhoneInput from 'react-phone-number-input/react-responsive-ui'
-=======
 import axios from 'axios';
 import SmartInput from 'react-phone-number-input/smart-input';
 import 'react-responsive-ui/style.css';
 import PhoneInput from 'react-phone-number-input/react-responsive-ui'
 import UserProfile from './UserProfile';
->>>>>>> 8bb290e86d1c9026d5c3f2312a67a1363afe70cd
 // import PhoneInput from 'react-phone-number-input/react-responsive-ui';
 // import PhoneInput, { formatPhoneNumber } from 'react-phone-number-input'
 // import PhoneInput, { formatPhoneNumber, isValidPhoneNumber } from 'react-phone-number-input'
@@ -118,7 +112,7 @@ export default class AddressForm extends Component {
 
 
   render(){
-    <UserProfile adresse={this.state} />
+    
     console.log("AT RENDER:", this.state)
     return (
         <div className="container" style={{
