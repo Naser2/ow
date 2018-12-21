@@ -1,16 +1,11 @@
 import React, { Component, Fragment } from 'react'
 import { Input } from 'semantic-ui-react';
 import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
+import axios from 'axios'
 
-
-const { SearchBox } = require("react-google-maps/lib/components/places/SearchBox");
 
 export default class GitMapData extends Component {
- 
-
   state = {findAdress:''}
-
-
 
   handleInputChange = (e) => {
   console.log("CHANGING VALUE:", e.target.value)
@@ -23,6 +18,9 @@ export default class GitMapData extends Component {
     e.preventDefault();
     
 
+  axios.get(`http://localhost:3001/addresses${this.state.findAdress}`)
+  .then(res => console.log(res))
+  //404 -Missing Get route in back-end 
   }
   
 
@@ -98,9 +96,6 @@ export default class GitMapData extends Component {
         )
   }
 }
- GoogleApiWrapper ({
-  apiKey: process.env.REACT_APP_OW_JS_API_KEY
-})("setMapData")
 
  GoogleApiWrapper ({
   apiKey: process.env.REACT_APP_OW_JS_API_KEY
