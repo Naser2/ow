@@ -14,7 +14,7 @@
 /build
 
 # misc
-/public/assets
+
 .DS_Store
 src/.env
 .env.local

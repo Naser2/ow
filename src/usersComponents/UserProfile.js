@@ -1,9 +1,12 @@
 import React, { Component } from 'react'
 import { Header, Image } from 'semantic-ui-react'
+import axios from 'axios'
 
 export default class UserProfile extends Component {
 
-  
+
+  //build the logic to fecth and render users adresses from back end
+  // axios.post(`http://localhost:3001/users/1/addresses`)
   render() {
 
     const HeaderExampleImage = () => (
