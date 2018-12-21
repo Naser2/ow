@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import SmartInput from 'react-phone-number-input/smart-input';
-import 'react-responsive-ui/style.css';
-import PhoneInput from 'react-phone-number-input/react-responsive-ui'
+// import SmartInput from 'react-phone-number-input/smart-input';
+// import 'react-responsive-ui/style.css';
+// import PhoneInput from 'react-phone-number-input/react-responsive-ui'
 // import PhoneInput from 'react-phone-number-input/react-responsive-ui';
 // import PhoneInput, { formatPhoneNumber } from 'react-phone-number-input'
 // import PhoneInput, { formatPhoneNumber, isValidPhoneNumber } from 'react-phone-number-input'

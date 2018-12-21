@@ -33,10 +33,11 @@ export default class Landing extends Component {
                                  marginRight:"60px"}}/>
                             </div>
                         </div>
+                       
                         <div className="col-md-6 col-md-offset-1">
                            
                             <div className="description">
-                            
+                            <MapWithASearchBox />
                                 <h2>Welcome To <img src="assets/img/ow_logo_white-1.png" alt="" style={{ overflow: "hidden", width: "130px"}} /></h2>
                                  <h4> Search for a place</h4>
                             
