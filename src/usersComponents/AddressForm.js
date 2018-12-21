@@ -1,11 +1,19 @@
 import React, { Component } from 'react';
+<<<<<<< HEAD
 // import SmartInput from 'react-phone-number-input/smart-input';
 // import 'react-responsive-ui/style.css';
 // import PhoneInput from 'react-phone-number-input/react-responsive-ui'
+=======
+import axios from 'axios';
+import SmartInput from 'react-phone-number-input/smart-input';
+import 'react-responsive-ui/style.css';
+import PhoneInput from 'react-phone-number-input/react-responsive-ui'
+import UserProfile from './UserProfile';
+>>>>>>> 8bb290e86d1c9026d5c3f2312a67a1363afe70cd
 // import PhoneInput from 'react-phone-number-input/react-responsive-ui';
 // import PhoneInput, { formatPhoneNumber } from 'react-phone-number-input'
 // import PhoneInput, { formatPhoneNumber, isValidPhoneNumber } from 'react-phone-number-input'
-const BASE_URL = "http://localhost:3000/"
+const BASE_URL = "http://localhost:3001"
 
 
 export default class AddressForm extends Component {
@@ -14,9 +22,6 @@ export default class AddressForm extends Component {
     super();
     this.state = {
         user_id: 1,
-        first_name: '',
-        last_name: '',
-        phone: '',
         door_number:'',
         cardinal: '',
         street:'',
@@ -29,57 +34,99 @@ export default class AddressForm extends Component {
         country:'',
     }
         }
-        
-        
-      
-    
-    componentDidMount() {
-      this.getRegistrantLocation()
-    }
+   
+      getAdditionalGeoData = () => {
+        let cardinal 
+        axios.get(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${this.state.lat},${this.state.lng}&key=
+       getKey()`
+        ).then(res => {
+          
+          const data = res.data;
+          console.log("IN AXIOS:", data)
+          const street  = data.results[0].address_components[1].short_name;
+          const neighborbhood = data.results[7].address_components[0].short_name
+          const city  = data.results[0].address_components[2].long_name;
+          const state = data.results[0].address_components[5].long_name;
+          const postal_code = data.results[0].address_components[7].long_name;
+          const country = data.results[0].address_components[6].short_name;
+          const lat =  this.state.lat
+          const lng = this.state.lng 
+          console.log("STREET:", street)
+          console.log("NEIGHBORHOOD", neighborbhood)
+          console.log("CITY:", city)
+          console.log("STATE:", state)
+          console.log("POSTAL CODE:", postal_code)
+          console.log("COUNTRY:", country)  
+          console.log("Lat in AXIOS:", lat)  
+          this.setState({
+            street: street,
+            cardinal: cardinal,
+            lat: lat,
+            lng: lng,
+            neighborhood: neighborbhood,
+            city:city,
+            state:state,
+            postal_code:postal_code,
+            country:country
+               });
+        })
+      } 
   
-    getRegistrantLocation = () => { 
+
+      getRegistrantLocation = () => { 
         navigator.geolocation.getCurrentPosition(position => {   
-          let  lat = { latitude: position.coords.latitude}.latitude
-           let  lng =  { longitude: position.coords.longitude}.longitude
-           console.log(position)
-         this.setState( {
+            const lat = { latitude: position.coords.latitude}.latitude
+            const lng =  { longitude: position.coords.longitude}.longitude 
+            this.setState( {
             lat: lat,
             lng: lng 
-          }, ()=> console.log(this.state))        
-        }
+          }, ()=> this.getAdditionalGeoData()) 
+        }    
       )
+      
     }
-//Handles form change
-handleAddressFormChange = (e) => {
-    console.log(e.target.value)
-    this.setState({
-       [ e.target.name]: e.target.value
-    })
-}
-//Submits new data
-handleAddressFormSubmit =(e)=>{
-  e.preventDefault()
-  console.log("submitting Data", this.state )
-
-  fetch(`${BASE_URL}/addresses/`,{
-    method: "POST",
-    headers: {
-      "Content-Type": "Application/json",
-       Accept: "Application/json"
-    },
-    body: JSON.stringify({ address: this.state })
-  }).then(res => res.json())
-  .then(address => console.log(address)) 
   
-}
+   //Handles form change
+    handleAddressFormChange = (e) => {
+      console.log(e.target.value)
+      this.setState({
+        [ e.target.name]: e.target.value
+      })
+   }
+   //Submits new data
+    handleAddressFormSubmit =(e)=>{
+      e.preventDefault()
+      console.log("SUBMITTING NEW ADDRESSE:", this.state )
+
+      fetch(`${BASE_URL}/addresses`,{
+        method: "POST",
+        headers: {
+          "Content-Type": "Application/json",
+          Accept: "Application/json"
+        },
+        body: JSON.stringify(this.state )
+      }).then(res => {
+        return res.json()
+      })
+      .then(res => console.log(res))   
+    }
+    componentDidMount() {
+      this.getRegistrantLocation() 
+      
+    }
+
+
+
   render(){
+    <UserProfile adresse={this.state} />
+    console.log("AT RENDER:", this.state)
     return (
         <div className="container" style={{
           position: "relative", 
           padding: "40px 40x",   
           background: "#eee",
-           paddingBlockStart: "20px",
-           paddingBlockEnd: "20px",
+          paddingBlockStart: "20px",
+          paddingBlockEnd: "20px",
           // 'boxSizing': "border-box",
           'backgroundColor': "white",
           'boxShadow': "0px 0px 15px black",
@@ -95,26 +142,23 @@ handleAddressFormSubmit =(e)=>{
        
       <div className="form AddressBox " style={{ padding: "20px 200px",}}>
           <form onSubmit={this.handleAddressFormSubmit} >
-          <input id="first_name"  style={{overflow: "auto",  margin: "12px " }} className="form-control" type="text" placeholder="First Name" name="first_name" value={this.state.first_name}
-           onChange={ (e)=> this.handleAddressFormChange(e) }></input>
-
-          <input id="last_name" style={{overflow: "auto", margin: "12px",'borderCollapse': "collapse",
-        }} className="form-control" type="last_name" placeholder="Last Name" name="last_name"
-          value={this.state.last_name}
-          onChange={ (e)=> this.handleAddressFormChange(e) }></input>
 
           <input id="street" style={{overflow: "auto", margin: "12px",'borderCollapse': "collapse",
         }} className="form-control" type="street" placeholder="Street" name="street"
-          value={this.state.last_street}
+          value={this.state.street}
           onChange={ (e)=> this.handleAddressFormChange(e) }></input>
+
+          <input id="neighborhood" style={{overflow: "auto", margin: "12px", 'borderCollapse': "collapse"}} className="form-control" type="neighborhood" placeholder="Phone" name="neighborhood"
+          value={this.state.neighborhood}
+          onChange={ (e)=> this.handleAddressFormChange(e) }></input> 
           
 
           <input id="city" style={{overflow: "auto", margin: "12px",'borderCollapse': "collapse",
         }} className="form-control" type="city" placeholder="City" name="city"
           value={this.state.city}
           onChange={ (e)=> this.handleAddressFormChange(e) }></input>
-             <input id="city" style={{overflow: "auto", margin: "12px",'borderCollapse': "collapse",
-
+        
+        <input id="state" style={{overflow: "auto", margin: "12px",'borderCollapse': "collapse",
         }} className="form-control" type="state" placeholder="State" name="state"
           value={this.state.state}
           onChange={ (e)=> this.handleAddressFormChange(e) }></input>
@@ -125,9 +169,7 @@ handleAddressFormSubmit =(e)=>{
          onChange={ value => this.setState({ value }) }
           /> */}
 
-           <input id="phone" style={{overflow: "auto", margin: "12px", 'borderCollapse': "collapse"}} className="form-control" type="phone" placeholder="Phone" name="phone"
-          value={this.state.phone}
-          onChange={ (e)=> this.handleAddressFormChange(e) }></input> 
+      
 
           <input id="door_number" style={{overflow: "auto",  margin: "12px",  'marginBlockEnd': "2.33em"}} className="form-control" type="door_number" placeholder="Door Number" name="door_number"
           value={this.state.door_number}
