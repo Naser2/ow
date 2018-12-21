@@ -62,17 +62,6 @@ export default class AddressForm extends Component {
             state:state,
             postal_code:postal_code,
             country:country
-
-            // t.integer :door_number
-            // t.string :cardinal
-            // t.string :street
-            // t.string :lat
-            // t.string :lng
-            // t.string :neighborhood
-            // t.string :city
-            // t.string :state
-            // t.string :postal_code
-            // t.string :country
                });
         })
       } 
