@@ -2,6 +2,7 @@ import React, { Component, Fragment } from 'react'
 import { Input } from 'semantic-ui-react';
 import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
 
+
 const { SearchBox } = require("react-google-maps/lib/components/places/SearchBox");
 
 export default class GitMapData extends Component {
@@ -20,12 +21,11 @@ export default class GitMapData extends Component {
   handleSearchSubmit =(e)=> {
     alert('A name was submitted: ' + this.state.findAdress);
     e.preventDefault();
+    
 
   }
-
-  conponentDidMount(){
   
-  }
+
 
   render() {
     
