@@ -4,9 +4,37 @@ import axios from 'axios'
 
 export default class UserProfile extends Component {
 
+  state ={
+    adresses:[]
+  };
+
+  
+  componentDidMount(){
+    // this.getUserAddresses()
+    axios.get("http://localhost:3001/users/1/addresses").then( res => {
+  
+      console.log(res);
+ 
+      this.setState({
+       addresses: res.data
+       });
+    })
+  }
+  // getUserAddresses = () => {
+  //   axios.get("http://localhost:3001/users/1/addresses").then( res => {
+  
+  //      console.log(res);
+  
+  //      this.setSate({
+  //       addresses: res.data
+  //       });
+  //     }
+    
 
   //build the logic to fecth and render users adresses from back
-  // axios.post(`http://localhost:3001/users/1/addresses`)
+  // axios.post(`http://localhost:3001/users/1/addresses`
+
+  
   render() {
 
     const HeaderExampleImage = () => (

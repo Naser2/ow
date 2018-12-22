@@ -32,7 +32,7 @@ export default class AddressForm extends Component {
       getAdditionalGeoData = () => {
         let cardinal 
         axios.get(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${this.state.lat},${this.state.lng}&key=
-       getKey()`
+        `
         ).then(res => {
           
           const data = res.data;
