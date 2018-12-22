@@ -21,9 +21,17 @@ export default class AppNavbar extends Component {
                     <span className="icon-bar bar3"></span>
                     </button>
                     <a href="http://www.1way.io">
-                        <div className="logo-container">
-                            <div className="logo">
-                                <img src="assets/img/ow_icon_cloud.png" alt="One Way Logo" />
+                        <div className="logo-container" >
+                            <div className="logo" style={{
+                                  overflow: 'hidden',
+                                 'borderRadius': "20%",
+                                  border: "1px solid #333333",
+                                  width: "80px",
+                                  height: "80px",
+                                  float: "left"
+                                }}>
+                                <img src="assets/img/ow_icon_cloud.png" alt="One Way Logo" 
+                                 />
                             </div>
                             <div className="brand">
                                

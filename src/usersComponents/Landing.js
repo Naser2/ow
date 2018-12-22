@@ -33,16 +33,20 @@ export default class Landing extends Component {
                     <div className="row">
                         <div className="col-md-5 hidden-xs">
                             <div className="parallax-image">
-                                <img className="phone" src="assets/img/template/iphone3.png" style={{marginTop: "20px",
-                                 marginRight:"60px"}}/>
+                                <img className="phone" src="assets/img/template/iphone3.png"
+                                 style={{
+                                 marginTop: "18px",
+                                 marginRight:"70px"
+                                 }}
+                                 />
                             </div>
                         </div>
                        
                         <div className="col-md-6 col-md-offset-1">
                            
                             <div className="description">
-                            <MapWithASearchBox />
-                                <h2>Welcome To <img src="assets/img/ow_logo_white-1.png" alt="" style={{ overflow: "hidden", width: "130px"}} /></h2>
+                            {/* <MapWithASearchBox /> */}
+                                <h2>Welcome To <img src="assets/img/logos/ow_logo_white-1.png" alt="" style={{ overflow: "hidden", width: "130px"}} /></h2>
                                  <h4> Search for a place</h4>
                             
                                 <br/>

@@ -5,7 +5,7 @@ import axios from 'axios'
 export default class UserProfile extends Component {
 
 
-  //build the logic to fecth and render users adresses from back end
+  //build the logic to fecth and render users adresses from back
   // axios.post(`http://localhost:3001/users/1/addresses`)
   render() {
 
