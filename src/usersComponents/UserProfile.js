@@ -11,10 +11,11 @@ export default class UserProfile extends Component {
 
   
   componentDidMount(){
+    // Next -  will Map over const address = this.state.address and display the list
     // this.getUserAddresses()
     axios.get("http://localhost:3001/users/1/addresses").then( res => {
   
-      console.log(res);
+      console.log(res.data);
  
       this.setState({
        addresses: res.data
@@ -31,11 +32,6 @@ export default class UserProfile extends Component {
   //       });
   //     }
     
-
-  //build the logic to fecth and render users adresses from back
-  // axios.post(`http://localhost:3001/users/1/addresses`
-
-  
   render() {
 
     const UserHeader = () => (
@@ -50,14 +46,13 @@ export default class UserProfile extends Component {
         fontWeight: "700",
         lineHeight: "1.28571429em",
         textTransform:"none",
-        color: "rgba(0,0,0,.87)"
-      }} /> Patrick
+        color: "white"
+      }} /> Jhon
       </Header> )
 
     return (
       <Fragment>
       <div>
-        User Profile
         {UserHeader()}
         <h2 class="ui header" style={{'font-size':" 2.1285714rem", fontWeight: "900"}}>Account Settings
         <div class="sub header" style={{'font-size':" 1.5285714rem",
@@ -73,18 +68,14 @@ export default class UserProfile extends Component {
         <Fragment>
           <div id="addressSearch">
             {/* {UserAdressSearch()} */}
-            {/* 
-                  
-    -webkit-box-flex: 1.
-    -ms-flex: 1 0 auto.
-  
-    
-    -webkit-tap-highlight-color: rgba(255,255,255,0).
-   
-  
-  
             
-            */}
+            
+            <div role="list" class="ui list"><div role="listitem" class="item"><i aria-hidden="true" class="users icon"></i><div class="content"> Friends</div></div><div role="listitem" class="item"><i aria-hidden="true" class="marker icon"></i><div class="content" style={{color:"white"}}>Adress: 356 E 34th St New York, NY 10016</div></div><div role="listitem" class="item"><i aria-hidden="true" class="mail icon"></i><div class="content"><a href="mailto:john@testmyskills.com">john@testmyskills.com</a></div>
+            <div class="content" style={{color:"white"}}>Cell: +1(234)-556=7654</div></div><div role="listitem" class="item">
+            </div>
+            <div role="listitem" class="item"><i aria-hidden="true" class="linkify icon"></i><div class="content"><a href="http:eoudboacdo.com">findmehere.com</a></div></div></div>
+            
+            
     <div class="ui basic center aligned segment">
     <div class="ui action left icon input" 
               style={{'minHeight': "1em",
@@ -223,7 +214,7 @@ export default class UserProfile extends Component {
     </i>Create New Address</button></div>
           </div>
         </Fragment>
-        
+            <ul><li>{}</li></ul>
       </Fragment>)
        }
     }
