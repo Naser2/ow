@@ -31,7 +31,7 @@ export default class AddressForm extends Component {
    
       getAdditionalGeoData = () => {
         let cardinal 
-        axios.get(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${this.state.lat},${this.state.lng}&key=
+        axios.get(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${this.state.lat},${this.state.lng}&key=AIzaSyBbYvUAa7yUlJBZq3w7QS9mA-Nfb3kkYFo
         `
         ).then(res => {
           
@@ -43,20 +43,20 @@ export default class AddressForm extends Component {
           const state = data.results[0].address_components[5].long_name;
           const postal_code = data.results[0].address_components[7].long_name;
           const country = data.results[0].address_components[6].short_name;
-          const lat =  this.state.lat
-          const lng = this.state.lng 
+          // const lat =  this.state.lat
+          // const lng = this.state.lng 
           console.log("STREET:", street)
           console.log("NEIGHBORHOOD", neighborbhood)
           console.log("CITY:", city)
           console.log("STATE:", state)
           console.log("POSTAL CODE:", postal_code)
           console.log("COUNTRY:", country)  
-          console.log("Lat in AXIOS:", lat)  
+          // console.log("Lat in AXIOS:", lat)  
           this.setState({
             street: street,
             cardinal: cardinal,
-            lat: lat,
-            lng: lng,
+            // lat: lat,
+            // lng: lng,
             neighborhood: neighborbhood,
             city:city,
             state:state,

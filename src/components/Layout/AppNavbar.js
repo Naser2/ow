@@ -16,9 +16,9 @@ export default class AppNavbar extends Component {
                 <div className="navbar-header">
                     <button id="menu-toggle" type="button" className="navbar-toggle" data-toggle="collapse" data-target="#example">
                     <span className="sr-only">Toggle navigation</span>
-                    <span className="icon-bar bar1"></span>
-                    <span className="icon-bar bar2"></span>
-                    <span className="icon-bar bar3"></span>
+                    <span className="icon-bar bar1">HIDDEN SPAN 1</span>
+                    {/* <span className="icon-bar bar2">span2</span>
+                    <span className="icon-bar bar3">span 3</span> */}
                     </button>
                     <a href="http://www.1way.io">
                         <div className="logo-container" >
@@ -51,7 +51,7 @@ export default class AppNavbar extends Component {
         </button>
         <div className="collapse navbar-collapse" id="navbarMain">
           <ul className="navbar-nav mr-auto">
-          <React.Fragment>
+          {/* <React.Fragment>
                 <div className="collapse navbar-collapse navbar-right" id="example" >
                     <ul className="nav navbar-nav navbar-right">
                         <li><a href="#"><i className="fa fa-facebook-square"></i>Like</a></li>
@@ -59,7 +59,7 @@ export default class AppNavbar extends Component {
                         <li><a href="#"><i className="fa fa-pinterest"></i> Pin</a></li>
                     </ul>
                 </div>
-           </React.Fragment>
+           </React.Fragment> */}
             <li className="nav-item"><Link to="/home" className="nav-link"> Home</Link></li>
             <li className="nav-item"><Link to="/dashboard" className="nav-link"> Dashboard</Link></li>
             <li><Link to="/register-place" className="nav-link"> Register Place</Link></li>
@@ -68,6 +68,7 @@ export default class AppNavbar extends Component {
             <li><Link to="/login" className="nav-link"> login</Link></li>
             <li className="nav-item"><Link to="/profile" className="nav-link"> Profile</Link></li>
             <li className="nav-item"><Link to="/GitMapData" className="nav-link"> GitMapData</Link></li>
+            <li className="nav-item"><Link to="/User" className="nav-link"> User</Link></li>
 
           </ul>
         </div>

@@ -1,18 +1,34 @@
-import React, { Component, Fragment } from 'react'
-import { Header, Image } from 'semantic-ui-react'
-import axios from 'axios'
-import UserAdressSearch from './UserAdressSearch'
+import React, { Component, Fragment } from 'react';
+import { Header, Image } from 'semantic-ui-react';
+import axios from 'axios';
+// import UserAdressSearch from './usersComponents/UserAdressSearch';
+import { Card, CardHeader, CardBody, Row, Col } from "reactstrap";
+
+import UserHeader from "/Users/techman/ow/src/usersComponents/UserHeader.js"
+
+// import { PanelHeader, FormInputs, CardAuthor, CardSocials } from "../components.1";
+
+
+// import userBackground from "../public/assets/img/bg1.jpg";
+// import userAvatar from "../public/assets/img/John.png";
+
 
 export default class UserProfile extends Component {
 
   state ={
-    adresses:[]
+    adresses:[],
+    aboutMe:false
+    
   };
-
   
+  displayAboutMe =()=>{
+    // alert("Cliked on show About details")
+    this.setState({
+      aboutMe:!this.state.aboutMe
+    })
+  }
+
   componentDidMount(){
-    // Next -  will Map over const address = this.state.address and display the list
-    // this.getUserAddresses()
     axios.get("http://localhost:3001/users/1/addresses").then( res => {
   
       console.log(res.data);
@@ -22,63 +38,72 @@ export default class UserProfile extends Component {
        });
     })
   }
-  // getUserAddresses = () => {
-  //   axios.get("http://localhost:3001/users/1/addresses").then( res => {
-  
-  //      console.log(res);
-  
-  //      this.setSate({
-  //       addresses: res.data
-  //       });
-  //     }
+
     
   render() {
 
-    const UserHeader = () => (
-    <Header as='h2' >
-        <Image circular src='/assets/img/John.png' style={{
-        borderRadius: "500em",
-        display:" inline-block",
-        width: "2.5em",
-        height: "auto",
-        verticalAlign: 'middle',
-        fontFamily:" Lato , Helvetica Neue, Arial,Helvetica, sans-serif",
-        fontWeight: "700",
-        lineHeight: "1.28571429em",
-        textTransform:"none",
-        color: "white"
-      }} /> Jhon
-      </Header> )
-
     return (
-      <Fragment>
+      <Fragment >
+        <div class="ui card"><div class="content">
+        <UserHeader/>
+        <div class="header">John {this.state.first_name}</div>
+          
+        <div class="meta"><span class="date">Joined in {this.state.createdAt} 2015</span></div><div class="description">John {this.state.first_name} is a musician living in Nashville Tenessee.{this.state.bio}</div>
+        <div class="ui card"><div class="content" onClick={this.displayAboutMe}>
+          <div class="header" >About Me</div></div>
+              <div class="content" style={this.state.aboutMe ? {} : { display: 'none' }} ><div class="description">John is a violinist with 2 years experience in the wedding industry. He enjoys the outdoors and currently resides in upstate New York.{this.state.description}</div>      
+          </div>
+        </div>
+        {/* USER DETAILS */}
+       <div role="list" class="ui list">
+              <div role="listitem" class="item"><i aria-hidden="true" class="users icon"></i>
+                <div class="content"> Favorites</div></div>
+                  <div role="listitem" class="item"><i aria-hidden="true" class="marker icon"></i>
+                    <div class="content" style={{color:"orange"}}>Adress: 356 E 34th St New York, NY 10016{this.state.addre}</div>
+                </div>
+                <div role="listitem" class="item"><i aria-hidden="true" class="mail icon"></i>
+                   <div class="content">
+                     <a href="mailto:john@testmyskills.com">john@testmyskills.com</a>
+                   </div>
+                 <div class="content" style={{color:"white"}}>Cell: +1(234)-556=7654 {this.state.phone}</div>
+              </div>
+              <div role="listitem" class="item">
+              </div>
+                 <div role="listitem" class="item"><i aria-hidden="true" class="linkify icon"></i>
+                  <div class="content"><a href="http:eoudboacdo.com">findmehere.com</a>
+                </div>
+              </div>
+            </div>
+       {/* UDER DETAILS END  */}
+        
+        </div>
+        
+        
+        
+        
+        <div class="extra content"><a><i aria-hidden="true" class="user icon"></i>rated these places</a></div></div>
+
+
+       
       <div>
-        {UserHeader()}
-        <h2 class="ui header" style={{'font-size':" 2.1285714rem", fontWeight: "900"}}>Account Settings
-        <div class="sub header" style={{'font-size':" 1.5285714rem",
-          display: "block",
-          fontWeight: "400",
-          padding: '0',
-          margin: "0",
-         }}> 
-        Manage your account settings and set email preferences</div>
-        </h2>
+     
+            
+          
+           <Fragment>
+      <div>
+       
       </div>
       
         <Fragment>
           <div id="addressSearch">
-            {/* {UserAdressSearch()} */}
+
+  
             
             
-            <div role="list" class="ui list"><div role="listitem" class="item"><i aria-hidden="true" class="users icon"></i><div class="content"> Friends</div></div><div role="listitem" class="item"><i aria-hidden="true" class="marker icon"></i><div class="content" style={{color:"white"}}>Adress: 356 E 34th St New York, NY 10016</div></div><div role="listitem" class="item"><i aria-hidden="true" class="mail icon"></i><div class="content"><a href="mailto:john@testmyskills.com">john@testmyskills.com</a></div>
-            <div class="content" style={{color:"white"}}>Cell: +1(234)-556=7654</div></div><div role="listitem" class="item">
-            </div>
-            <div role="listitem" class="item"><i aria-hidden="true" class="linkify icon"></i><div class="content"><a href="http:eoudboacdo.com">findmehere.com</a></div></div></div>
-            
-            
-    <div class="ui basic center aligned segment">
+    <div class="ui basic center aligned segment" style={{ paddingRight: ".78571429em"}}>
     <div class="ui action left icon input" 
               style={{'minHeight': "1em",
+             
                 'boxShadow': "0 0 0 0 rgba(34,36,38,.15) inset",
                 outline: "0",
                 border: "none",
@@ -152,8 +177,10 @@ export default class UserProfile extends Component {
           
           <button class="ui blue button" 
                 style={{
+                  float:"left ",
                   paddingTop: ".78571429em",
                   paddingBottom: ".78571429em",
+                  
                   margin: 0,
                   borderRadius: "0 .28571429rem .28571429rem 0",
                   backgroundColor: "#2185d0",
@@ -207,14 +234,28 @@ export default class UserProfile extends Component {
                   color:"#ffffff", textShadow: "none", backgroundImage: "none",
                   borderRadius: "0 .28571429rem .28571429rem 0",
                   padding: ".98571429em 1.6em .98571429em",
-                  border:"#ffffff"
+                  border:"#ffffff",
+                  // float:"left"
                 }}>
     <i aria-hidden="true" class="add icon">
     
     </i>Create New Address</button></div>
           </div>
         </Fragment>
-            <ul><li>{}</li></ul>
-      </Fragment>)
+        
+      </Fragment>
+     
+      </div>
+      
+      
+
+            
+            
+        
+           
+            </Fragment>
+            
+     
+        )
        }
     }
