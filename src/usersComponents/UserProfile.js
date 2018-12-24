@@ -6,6 +6,7 @@ import { Card, CardHeader, CardBody, Row, Col } from "reactstrap";
 
 import UserHeader from "/Users/techman/ow/src/usersComponents/UserHeader.js"
 import SmallMapCard from '../components/Layout/SmallMapCard';
+import FullScreenMap from '../components/Layout/FullScreenMap';
 
 // import { PanelHeader, FormInputs, CardAuthor, CardSocials } from "../components.1";
 
@@ -67,7 +68,7 @@ export default class UserProfile extends Component {
 
                  Favorites</div></div>
                   <div role="listitem" class="item"><i aria-hidden="true" class="home icon"></i>
-                    <div class="content" style={{color:"orange"}}>Adress: 356 E 34th St New York, NY 10016{this.state.addre}</div>
+                    <div class="content" style={{color:"orange"}}>Adress: 356 E 34th St New York, NY 10016{this.state.addre}<div><h4 class="ui red header">Red</h4><h4 class="ui orange header">Orange</h4><h4 class="ui yellow header">Yellow</h4><h4 class="ui olive header">Olive</h4><h4 class="ui green header">Green</h4><h4 class="ui teal header">Teal</h4><h4 class="ui blue header">Blue</h4><h4 class="ui purple header">Purple</h4><h4 class="ui violet header">Violet</h4><h4 class="ui pink header">Pink</h4><h4 class="ui brown header">Brown</h4><h4 class="ui grey header">Grey</h4></div></div>
                 </div>
                 <div role="listitem" class="item"><i aria-hidden="true" class="mail icon"></i>
                    <div class="content">
@@ -97,7 +98,8 @@ export default class UserProfile extends Component {
           
       <Fragment>
       <div id="smallMapCard" style={{}}>
-       <SmallMapCard />
+    <SmallMapCard map={<FullScreenMap />} />
+
       </div>
       
         <Fragment>
@@ -117,7 +119,7 @@ export default class UserProfile extends Component {
             padding:" 1em 1em",
         }}>
 
-  
+
                    
     <div class="ui basic center aligned segment" >
     <div class="ui action left icon input" 
