@@ -47,7 +47,7 @@ export default class UserProfile extends Component {
         <div class="ui card"><div class="content">
         <UserHeader/>
         <div class="header">John {this.state.first_name}</div>
-          
+        <div class="something" style={{color:"blue", 'line-height': "4em"}}></div>
         <div class="meta"><span class="date">Joined in {this.state.createdAt} 2015</span></div><div class="description">John {this.state.first_name} is a musician living in Nashville Tenessee.{this.state.bio}</div>
         <div class="ui card"><div class="content" onClick={this.displayAboutMe}>
           <div class="header" >About Me</div></div>
