@@ -10,6 +10,7 @@ import Landing from './usersComponents/Landing'
 import UserProfile from './usersComponents/UserProfile';
 import GitMapData from './components/GitMapData';
 import User from './usersComponents/User'
+import HotspotsPage from './components/Layout/HotspotsPage';
 
 
 
@@ -34,6 +35,7 @@ class App extends Component {
                <Route exact path="/register-place" component={AddressForm} /> 
                <Route exact path="/signup" component={Signup} /> 
                <Route exact path="/login" component={Login} /> 
+               <Route exact path="/HotSpotsPage" component={HotspotsPage} /> 
                <Route exact path="/User" component={User} /> 
              </Switch>
          </div>
