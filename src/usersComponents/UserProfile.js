@@ -59,9 +59,13 @@ export default class UserProfile extends Component {
         </div>
         {/* USER DETAILS */}
        <div role="list" class="ui list">
-              <div role="listitem" class="item"><i aria-hidden="true" class="users icon"></i>
-                <div class="content"> Favorites</div></div>
-                  <div role="listitem" class="item"><i aria-hidden="true" class="marker icon"></i>
+              <div role="listitem" class="item"><i aria-hidden="true" class="marker icon"></i>
+                <div class="content">
+                <div class="ui heart rating" role="radiogroup" tabindex="-1"><i tabindex="0" aria-checked="true" aria-posinset="1" aria-setsize="3" class="active icon" role="radio"></i>       
+                </div>
+
+                 Favorites </div></div>
+                  <div role="listitem" class="item"><i aria-hidden="true" class="home icon"></i>
                     <div class="content" style={{color:"orange"}}>Adress: 356 E 34th St New York, NY 10016{this.state.addre}</div>
                 </div>
                 <div role="listitem" class="item"><i aria-hidden="true" class="mail icon"></i>
@@ -81,7 +85,7 @@ export default class UserProfile extends Component {
         
         </div>
   
-          <div class="extra content"><a><i aria-hidden="true" class="user icon"></i>rated these     places</a>
+          <div class="extra content"><a><i aria-hidden="true" class="flag icon"></i>rated these     places</a>
           </div>
         </div>
  
