@@ -39,15 +39,18 @@ export default class UserProfile extends Component {
     })
   }
 
-    
+  
   render() {
 
     return (
       <Fragment >
-        <div class="ui card"><div class="content">
+        <div class="ui card" style={{float:"left"}}><div class="content">
         <UserHeader/>
-        <div class="header">John {this.state.first_name}</div>
-        <div class="something" style={{color:"blue", 'line-height': "4em"}}></div>
+        <div class="something" style={{paddingTop: "1.08571429em"}}></div>
+        <div class="header">John {this.state.first_name}   | Jackson {this.state.last_name}</div>
+        <div class="something" style={{paddingTop: "1.08571429em"}}></div>
+        
+        <div class="something" style={{'border-top':" 1px solid rgba(34,36,38,.1)"}}></div>
         <div class="meta"><span class="date">Joined in {this.state.createdAt} 2015</span></div><div class="description">John {this.state.first_name} is a musician living in Nashville Tenessee.{this.state.bio}</div>
         <div class="ui card"><div class="content" onClick={this.displayAboutMe}>
           <div class="header" >About Me</div></div>
@@ -77,14 +80,11 @@ export default class UserProfile extends Component {
        {/* UDER DETAILS END  */}
         
         </div>
-        
-        
-        
-        
-        <div class="extra content"><a><i aria-hidden="true" class="user icon"></i>rated these places</a></div></div>
-
-
-       
+  
+          <div class="extra content"><a><i aria-hidden="true" class="user icon"></i>rated these     places</a>
+          </div>
+        </div>
+ 
       <div>
      
             
@@ -95,16 +95,29 @@ export default class UserProfile extends Component {
       </div>
       
         <Fragment>
-          <div id="addressSearch">
+          <div id="addressSearch"  style={{ float:"right",
+         //  paddingLeft: "25.78571429em",
+          paddingBottom: "50.78571429em",
+          paddingTop: "0.08571429em",
+          // paddingLeft: "55.78571429em",
+          // "border-top": "none!important",
+        '-webkit-box-flex': "1",
+        '-ms-flex-positive': 1,
+        'flex-grow': 1,
+        border: "none",
+        background: "0 0",
+        margin: 0,
+        padding:" 1em 1em",
+        }}>
 
   
             
             
-    <div class="ui basic center aligned segment" style={{ paddingRight: ".78571429em"}}>
+    <div class="ui basic center aligned segment" >
     <div class="ui action left icon input" 
               style={{'minHeight': "1em",
              
-                'boxShadow': "0 0 0 0 rgba(34,36,38,.15) inset",
+               'boxShadow': "0 0 0 0 rgba(34,36,38,.15) inset",
                 outline: "0",
                 border: "none",
                 verticalAlign: "baseline",
@@ -220,7 +233,8 @@ export default class UserProfile extends Component {
                   top: "50%",
                   // width: "100%",
                   ' margin-top':" -.5em"
-                }}>
+                }}
+                >
 
          Search
     </button>
@@ -236,7 +250,8 @@ export default class UserProfile extends Component {
                   padding: ".98571429em 1.6em .98571429em",
                   border:"#ffffff",
                   // float:"left"
-                }}>
+                }}
+                >
     <i aria-hidden="true" class="add icon">
     
     </i>Create New Address</button></div>
