@@ -5,6 +5,7 @@ import axios from 'axios';
 import { Card, CardHeader, CardBody, Row, Col } from "reactstrap";
 
 import UserHeader from "/Users/techman/ow/src/usersComponents/UserHeader.js"
+import SmallMapCard from '../components/Layout/SmallMapCard';
 
 // import { PanelHeader, FormInputs, CardAuthor, CardSocials } from "../components.1";
 
@@ -39,7 +40,6 @@ export default class UserProfile extends Component {
     })
   }
 
-  
   render() {
 
     return (
@@ -83,40 +83,40 @@ export default class UserProfile extends Component {
   
           <div class="extra content"><a><i aria-hidden="true" class="user icon"></i>rated these     places</a>
           </div>
+
         </div>
  
       <div>
      
             
           
-           <Fragment>
-      <div>
-       
+      <Fragment>
+      <div id="smallMapCard" style={{}}>
+       <SmallMapCard />
       </div>
       
         <Fragment>
-          <div id="addressSearch"  style={{ float:"right",
-         //  paddingLeft: "25.78571429em",
-          paddingBottom: "50.78571429em",
-          paddingTop: "0.08571429em",
-          // paddingLeft: "55.78571429em",
-          // "border-top": "none!important",
-        '-webkit-box-flex': "1",
-        '-ms-flex-positive': 1,
-        'flex-grow': 1,
-        border: "none",
-        background: "0 0",
-        margin: 0,
-        padding:" 1em 1em",
+          <div id="addressSearch"  
+          style={{ float:"right",
+             paddingLeft: "50.78571429em",
+            paddingBottom: "80.78571429em",
+            // paddingTop: "0.08571429em",
+            // paddingLeft: "55.78571429em",
+            // "border-top": "none!important",
+            '-webkit-box-flex': "1",
+            '-ms-flex-positive': 1,
+            'flex-grow': 1,
+            border: "none",
+            background: "0 0",
+            margin: 0,
+            padding:" 1em 1em",
         }}>
 
   
-            
-            
+                   
     <div class="ui basic center aligned segment" >
     <div class="ui action left icon input" 
-              style={{'minHeight': "1em",
-             
+           style={{'minHeight': "1em",             
                'boxShadow': "0 0 0 0 rgba(34,36,38,.15) inset",
                 outline: "0",
                 border: "none",
@@ -180,7 +180,6 @@ export default class UserProfile extends Component {
                   width: "2.67142857em",
                   opacity: ".5",
                   content: "\f002",
-
                   // borderRadius: "0 .28571429rem .28571429rem 0",
                   '-webkit-transition':" opacity .3s ease",
                   transition: "opacity .3s ease", //Not sure if this is working [Test aagain ]
