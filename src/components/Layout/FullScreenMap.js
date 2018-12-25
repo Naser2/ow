@@ -1,5 +1,6 @@
 import React from "react";
 import { Row, Col, Card, CardHeader, CardBody } from "reactstrap";
+// import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
 // react plugin used to create google maps
 import {
   withScriptjs,
@@ -7,10 +8,11 @@ import {
   GoogleMap,
   Marker
 } from "react-google-maps";
+import PanelHeader from "../PanelHeader";
 
-import { PanelHeader } from "components";
+// import { PanelHeader } from '../PanelHeader'
 
-const MapWrapper = withScriptjs(
+ const MapWrapper = withScriptjs(
   withGoogleMap(props => (
     <GoogleMap
       defaultZoom={13}
@@ -100,6 +102,7 @@ const MapWrapper = withScriptjs(
 
 class FullScreenMap extends React.Component {
   render() {
+    // console.log(googleMapURL)
     return (
       <div>
         <PanelHeader size="sm" />
@@ -115,7 +118,7 @@ class FullScreenMap extends React.Component {
                     style={{ position: "relative", overflow: "hidden" }}
                   >
                     <MapWrapper
-                      googleMapURL="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"
+                      googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyBbYvUAa7yUlJBZq3w7QS9mA-Nfb3kkYFo"
                       loadingElement={<div style={{ height: `100%` }} />}
                       containerElement={<div style={{ height: `100%` }} />}
                       mapElement={<div style={{ height: `100%` }} />}

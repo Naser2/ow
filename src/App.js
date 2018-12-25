@@ -11,6 +11,7 @@ import UserProfile from './usersComponents/UserProfile';
 import GitMapData from './components/GitMapData';
 import User from './usersComponents/User'
 import HotspotsPage from './components/Layout/HotspotsPage';
+import PanelHeader from './components/PanelHeader';
 
 
 
@@ -36,7 +37,7 @@ class App extends Component {
                <Route exact path="/signup" component={Signup} /> 
                <Route exact path="/login" component={Login} /> 
                <Route exact path="/HotSpotsPage" component={HotspotsPage} /> 
-               <Route exact path="/User" component={User} /> 
+               {/* <Route exact path="/User" component={User} />  */}
              </Switch>
          </div>
       </div>

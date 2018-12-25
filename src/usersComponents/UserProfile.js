@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import { Header, Image } from 'semantic-ui-react';
+import { Header, Image, Container } from 'semantic-ui-react';
 import axios from 'axios';
 // import UserAdressSearch from './usersComponents/UserAdressSearch';
 import { Card, CardHeader, CardBody, Row, Col } from "reactstrap";
@@ -14,6 +14,7 @@ import FullScreenMap from '../components/Layout/FullScreenMap';
 // import userBackground from "../public/assets/img/bg1.jpg";
 // import userAvatar from "../public/assets/img/John.png";
 
+import Cont from '../Container'
 
 export default class UserProfile extends Component {
 
@@ -42,6 +43,7 @@ export default class UserProfile extends Component {
   }
 
   render() {
+    console.log(FullScreenMap)
 
     return (
       <Fragment >
@@ -98,15 +100,15 @@ export default class UserProfile extends Component {
           
       <Fragment>
       <div id="smallMapCard" style={{}}>
-    <SmallMapCard map={<FullScreenMap />} />
-
+    <SmallMapCard map={ <Cont />} />
+     {/* <Cont /> */}
       </div>
       
         <Fragment>
           <div id="addressSearch"  
           style={{ float:"right",
              paddingLeft: "50.78571429em",
-            paddingBottom: "80.78571429em",
+             paddingBottom: "80.78571429em",
             // paddingTop: "0.08571429em",
             // paddingLeft: "55.78571429em",
             // "border-top": "none!important",
