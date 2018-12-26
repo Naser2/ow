@@ -65,7 +65,7 @@ body {
   position: relative;
   overflow: hidden; }
   .app-container .app-header {
-    margin-top: 300px; }
+    margin-top: 250px; }
     .app-container .app-header .app-site-info {
       color: #ffffff; }
       .app-container .app-header .app-site-info h1 {
@@ -90,5 +90,21 @@ body {
       float: left; }
     .app-container .app-content {
       float: right; } }
+  .app-container .app-card {
+    position: relative;
+    overflow: hidden;
+    background: #ffffff; }
+    @media (min-width: 768px) {
+      .app-container .app-card {
+        width: 350px;
+        -webkit-border-radius: 5px;
+        -moz-border-radius: 5px;
+        border-radius: 5px; } }
+    .app-container .app-card .app-card-header {
+      background-color: rgba(225, 225, 225, 0.3); }
+      .app-container .app-card .app-card-header .app-card-header-inner {
+        padding: 10px; }
+    .app-container .app-card .app-card-content .app-card-content-inner {
+      padding: 10px; }
 
 /*# sourceMappingURL=app.css.map */

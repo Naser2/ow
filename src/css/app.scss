@@ -34,8 +34,8 @@ body{
   overflow: hidden;
 
   .app-header{
-    margin-top: 300px;
-    
+    margin-top: 250px;
+
       .app-site-info{
         color: #ffffff;
           h1{
@@ -62,11 +62,39 @@ body{
    }
   
   .app-content{
+    
   }
+
+  
   @media(min-width: $screen-md){
     .app-header{float: left}
     .app-content{float: right}
 
   }
+
+  .app-card {
+    position: relative;
+    overflow: hidden;
+    background: #ffffff;
+    @media(min-width: $screen-sm){
+     width:350px;
+     -webkit-border-radius:5px;
+     -moz-border-radius:5px;
+     border-radius: 5px
+    }
+    .app-card-header{
+      background-color: rgba(225, 225, 225, .3);
+      .app-card-header-inner{
+        padding: 10px;
+
+      }
+    }
+    .app-card-content{
+      .app-card-content-inner{
+        padding: 10px;
+      }
+    }
+  }
+
 }
 

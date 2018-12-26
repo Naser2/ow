@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Header from '../components/Layout/Header';
+import HomeForm from './HomeForm';
 
 
 export default class Home extends Component {
@@ -11,24 +12,9 @@ export default class Home extends Component {
           Container Begin 
              <Header />
             <div className={'app-content'}>    
-              Begin App Content
-              <div className="app-card">
-                Card Begin
-                <div className="app-card-header">
-                   Header
-                   <div className="app-card-content-inner">
-                      Header Inner
-                    </div>
-                </div>
-                <div className="app-card-content">
-                   Content Header 
-                  <div className="app-card-content-inner">
-                     Inner
-                  </div>
-                </div>
-                Card End 
-              </div>
-              End App Content
+              Begin Form Content
+              <HomeForm />
+              End Form Content
           </div>
           End App Container    
        </div>
