@@ -49,7 +49,9 @@ table {
 /* apply a natural box layout model to all elements, but allowing components to change */
 body {
   background: #2b98e7;
-  font-family: 'Open Sans', sans-serif; }
+  font-family: 'Open Sans', sans-serif;
+  color: #9699bb;
+  font-size: 14px; }
 
 * {
   box-sizing: border-box; }
@@ -65,7 +67,7 @@ body {
   position: relative;
   overflow: hidden; }
   .app-container .app-header {
-    margin-top: 250px; }
+    margin-top: 200px; }
     .app-container .app-header .app-site-info {
       color: #ffffff; }
       .app-container .app-header .app-site-info h1 {
@@ -106,5 +108,23 @@ body {
         padding: 10px; }
     .app-container .app-card .app-card-content .app-card-content-inner {
       padding: 10px; }
+  .app-container .upload-profile-photo-main {
+    width: 100%;
+    display: block;
+    text-align: center label;
+      text-align-width: 100%;
+      text-align-display: block; }
+    .app-container .upload-profile-photo-main input {
+      position: fixed;
+      top: -9999px; }
+    .app-container .upload-profile-photo-main .upload-photo-description {
+      display: block;
+      font-size: 12px; }
+    .app-container .upload-profile-photo-main .upload-photo-icon {
+      display: inline-block;
+      margin-bottom: 10px;
+      width: 70px;
+      height: 33px;
+      border: 1px dashed #9699bb; }
 
 /*# sourceMappingURL=app.css.map */

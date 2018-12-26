@@ -16,6 +16,8 @@ body{
   background: $primary-color;
   // background:olivedrab
   font-family: 'Open Sans', sans-serif;
+  color: $body-text-color;
+  font-size: 14px;
 }
 
 *{
@@ -34,7 +36,7 @@ body{
   overflow: hidden;
 
   .app-header{
-    margin-top: 250px;
+    margin-top: 200px;
 
       .app-site-info{
         color: #ffffff;
@@ -61,15 +63,11 @@ body{
       }
    }
   
-  .app-content{
-    
-  }
+  .app-content{  }
 
-  
   @media(min-width: $screen-md){
     .app-header{float: left}
     .app-content{float: right}
-
   }
 
   .app-card {
@@ -94,6 +92,32 @@ body{
         padding: 10px;
       }
     }
+  }
+
+  .upload-profile-photo-main{
+    width: 100%;
+    display: block;
+    text-align: center
+    label{
+      width: 100%;
+      display: block;
+    }
+    input{
+      position: fixed;
+      top: -9999px
+    }
+   .upload-photo-description{
+     display:block;
+     font-size: 12px
+   }
+
+   .upload-photo-icon{
+     display: inline-block;
+     margin-bottom: 10px;
+     width: 70px;
+     height: 33px;
+     border: 1px dashed $body-text-color;
+   }
   }
 
 }
