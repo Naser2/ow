@@ -9,7 +9,7 @@ import Login from './usersComponents/Login'
 import Landing from './usersComponents/Landing'
 import UserProfile from './usersComponents/UserProfile';
 import GitMapData from './components/GitMapData';
-import User from './usersComponents/User'
+// import User from './usersComponents/User'
 import HotspotsPage from './components/Layout/HotspotsPage';
 import PanelHeader from './components/PanelHeader';
 import Layout from './layout';

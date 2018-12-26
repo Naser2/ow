@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import Header from '../components/Layout/Header'
+
 
  class Layout extends Component {
    constructor(props){
@@ -8,9 +10,8 @@ import React, { Component } from 'react'
     return (
       <div className={'app-layout'}>
         <div className={'app-container'}>
-           <div className={'app-header'}>
-             Here is left side 
-           </div>
+              <Header />
+           
            <div className={'app-content'}>
             Here is the App content
            </div>

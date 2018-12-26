@@ -2,8 +2,70 @@
 @import "reset";
 @import "variables";
 
+
+/* apply a natural box layout model to all elements, but allowing components to change */
+// html {
+//   box-sizing: border-box;
+// }
+// *, *:before, *:after {
+//   box-sizing: inherit;
+// }
+
+
 body{
   background: $primary-color;
   // background:olivedrab
   font-family: 'Open Sans', sans-serif;
 }
+
+*{
+  box-sizing: border-box;
+}
+
+.app-layout{
+  max-width: 1000px;
+  margin:0 auto; //centered content
+  @media(min-width: $screen-md){
+    padding: 100px, 50px, 50px, 50px
+  }
+}
+.app-container{
+  position: relative;
+  overflow: hidden;
+
+  .app-header{
+
+      .app-site-info{
+        color: #ffffff;
+          h1{
+            margin: 0;
+            padding: 0;
+            font-size: 60px;
+            font-weight: 800
+          }
+          .site-title{
+            margin: 20px, 0, 0, 0; //TRBL
+            padding: 0;
+            font-size: 50px;
+            font-weight: 300;
+            color: rgba(225, 225, 225, .8);
+          }
+          .site-slogan{
+            margin:5px;
+            padding: 0;
+            font-size: 30px;
+            font-weight: 300px;
+            color: rgba(225, 225, 225, .6);
+          }
+      }
+   }
+  
+  .app-content{
+  }
+  @media(min-width: $screen-md){
+    .app-header{float: left}
+    .app-content{float: right}
+
+  }
+}
+
