@@ -64,25 +64,27 @@ body {
 .app-container {
   position: relative;
   overflow: hidden; }
-  .app-container .app-header .app-site-info {
-    color: #ffffff; }
-    .app-container .app-header .app-site-info h1 {
-      margin: 0;
-      padding: 0;
-      font-size: 60px;
-      font-weight: 800; }
-    .app-container .app-header .app-site-info .site-title {
-      margin: 20px, 0, 0, 0;
-      padding: 0;
-      font-size: 50px;
-      font-weight: 300;
-      color: rgba(225, 225, 225, 0.8); }
-    .app-container .app-header .app-site-info .site-slogan {
-      margin: 5px;
-      padding: 0;
-      font-size: 30px;
-      font-weight: 300px;
-      color: rgba(225, 225, 225, 0.6); }
+  .app-container .app-header {
+    margin-top: 300px; }
+    .app-container .app-header .app-site-info {
+      color: #ffffff; }
+      .app-container .app-header .app-site-info h1 {
+        margin: 0;
+        padding: 0;
+        font-size: 60px;
+        font-weight: 800; }
+      .app-container .app-header .app-site-info .site-title {
+        margin: 20px, 0, 0, 0;
+        padding: 0;
+        font-size: 50px;
+        font-weight: 300;
+        color: rgba(225, 225, 225, 0.8); }
+      .app-container .app-header .app-site-info .site-slogan {
+        margin: 5px;
+        padding: 0;
+        font-size: 30px;
+        font-weight: 300px;
+        color: rgba(225, 225, 225, 0.6); }
   @media (min-width: 992px) {
     .app-container .app-header {
       float: left; }
