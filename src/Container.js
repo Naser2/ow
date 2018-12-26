@@ -47,10 +47,8 @@ import { Row, Col, Card, CardHeader, CardBody } from "reactstrap";
          <Row>
           <Col xs={6}>
           <Card>
-            <CardHeader style={{backgroundColor:"#e039c2e0",  width: '42vw',
-      }}>Google Maps</CardHeader>
-            <CardBody style={{ width: '54vw',
-      height: '51vh', padding: "0.25rem"}} >
+            <CardHeader style={{backgroundColor:"#e039c2e0",  width: '42vw'}}>Google Maps</CardHeader>
+            <CardBody style={{ width: '35vw', height: '51vh', padding: "0.25rem"}} >
             <Map 
             
               center={{
@@ -85,6 +83,9 @@ import { Row, Col, Card, CardHeader, CardBody } from "reactstrap";
 }
 
 export default GoogleApiWrapper ({
-  apiKey: 
+  apiKey: "AIzaSyBbYvUAa7yUlJBZq3w7QS9mA-Nfb3kkYFo"
 })(Container)
+
+
+
 
