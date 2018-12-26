@@ -12,6 +12,8 @@ import GitMapData from './components/GitMapData';
 import User from './usersComponents/User'
 import HotspotsPage from './components/Layout/HotspotsPage';
 import PanelHeader from './components/PanelHeader';
+import Layout from './layout';
+
 
 
 
@@ -22,11 +24,14 @@ class App extends Component {
     console.log(GitMapData)
     return (
       <Router>
-      <div className="App" style={{backgroundColor: "#00bfff"}}> 
+      <div className="App" 
+      // style={{backgroundColor: "#00bfff"}}
+      > 
          <AppNavbar />
          <div className="container">
              <Switch>
-             <Route  exact path="/"   component={Landing} />
+             <Route  exact path="/"   component={Layout} />
+             {/* <Route  exact path="/"   component={Landing} /> */}
              <Route  exact path= "/home" component={Landing} />
              <Route  exact path= "/GitMapData" component={GitMapData} />
              <Route exact path="/map" component={Container} />
