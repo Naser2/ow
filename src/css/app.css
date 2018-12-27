@@ -49,7 +49,7 @@ table {
 body {
   font-family: 'Open Sans', sans-serif;
   background: #2b98e7;
-  color: #9699bb;
+  color: #b0b3ce;
   font-size: 13px; }
 
 a {
@@ -124,7 +124,7 @@ a {
   .app-card .app-card-content .app-card-content-inner {
     padding: 20px; }
   .app-card .app-card-content .app-card-content-inner {
-    padding: 40px; }
+    padding: 30px; }
 
 .upload-profile-photo-main {
   width: 100%;
@@ -145,7 +145,7 @@ a {
     margin-bottom: 10px;
     width: 60px;
     height: 30px;
-    border: 1px dashed #9699bb;
+    border: 1px dashed #b0b3ce;
     position: relative; }
     .upload-profile-photo-main .upload-photo-icon i {
       position: absolute;
@@ -153,37 +153,54 @@ a {
       top: -10px;
       background: #f3f7ff;
       font-size: 28px; }
+  .upload-profile-photo-main.error .app-upload-icon {
+    border-color: red; }
+
+.first-and-lastname {
+  display: flex;
+  margin: 0; }
+  .first-and-lastname input {
+    font-size: 18px;
+    padding: 8px 10px;
+    border: 1px solid #bdc7d7; }
 
 .app-form-item {
-  margin: 15px 20px 0 20px; }
+  margin: 15px 23px 0 23px; }
   .app-form-item label {
     text-transform: uppercase;
     display: block;
-    font-weight: 500;
+    font-size: 14px;
     margin: 0 0 8px 0; }
   .app-form-item input[type='text'], .app-form-item input[type='email'], .app-form-item input[type='password'], .app-form-item textarea {
+    color: black;
     width: 100%;
     height: 40px;
-    border: 1px solid #e0e0e0;
+    border: 1px solid #bdc7d7;
+    font-size: 18px;
     outline: 0 none;
-    padding: 8px;
+    margin: 0;
+    padding: 8px 10px;
+    border-color: #bdc7d8;
+    border-radius: 5px;
+    -webkit-appearance: none;
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
     border-radius: 5px; }
     .app-form-item input[type='text']:focus, .app-form-item input[type='text'] :active, .app-form-item input[type='email']:focus, .app-form-item input[type='email'] :active, .app-form-item input[type='password']:focus, .app-form-item input[type='password'] :active, .app-form-item textarea:focus, .app-form-item textarea :active {
-      outline: 0 none; }
+      outline: 0 none;
+      border: 1px solid #46aaf0; }
   .app-form-item textarea {
     min-height: 50px; }
 
 .app-form-actions {
-  margin: 15px 15px 0 15px; }
+  margin: 15px 23px 0 23px; }
   .app-form-actions .app-button {
     width: 100%;
     height: 45px;
     text-align: center;
     display: block;
     font-weight: 800;
-    color: #2b98e7;
+    background-color: red;
     border: 1px solid #2b98e7;
     background: #FFFFFF;
     -webkit-border-radius: 5px;
@@ -193,8 +210,8 @@ a {
     text-transform: uppercase;
     margin: 20px 0 0 0; }
     .app-form-actions .app-button.primary {
-      background: #2b98e7;
-      color: #FFFFFF; }
+      background: #1363ce;
+      color: white; }
     .app-form-actions .app-button.app-button-link {
       background: none;
       border: 0 none;

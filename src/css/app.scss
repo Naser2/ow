@@ -106,7 +106,7 @@ a{
   // &.app-card-uploading, &.app-card-upload-sent {
     .app-card-content {
       .app-card-content-inner {
-        padding: 40px;
+        padding: 30px;
       }
     }
   }
@@ -146,30 +146,55 @@ a{
   }
   &.error {
     .app-upload-icon {
-      // border-color: $danger-color;
+      border-color: $danger-color;
     }
   }
 }
+.first-and-lastname{
+ display: flex;
+ margin: 0; //T(0)R(15)B(15)L(15)
+   input {
+    // width: 172px;
+    font-size: 18px;
+    padding: 8px 10px;
+    // margin: 15px 5px 0 0px;
+    border: 1px solid rgb(189, 199, 215);
+    // color: rgb(140, 140, 140);
+  //   display: block; /* 1. oh noes, my inputs are styled as block... */
+   }
 
+}
 .app-form-item {
-  margin: 15px 20px 0 20px; //T(0)R(15)B(15)L(15)
+  margin: 15px 23px 0 23px;
+  // margin: 13px 15px 0 15px; //T(0)R(15)B(15)L(15)
   label {
     text-transform: uppercase;
     display: block;
-    font-weight: 500;
+    // font-weight: 500;
+    font-size: 14px;
     margin: 0 0 8px 0;
+    // color: rgb(140, 140, 140);
   }
   input[type='text'], input[type='email'],input[type='password'],textarea {
+    color:rgb(0,0,0);
     width: 100%;
     height: 40px;
-    border: 1px solid rgba(224, 224, 224, 1);
+    border: 1px solid rgb(189, 199, 215);//F
+    
+    font-size: 18px;
     outline: 0 none;
-    padding: 8px;
+    // padding: 8px;
+    margin: 0;
+    padding: 8px 10px;
+    border-color: #bdc7d8;
+    border-radius: 5px;
+    -webkit-appearance: none;
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
     border-radius: 5px;
     &:focus, :active {
       outline: 0 none;
+      border: 1px solid rgba(70, 170, 240,1);
     }
   }
   textarea {
@@ -182,14 +207,15 @@ a{
   }
 }
 .app-form-actions {
-  margin: 15px 15px 0 15px; //T(0)R(15)B(15)L(15)
+  margin: 15px 23px 0 23px; //T(0)R(15)B(15)L(15)
   .app-button {
     width: 100%;
     height: 45px;
     text-align: center;
     display: block;
     font-weight: 800;
-    color: $primary-color;
+    // font-size: 18px;
+    background-color: red;
     border: 1px solid $primary-color;
     background: #FFFFFF;
     -webkit-border-radius: 5px;
@@ -199,8 +225,11 @@ a{
     text-transform: uppercase;
     margin: 20px 0 0 0; //T(0)R(15)B(15)L(15)
     &.primary {
-      background: $primary-color;
-      color: #FFFFFF;
+      background: rgb(19, 99, 206);
+      //orange;
+            // rgba(113, 179, 96,1);
+      //orange;
+      color: rgb(255, 255, 255);
     }
     &.app-button-link{
       background: none;

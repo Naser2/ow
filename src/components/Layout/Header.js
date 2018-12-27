@@ -7,7 +7,7 @@ export default class Header extends Component {
         
         <div className={'app-site-info'}>
          
-           <h1>SHARE</h1> 
+           <h1>TRAVEL</h1> 
            
            <div className="site-title"> 
               Share With Your Friends

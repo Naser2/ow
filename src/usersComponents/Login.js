@@ -53,13 +53,17 @@ export default class SignupForm extends Component {
 
 
 
-<form class="ui small form"  
+<form class="ui small form" >
+<div class="equal width fields"><div class="field"><label>First name</label><input placeholder="First name"/></div>
 
-><div class="equal width fields"><div class="field"><label>First name</label><input placeholder="First name"/></div>
 <div class="field"><label>Last name</label><input placeholder="Last name"/></div>
 <div class="field"></div><label>First name</label><div class="ui input"><input type="text" placeholder="First name"/></div>
 
-</div><div class="field"><div class="ui checkbox"><input type="checkbox" class="hidden" readonly="" tabindex="0"/><label>I agree to the Terms and Conditions</label></div></div><button type="submit" class="ui button">Submit</button>
+</div><div class="field"><div class="ui checkbox"><input type="checkbox" class="hidden" readonly="" tabindex="0"/><label>I agree to the Terms and Conditions</label>
+
+
+
+</div></div><button type="submit" class="ui button">Submit</button>
 
 <div class="ui grid"><div class="eight wide column"><button class="ui primary button">A button that can be focused</button></div><div class="eight wide column"><button class="ui button">Set focused</button></div></div>
 </form>
