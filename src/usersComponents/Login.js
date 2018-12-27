@@ -23,8 +23,25 @@ export default class SignupForm extends Component {
 
   render() {
     return (
-      <div className="app-card">
-      <form>
+      <div className="app-card" style={{margin: "0 auto",
+        width:"600px",
+        // Fb width: "396px" - // padding: "22px 108px 26px",
+        // margin: "auto",
+        backgroundColor: "#fff",
+        border: "1px solid #dddfe2",
+        borderRadius: "3px",
+        
+      
+        }}>
+      <form  
+      style={{
+        margin: "25px 120px 50px 120px", //T(0)R(15)B(15)L(15)
+        padding:" 0",
+        textAlign: "center",
+        clear:"left",
+
+      
+      }}>
           <div className="app-card-header">
             <div className="app-card-content-inner">
                <div className="upload-profile-photo-main">
@@ -37,20 +54,54 @@ export default class SignupForm extends Component {
                 </div>
              </div>
           </div>  
-          <div className="first-and-lastname">
+          
               <div  className="app-form-item">
               {/* <div class="ui form">*/}
-                  <label htmlFor="to">email</label>
-                  <input type="text" placeholder="Email" id="to"/>
+                  {/* <label htmlFor="to">email</label> */}
+                  <input type="text" placeholder="Email" id="to" style={{
+                    'font-size': "14px",
+                    'font-family': "Helvetica, Arial,   sans-serif",
+          
+                    // padding: "5px 8px",
+                     width: "284px",
+                     background: "#FFFFFF repeat-x",
+                     border: "1 /px solid #dddfe2",
+                     color: "#1d2129",
+                    'line-height': "16px",
+                     padding: "0 8px",
+                     'vertical-align': "middle",
+                     borderRadius: 0,
+                    'font-size': "14px",
+                     width: " 302px",
+                  }}/>
               </div> 
               <div className="app-form-item">    
-                  <label>password</label>
-                  <input htmlFor="to" type="password" placeholder="Password" id="to"/>
+                  {/* <label>password</label> */}
+                  <input htmlFor="to" type="password" placeholder="Password" id="to"  
+                        style={{
+                        'font-size': "14px",
+                          width: " 302px",
+
+                          borderRadius: 0
+                        }}
+                  />
               </div>
-          </div>
-          
-           <div className="app-form-actions">
-              <button type="submit" className="app-button primary">Submit</button>
+            
+           <div className="app-form-actions"  
+                                    style={{
+                                      'font-size': "14px",
+                                       width: "284px",
+                                      margin:" 10px 28px 50px ",
+                                      //T(0)R(15)B(15)L(15
+                                    }}
+           >
+              <button type="submit" className="app-button primary"
+              style={{
+                width: " 302px",
+                borderRadius: 0
+              }}
+
+              >Submit</button>
            </div>
          
           <div className="app-card-content">
