@@ -40,12 +40,12 @@ import PropTypes from 'prop-types'
     }
   }
   render(){
-    // console.log(this.props)
+    console.log("HELLO MAP",this.props)
     // console.log(this.loadMap(), this.map, this.google, this.node)
     return (
       <div ref='map'>
         Loading map...
-        {this.map}
+        {/* <PanelHeader size="sm" map={this.map}/> */}
       </div>
     )
   }

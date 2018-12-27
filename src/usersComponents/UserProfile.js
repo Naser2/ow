@@ -1,10 +1,12 @@
 import React, { Component, Fragment } from 'react';
-import { Header, Image } from 'semantic-ui-react';
+import { Header, Image, Container } from 'semantic-ui-react';
 import axios from 'axios';
 // import UserAdressSearch from './usersComponents/UserAdressSearch';
 import { Card, CardHeader, CardBody, Row, Col } from "reactstrap";
 
 import UserHeader from "/Users/techman/ow/src/usersComponents/UserHeader.js"
+import SmallMapCard from '../components/Layout/SmallMapCard';
+import FullScreenMap from '../components/Layout/FullScreenMap';
 
 // import { PanelHeader, FormInputs, CardAuthor, CardSocials } from "../components.1";
 
@@ -12,6 +14,7 @@ import UserHeader from "/Users/techman/ow/src/usersComponents/UserHeader.js"
 // import userBackground from "../public/assets/img/bg1.jpg";
 // import userAvatar from "../public/assets/img/John.png";
 
+import Cont from '../Container'
 
 export default class UserProfile extends Component {
 
@@ -39,8 +42,8 @@ export default class UserProfile extends Component {
     })
   }
 
-  
   render() {
+    console.log(FullScreenMap)
 
     return (
       <Fragment >
@@ -67,7 +70,7 @@ export default class UserProfile extends Component {
 
                  Favorites</div></div>
                   <div role="listitem" class="item"><i aria-hidden="true" class="home icon"></i>
-                    <div class="content" style={{color:"orange"}}>Adress: 356 E 34th St New York, NY 10016{this.state.addre}</div>
+                    <div class="content" style={{color:"orange"}}>Adress: 356 E 34th St New York, NY 10016{this.state.addre}<div><h4 class="ui red header">Red</h4><h4 class="ui orange header">Orange</h4><h4 class="ui yellow header">Yellow</h4><h4 class="ui olive header">Olive</h4><h4 class="ui green header">Green</h4><h4 class="ui teal header">Teal</h4><h4 class="ui blue header">Blue</h4><h4 class="ui purple header">Purple</h4><h4 class="ui violet header">Violet</h4><h4 class="ui pink header">Pink</h4><h4 class="ui brown header">Brown</h4><h4 class="ui grey header">Grey</h4></div></div>
                 </div>
                 <div role="listitem" class="item"><i aria-hidden="true" class="mail icon"></i>
                    <div class="content">
@@ -88,40 +91,41 @@ export default class UserProfile extends Component {
   
           <div class="extra content"><a><i aria-hidden="true" class="flag icon"></i>rated these     places</a>
           </div>
+
         </div>
  
       <div>
      
             
           
-           <Fragment>
-      <div>
-       
+      <Fragment>
+      <div id="smallMapCard" style={{}}>
+    <SmallMapCard map={ <Cont />} />
+     {/* <Cont /> */}
       </div>
       
         <Fragment>
-          <div id="addressSearch"  style={{ float:"right",
-         //  paddingLeft: "25.78571429em",
-          paddingBottom: "50.78571429em",
-          paddingTop: "0.08571429em",
-          // paddingLeft: "55.78571429em",
-          // "border-top": "none!important",
-        '-webkit-box-flex': "1",
-        '-ms-flex-positive': 1,
-        'flex-grow': 1,
-        border: "none",
-        background: "0 0",
-        margin: 0,
-        padding:" 1em 1em",
+          <div id="addressSearch"  
+          style={{ float:"right",
+             paddingLeft: "50.78571429em",
+             paddingBottom: "80.78571429em",
+            // paddingTop: "0.08571429em",
+            // paddingLeft: "55.78571429em",
+            // "border-top": "none!important",
+            '-webkit-box-flex': "1",
+            '-ms-flex-positive': 1,
+            'flex-grow': 1,
+            border: "none",
+            background: "0 0",
+            margin: 0,
+            padding:" 1em 1em",
         }}>
 
-  
-            
-            
+
+                   
     <div class="ui basic center aligned segment" >
     <div class="ui action left icon input" 
-              style={{'minHeight': "1em",
-             
+           style={{'minHeight': "1em",             
                'boxShadow': "0 0 0 0 rgba(34,36,38,.15) inset",
                 outline: "0",
                 border: "none",
@@ -185,7 +189,6 @@ export default class UserProfile extends Component {
                   width: "2.67142857em",
                   opacity: ".5",
                   content: "\f002",
-
                   // borderRadius: "0 .28571429rem .28571429rem 0",
                   '-webkit-transition':" opacity .3s ease",
                   transition: "opacity .3s ease", //Not sure if this is working [Test aagain ]

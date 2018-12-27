@@ -1,0 +1,246 @@
+@import "https://fonts.googleapis.com/css?family=Open+Sans:300i,400,800";
+@import "reset";
+@import "variables";
+
+
+body {
+  font-family: 'Open Sans', sans-serif;
+  background: $primary-color;
+  color: $body-text-color;
+  font-size: 13px;
+}
+a{
+  color: $primary-color;
+  text-decoration: none;
+}
+* {
+  box-sizing: border-box;
+}
+
+.app-layout {
+  max-width: 1000px;
+  margin: 0 auto;
+
+  @media(min-width: $screen-md) {
+    padding: 100px 50px 50px 50px;
+  }
+}
+
+.app-container {
+  position: relative;
+  overflow: hidden;
+  padding: 20px 0 0 0;
+  .app-header {
+    padding-bottom: 30px;
+    text-align: center;
+    .app-site-info {
+      color: #FFFFFF;
+      h1 {
+        margin: 0;
+        padding: 0;
+        font-size: 60px;
+        font-weight: 800;
+
+      }
+      .site-title {
+        margin: 20px 0 0 0;
+        padding: 0;
+        font-size: 50px;
+        font-weight: 300;
+        color: rgba(255, 255, 255, .9);
+        @media (max-width: $screen-sm) {
+          display: none;
+        }
+      }
+      .site-slogan {
+        @media (max-width: $screen-sm) {
+          display: none;
+        }
+        margin-top: 5px;
+        padding: 0;
+        font-size: 30px;
+        font-weight: 300;
+        color: rgba(255, 255, 255, .6);
+      }
+    }
+
+  }
+  .app-content {
+
+  }
+
+  @media (min-width: $screen-md) {
+    .app-header {
+      float: left;
+      padding-top: 100px;
+      text-align: left;
+    }
+    .app-content {
+      float: right;
+    }
+  }
+}
+
+.app-card {
+  overflow: hidden;
+  position: relative;
+  background: #FFFFFF;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  @media (min-width: $screen-sm) {
+    width: 350px;
+  }
+  .app-card-header {
+    padding:  20px;
+    background: rgba(243, 247, 255, 1);
+    .app-card-header-inner {
+      padding: 10px 20px;
+    }
+  }
+  .app-card-content {
+    .app-card-content-inner {
+      padding: 20px;
+    }
+  }
+  // &.app-card-uploading, &.app-card-upload-sent {
+    .app-card-content {
+      .app-card-content-inner {
+        padding: 30px;
+      }
+    }
+  }
+// }
+
+.upload-profile-photo-main {
+  width: 100%;
+  display: block;
+  text-align: center;
+  padding: 10px 0 0 0;
+  label {
+    display: block;
+    width: 100%;
+    input {
+      position: fixed;
+      top: -9999px;
+    }
+  }
+  .upload-photo-description {
+    font-size: 12px;
+    display: block;
+  }
+  .upload-photo-icon {
+    display: inline-block;
+    margin-bottom: 10px;
+    width: 60px;
+    height: 30px;
+    border: 1px dashed $body-text-color;
+    position: relative;
+    i {
+      position: absolute;
+      left: 10px;
+      top: -10px;
+      background: #f3f7ff;
+      font-size: 28px;
+    }
+  }
+  &.error {
+    .app-upload-icon {
+      border-color: $danger-color;
+    }
+  }
+}
+.first-and-lastname{
+ display: flex;
+ margin: 0; //T(0)R(15)B(15)L(15)
+   input {
+    // width: 172px;
+    font-size: 18px;
+    padding: 8px 10px;
+    // margin: 15px 5px 0 0px;
+    border: 1px solid rgb(189, 199, 215);
+    // color: rgb(140, 140, 140);
+  //   display: block; /* 1. oh noes, my inputs are styled as block... */
+   }
+
+}
+.app-form-item {
+  margin: 15px 23px 0 23px;
+  // margin: 13px 15px 0 15px; //T(0)R(15)B(15)L(15)
+  label {
+    text-transform: uppercase;
+    display: block;
+    // font-weight: 500;
+    font-size: 14px;
+    margin: 0 0 8px 0;
+    // color: rgb(140, 140, 140);
+  }
+  input[type='text'], input[type='email'],input[type='password'],textarea {
+    color:rgb(0,0,0);
+    width: 100%;
+    height: 40px;
+    border: 1px solid rgb(189, 199, 215);//F
+    
+    font-size: 18px;
+    outline: 0 none;
+    // padding: 8px;
+    margin: 0;
+    padding: 8px 10px;
+    border-color: #bdc7d8;
+    border-radius: 5px;
+    -webkit-appearance: none;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    &:focus, :active {
+      outline: 0 none;
+      border: 1px solid rgba(70, 170, 240,1);
+    }
+  }
+  textarea {
+    min-height: 50px;
+  }
+  &.error {
+    input {
+      // color: $danger-color;
+    }
+  }
+}
+.app-form-actions {
+  margin: 15px 23px 0 23px; //T(0)R(15)B(15)L(15)
+  .app-button {
+    width: 100%;
+    height: 45px;
+    text-align: center;
+    display: block;
+    font-weight: 800;
+    // font-size: 18px;
+    background-color: red;
+    border: 1px solid $primary-color;
+    background: #FFFFFF;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    padding: 10px 15px;
+    text-transform: uppercase;
+    margin: 20px 0 0 0; //T(0)R(15)B(15)L(15)
+    &.primary {
+      background: rgb(19, 99, 206);
+      //orange;
+            // rgba(113, 179, 96,1);
+      //orange;
+      color: rgb(255, 255, 255);
+    }
+    &.app-button-link{
+      background: none;
+      border: 0 none;
+      color: $primary-color;
+    }
+  }
+}
+
+
+/////////////////////////////////////////////
+
+
+
