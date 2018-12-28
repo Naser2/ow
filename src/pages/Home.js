@@ -12,11 +12,11 @@ export default class Home extends Component {
           Container Begin 
              <Header />
             <div className={'app-content'}>    
-              Begin Form Content
+              
               <HomeForm />
-              End Form Content
+             
           </div>
-          End App Container    
+          End Container    
        </div>
       Temp Main End 
     </div>
