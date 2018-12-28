@@ -30,7 +30,7 @@
   flex:0.2;
 }
 
-.toolbar_navigation_item ul{
+.toolbar_navigation_items ul{
   list-style: none;
   margin: 0;
   padding: 0;
@@ -39,17 +39,32 @@
   text-decoration: none;
  */
 }
-.toolbar_navigation_item li{
+.toolbar_navigation_items li{
   padding: 0 0.5rem;
   font-size: 1rem; 
 }
-.toolbar_navigation_item a:hover,
-.toolbar_navigation_item a:active {
+.toolbar_navigation_items a:hover,
+.toolbar_navigation_items a:active {
   color:#fa923f;
  } 
 
 
 
+ @media (max-width:768px){
+   .toolbar_navigation_items {
+     display: none;
+   }
+ }
+
+ @media (min-width:769px){
+  .toolbar__toggle-button {
+    display: none;
+  }
+  .toolbar_logo {
+    margin-left: 0;
+  }
+}
+ 
 
 
 

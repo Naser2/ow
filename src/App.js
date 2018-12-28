@@ -14,23 +14,54 @@ import HotspotsPage from './components/Layout/HotspotsPage';
 import PanelHeader from './components/PanelHeader';
 import Layout from './layout';
 import UserAddressBook from './usersComponents/UserAddressBook';
-import { ToolBar } from './pages/Toolsbar/ToolBar';
+import ToolBar  from './pages/Toolsbar/ToolBar';
 import SideDrawer from './pages/Toolsbar/SideDrawer/SideDrawer';
 import Backdrop from './pages/BackDrop/Backdrop';
 
 
 
 class App extends Component {
+
+
+    state = {
+      sideDrawerOpen: false
+      }
+ 
+
+  drawerToggleClickHandler = () => {
+    console.log("drawerClickHandler I WORK")
+    this.setState((prevState) => {
+       return {sideDrawerOpen: !prevState.sideDrawerOpen};
+    });
+  
+  };
+  backdropClickHandler = () => {
+    console.log("BACKDROP CLICKED")
+    this.setState({
+      sideDrawerOpen: false
+    });
+  }
   render() {
-    console.log(GitMapData)
+    // console.log(GitMapData)
+
+    let backdrop;
+    if (this.state.SideDrawerOpen) {
+       console.log("I Should show Drawer")
+       backdrop = <Backdrop click={ this.backdropClickHandler}/>
+    } else {
+      console.log("Nothing is being Executed")
+    }
+
+
     return (
       <div className="main" style={{height:"100%" }}>
         <Router>
           <div className="App"> 
-            <ToolBar />
-            <SideDrawer />
-            <Backdrop />
-            <div className="container" >
+            <ToolBar drawerClickHandler={this.drawerToggleClickHandler} />
+            <SideDrawer show={this.state.sideDrawerOpen}/>
+             {backdrop}
+           
+            <div className="container" style={{marginTop:"64px"}} >
               <Switch>
                 <Route  exact path="/Home1"   component={Layout} />
                 <Route  exact path= "/home2" component={Landing} />

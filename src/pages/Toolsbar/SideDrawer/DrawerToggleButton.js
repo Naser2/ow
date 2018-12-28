@@ -1,11 +1,10 @@
 import React from 'react'
 import "./DrawerToggleButton.css"
 
-const DrawerToggleButton = (props) => {
+const drawerToggleButton = props => {
   return (
     
-    <button className="toggle-button">
-    
+    <button className="toggle-button" onClick={props.click}>
       <div className="toggle-button_line"/>
       <div className="toggle-button_line"/>
       <div className="toggle-button_line"/>
@@ -13,4 +12,4 @@ const DrawerToggleButton = (props) => {
   )
 }
 
-export default DrawerToggleButton;
+export default drawerToggleButton;
