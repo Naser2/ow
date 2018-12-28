@@ -4,7 +4,7 @@ export default class HomeForm extends Component {
   render() {
     return (
 
-        <div className="app-card">
+        <div className="app-card" >
             <form>
                 <div className="app-card-header">
                   <div className="app-card-content-inner">

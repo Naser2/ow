@@ -16,10 +16,18 @@
   height: 100%;
   align-items: center;
 }
+.toolbar_logo {
+ margin-left: 1rem; 
+ /* This is to space the toggle button */
+}
 .toolbar_logo a{
   color:white;
   text-decoration: none;
   font-size: 1.5em
+}
+
+.spacer{
+  flex:0.2;
 }
 
 .toolbar_navigation_item ul{
