@@ -69,8 +69,8 @@ export default class AppNavbar extends Component {
             <li className="nav-item"><Link to="/profile" className="nav-link"> Profile</Link></li>
             <li className="nav-item"><Link to="/GitMapData" className="nav-link"> GitMapData</Link></li>
             <li className="nav-item"><Link to="/HotSpotsPage" className="nav-link"> Places</Link></li>
-            <li className="nav-item"><Link to="/User" className="nav-link"> User</Link></li>
-
+            {/* <li className="nav-item"><Link to="/User" className="nav-link"> User</Link></li>     */}
+            <li className="nav-item"><Link to="/UserAddressBook" className="nav-link"> UserAddressBook</Link></li>
           </ul>
         </div>
       </div>

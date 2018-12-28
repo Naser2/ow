@@ -10,9 +10,9 @@ const ToolBar = props =>{
         <header className="toolbar" >
  
            <nav  className="toolbar_navigation">
-
-           <div><DrawerToggleButton/></div>
-
+            <div>
+              <div><DrawerToggleButton/></div>
+            </div>
             <div className="toolbar_logo">  <a href="http://www.1way.io"> 
                 <div className="logo"
                     style={{

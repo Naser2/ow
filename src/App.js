@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Container from './Container'
 import AddressForm from './usersComponents/AddressForm'
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
-import AppNavbar from './components/Layout/AppNavbar'
+
 import Dashboard from './components/Layout/Dashboard'
 import Signup from './usersComponents/Signup';
 import Login from './usersComponents/Login'
@@ -13,9 +13,10 @@ import GitMapData from './components/GitMapData';
 import HotspotsPage from './components/Layout/HotspotsPage';
 import PanelHeader from './components/PanelHeader';
 import Layout from './layout';
-
-
-
+import UserAddressBook from './usersComponents/UserAddressBook';
+import { ToolBar } from './pages/Toolsbar/ToolBar';
+import SideDrawer from './pages/Toolsbar/SideDrawer/SideDrawer';
+import Backdrop from './pages/BackDrop/Backdrop';
 
 
 
@@ -23,30 +24,31 @@ class App extends Component {
   render() {
     console.log(GitMapData)
     return (
-      <Router>
-      <div className="App" 
-      // style={{backgroundColor: "#00bfff"}}
-      > 
-         <AppNavbar />
-         <div className="container">
-             <Switch>
-             <Route  exact path="/"   component={Layout} />
-             {/* <Route  exact path="/"   component={Landing} /> */}
-             <Route  exact path= "/home" component={Landing} />
-             <Route  exact path= "/GitMapData" component={GitMapData} />
-             <Route exact path="/map" component={Container} />
-             <Route exact path="/map-data" component={GitMapData} /> 
-               <Route exact path="/dashboard" component={Dashboard} />
-               <Route exact path="/profile" component={UserProfile} />
-               <Route exact path="/register-place" component={AddressForm} /> 
-               <Route exact path="/signup" component={Signup} /> 
-               <Route exact path="/login" component={Login} /> 
-               <Route exact path="/HotSpotsPage" component={HotspotsPage} /> 
-               {/* <Route exact path="/User" component={User} />  */}
-             </Switch>
-         </div>
+      <div className="main" style={{height:"100%" }}>
+        <Router>
+          <div className="App"> 
+            <ToolBar />
+            <SideDrawer />
+            <Backdrop />
+            <div className="container" >
+              <Switch>
+                <Route  exact path="/Home1"   component={Layout} />
+                <Route  exact path= "/home2" component={Landing} />
+                <Route  exact path= "/GitMapData" component={GitMapData} />
+                <Route exact path="/map" component={Container} />
+                <Route exact path="/map-data" component={GitMapData} /> 
+                <Route exact path="/dashboard" component={Dashboard} />
+                <Route exact path="/profile" component={UserProfile} />
+                <Route exact path="/register-place" component={AddressForm} /> 
+                <Route exact path="/signup" component={Signup} /> 
+                <Route exact path="/login" component={Login} /> 
+                <Route exact path="/HotSpotsPage" component={HotspotsPage} /> 
+                <Route exact path="/UserAddressBook" component={UserAddressBook} /> 
+              </Switch>
+            </div>
+          </div>
+        </Router>
       </div>
-      </Router>
     );
   }
 }
