@@ -5,6 +5,10 @@ export default class HomeForm extends Component {
     return (
 
         <div className="app-card" >
+
+ 
+
+
             <form>
                 <div className="app-card-header">
                   <div className="app-card-content-inner">
@@ -33,6 +37,10 @@ export default class HomeForm extends Component {
                       </div>
                    </div>
                 </div>  
+
+
+
+
                 <div className="first-and-lastname">
                     <div  className="app-form-item">
                     {/* <div class="ui form">*/}
