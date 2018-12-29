@@ -19,10 +19,23 @@ import Cont from '../Container'
 export default class UserProfile extends Component {
 
   state ={
-    adresses:[],
-    aboutMe:false
-    
+    addresses:[],
+    aboutMe:false,
+    showForm:false,
+    id: '',
+    savedAddresses: [],
+    door_number:'',
+        cardinal: '',
+        street:'',
+        neighborhood:'',
+        lat: '',
+        lng: '',
+        city:'',
+        state:'',
+        postal_code:'',
+        country:'',
   };
+
   
   displayAboutMe =()=>{
     // alert("Cliked on show About details")
@@ -31,10 +44,91 @@ export default class UserProfile extends Component {
     })
   }
 
-  componentDidMount(){
-    axios.get("http://localhost:3001/users/1/addresses").then( res => {
-  
-      console.log(res.data);
+  displayForm = (address) => {
+    console.log(" SHow FORM ")
+    this.setState({
+      showForm: true,
+        id:address.id,
+        door_number:address.door_number,
+        cardinal: address.cardinal,
+        street: address.street,
+        neighborhood:address.neighborhood,
+        city:address.city,
+        state:address.state,
+        postal_code:address.postal_code,
+        country:address.country,
+    })
+  }
+
+  hideEditForm = () => {
+    this.setState({
+      showForm: false,
+    id: '',
+
+      door_number:'',
+        cardinal: '',
+        street:'',
+        neighborhood:'',
+        city:'',
+        state:'',
+        postal_code:'',
+        country:'',
+    })
+  }
+
+  handleDelete =(id)=>{
+     
+    const token = localStorage.getItem("token")
+    const headers = {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    }
+    console.log("Delete  ADDRESSE:", id )
+    axios.delete(`http://localhost:3001/addresses/${id}`,{headers}
+    ).then( res => {
+      console.log(res)
+      this.getUserAddresses();
+    }
+    )
+
+   
+  }
+  handleAddressFormChange = (e) => {
+    
+    console.log(e.target.value)
+    this.setState({
+      [ e.target.name]: e.target.value
+    })
+ }
+
+  handleAddressFormSubmit =(e)=>{
+    e.preventDefault()
+     
+    const token = localStorage.getItem("token")
+    const headers = {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    }
+    console.log("SUBMITTING NEW ADDRESSE:", this.state )
+    axios.put(`http://localhost:3001/addresses/${this.state.id}`,{address: this.state}, {headers}
+    ).then( res => {
+      console.log(res)
+      this.getUserAddresses();
+    }
+      )
+    }
+
+
+
+  getUserAddresses =() => {
+    const token = localStorage.getItem("token")
+    const headers = {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    }
+    axios.get("http://localhost:3001/user/addresses", {headers}).then( res => {
+     this.setState({addresses: res.data});
+      console.log("USER ADDRESS RES:", res.data);
  
       this.setState({
        addresses: res.data
@@ -42,10 +136,45 @@ export default class UserProfile extends Component {
     })
   }
 
+
+  getUserSavedAddresses =() => {
+    const token = localStorage.getItem("token")
+    const headers = {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    }
+    axios.get("http://localhost:3001/user/addresses/saved", {headers}).then( res => {
+
+      console.log("USER SAVED ADDRESS RES:", res.data);
+ 
+      this.setState({
+       savedAddresses: res.data
+       });
+    })
+  }
+  componentDidMount(){
+    this.getUserAddresses();
+    this.getUserSavedAddresses();
+  }
+
   render() {
+    const addresseObj =  this.state.addresses.map( address => {
+      return (<span><h1 key={address.id}>{address.fullAddress}</h1> 
+      <button onClick={()=>{this.displayForm(address)} }>Edit</button>
+      <button onClick={()=>{this.handleDelete(address.id)}} >Delete</button>
+      </span>)
+     })
+
+     const savedAddresseObj =  this.state.savedAddresses.map( savedAddress => {
+      return (<span><h1 key={savedAddress.id}>{savedAddress.address.fullAddress}</h1> 
+
+
+      </span>)
+     })
     console.log(FullScreenMap)
 
     return (
+      <div>
       <Fragment >
         <div class="ui card" style={{float:"left"}}><div class="content">
         <UserHeader/>
@@ -65,12 +194,22 @@ export default class UserProfile extends Component {
               <div role="listitem" class="item"><i aria-hidden="true" class="marker icon"></i>
                 <div class="content">
                 <div class="ui heart rating" role="radiogroup" tabindex="-1"><i tabindex="0" aria-checked="true" aria-posinset="1" aria-setsize="3" class="active icon" role="radio"></i>
-                
-                </div>
+             </div>
 
                  Favorites</div></div>
                   <div role="listitem" class="item"><i aria-hidden="true" class="home icon"></i>
-                    <div class="content" style={{color:"orange"}}>Adress: 356 E 34th St New York, NY 10016{this.state.addre}<div><h4 class="ui red header">Red</h4><h4 class="ui orange header">Orange</h4><h4 class="ui yellow header">Yellow</h4><h4 class="ui olive header">Olive</h4><h4 class="ui green header">Green</h4><h4 class="ui teal header">Teal</h4><h4 class="ui blue header">Blue</h4><h4 class="ui purple header">Purple</h4><h4 class="ui violet header">Violet</h4><h4 class="ui pink header">Pink</h4><h4 class="ui brown header">Brown</h4><h4 class="ui grey header">Grey</h4></div></div>
+                    <div class="content" style={{color:"orange"}}>Address: {addresseObj} 
+                    
+                    {/* <div>
+                      <h4 class="ui red header">Red</h4><h4 class="ui orange header">Orange</h4>
+                      <h4 class="ui yellow header">Yellow</h4><h4 class="ui olive header">Olive</h4>
+                      <h4 class="ui green header">Green</h4><h4 class="ui teal header">Teal</h4>
+                      <h4 class="ui blue header">Blue</h4><h4 class="ui purple header">Purple</h4>
+                      <h4 class="ui violet header">Violet</h4><h4 class="ui pink header">Pink</h4>
+                      <h4 class="ui brown header">Brown</h4><h4 class="ui grey header">Grey</h4>
+                      </div> */}
+
+                      </div>
                 </div>
                 <div role="listitem" class="item"><i aria-hidden="true" class="mail icon"></i>
                    <div class="content">
@@ -89,7 +228,7 @@ export default class UserProfile extends Component {
         
         </div>
   
-          <div class="extra content"><a><i aria-hidden="true" class="flag icon"></i>rated these     places</a>
+          <div class="extra content"><a><i aria-hidden="true" class="flag icon"></i>rated these places</a>
           </div>
 
         </div>
@@ -99,7 +238,7 @@ export default class UserProfile extends Component {
             
           
       <Fragment>
-      <div id="smallMapCard" style={{}}>
+      <div id="smallMapCard" style={{'box-sizing': "border-box"}}>
     <SmallMapCard map={ <Cont />} />
      {/* <Cont /> */}
       </div>
@@ -247,6 +386,10 @@ export default class UserProfile extends Component {
          Search
     </button>
     </div>
+
+
+
+
     <div class="ui horizontal divider"></div>
     
     <button class="ui teal icon left labeled button"
@@ -269,16 +412,78 @@ export default class UserProfile extends Component {
       </Fragment>
      
       </div>
-      
+  
+
+     {savedAddresseObj}
+
+    </Fragment>
+      { this.state.showForm &&
+       <div className="address-update-form">
+       <div className="form AddressBox " style={{ padding: "20px 200px",}}>
+           <form onSubmit={this.handleAddressFormSubmit}   >
+
+           <input id="street" style={{overflow: "auto", margin: "12px",'borderCollapse': "collapse",
+         }} className="form-control" type="street" placeholder="Street" name="street"
+           value={this.state.street}
+           onChange={ (e)=> this.handleAddressFormChange(e) }></input>
+
+           <input id="neighborhood" style={{overflow: "auto", margin: "12px", 'borderCollapse': "collapse"}} className="form-control" type="neighborhood" placeholder="Phone" name="neighborhood"
+           value={this.state.neighborhood}
+           onChange={ (e)=> this.handleAddressFormChange(e) }></input> 
+          
+
+           <input id="city" style={{overflow: "auto", margin: "12px",'borderCollapse': "collapse",
+         }} className="form-control" type="city" placeholder="City" name="city"
+           value={this.state.city}
+           onChange={ (e)=> this.handleAddressFormChange(e) }></input>
+        
+         <input id="state" style={{overflow: "auto", margin: "12px",'borderCollapse': "collapse",
+         }} className="form-control" type="state" placeholder="State" name="state"
+           value={this.state.state}
+           onChange={ (e)=> this.handleAddressFormChange(e) }></input>
+          {/* <PhoneInput
+          inputComponent={ SmartInput }
+          placeholder="Enter phone number"
+          value={ this.state.value }
+          onChange={ value => this.setState({ value }) }
+           /> */}
+
       
 
-            
-            
-        
-           
-            </Fragment>
-            
-     
+           <input id="door_number" style={{overflow: "auto",  margin: "12px",  'marginBlockEnd': "2.33em"}} className="form-control" type="door_number" placeholder="Door Number" name="door_number"
+           value={this.state.door_number}
+           onChange={ (e)=> this.handleAddressFormChange(e) }></input>
+
+            <input id="country" style={{overflow: "auto", margin: "12px", 'borderCollapse': "collapse",
+         }} className="form-control" type="country" placeholder="Country" name="country"
+           value={this.state.country}
+           onChange={ (e)=> this.handleAddressFormChange(e) }></input>
+
+           <input className="btn btn-default btn-login" style={{
+
+             'marginRight': "auto",
+             'marginLeft': "auto",
+             display: "block",
+             padding: "8px 16px",
+             'fontSize':" 16px",
+             color: "#ffff",
+              'background-color': "#3fc1c9",
+              'background-color':"#1273de",
+             'backgroundColor': "#fccb00",
+             'border': "0",
+             'borderRadius': "2px",
+             cursor: "pointer",
+             transition: "background-color. 15s ease-in",
+             'marginTop': "16px"}}
+             type="submit" value="Get An Address"></input>
+             <button onClick={this.hideEditForm}>Cancel</button>
+            </form>
+        </div>
+       </div>
+      }
+      </div>
+      
+    
         )
        }
     }
