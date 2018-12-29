@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react'
-
+import axios  from 'axios'
 export default class SignupForm extends Component {
 
   state ={
@@ -17,8 +17,12 @@ export default class SignupForm extends Component {
  //Login data
  handleSubmit =(e)=>{
   e.preventDefault()
-  console.log("LOGIN EMAIL " + this.state.email  +
-  " PASSWORD "  + this.state.password)
+  // console.log("LOGIN EMAIL " + this.state.email  +
+  // " PASSWORD "  + this.state.password)
+  axios.post("http://localhost:3001/user_token", {auth: this.state})
+  .then(res => localStorage.setItem("token",res.data.jwt))
+  .finally(this.props.history.push("/profile"))
+  
 }
 
   render() {
@@ -30,10 +34,8 @@ export default class SignupForm extends Component {
         backgroundColor: "#fff",
         border: "1px solid #dddfe2",
         borderRadius: "3px",
-        
-      
         }}>
-      <form  
+      <form  onSubmit={this.handleSubmit}
       style={{
         margin: "25px 120px 50px 120px", //T(0)R(15)B(15)L(15)
         padding:" 0",
@@ -61,7 +63,6 @@ export default class SignupForm extends Component {
                   <input type="text" placeholder="Email" id="to" style={{
                     'font-size': "14px",
                     'font-family': "Helvetica, Arial,   sans-serif",
-          
                     // padding: "5px 8px",
                      width: "284px",
                      background: "#FFFFFF repeat-x",
@@ -72,8 +73,11 @@ export default class SignupForm extends Component {
                      'vertical-align': "middle",
                      borderRadius: 0,
                     'font-size': "14px",
-                     width: " 302px",
-                  }}/>
+                     width: " 302px",   
+                  }}
+                  name="email" value={this.state.name}
+                  onChange={this.handleLoginChange}
+                  />
               </div> 
               <div className="app-form-item">    
                   {/* <label>password</label> */}
@@ -81,9 +85,11 @@ export default class SignupForm extends Component {
                         style={{
                         'font-size': "14px",
                           width: " 302px",
-
                           borderRadius: 0
                         }}
+                        name="password" value={this.state.password}
+                       onChange={this.handleLoginChange}
+
                   />
               </div>
             
