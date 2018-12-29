@@ -15,7 +15,6 @@ export default class AddressForm extends Component {
 
     super();
     this.state = {
-        user_id: 1,
         door_number:'',
         cardinal: '',
         street:'',
@@ -31,7 +30,7 @@ export default class AddressForm extends Component {
    
       getAdditionalGeoData = () => {
         let cardinal 
-        axios.get(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${this.state.lat},${this.state.lng}&key=AIzaSyBbYvUAa7yUlJBZq3w7QS9mA-Nfb3kkYFo
+        axios.get(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${this.state.lat},${this.state.lng}&key=AIzaSyCItICGm9dV9G_ToVLWNM-dmUNrGYCpy88
         `
         ).then(res => {
           
@@ -41,7 +40,7 @@ export default class AddressForm extends Component {
           const neighborbhood = data.results[7].address_components[0].short_name
           const city  = data.results[0].address_components[2].long_name;
           const state = data.results[0].address_components[5].long_name;
-          const postal_code = data.results[0].address_components[7].long_name;
+          // const postal_code = data.results[0].address_components[7].long_name;
           const country = data.results[0].address_components[6].short_name;
           // const lat =  this.state.lat
           // const lng = this.state.lng 
@@ -49,7 +48,7 @@ export default class AddressForm extends Component {
           console.log("NEIGHBORHOOD", neighborbhood)
           console.log("CITY:", city)
           console.log("STATE:", state)
-          console.log("POSTAL CODE:", postal_code)
+          // console.log("POSTAL CODE:", postal_code)
           console.log("COUNTRY:", country)  
           // console.log("Lat in AXIOS:", lat)  
           this.setState({
@@ -60,14 +59,14 @@ export default class AddressForm extends Component {
             neighborhood: neighborbhood,
             city:city,
             state:state,
-            postal_code:postal_code,
+            // postal_code:postal_code,
             country:country
                });
         })
       } 
   
 
-      getRegistrantLocation = () => { 
+    getRegistrantLocation = () => { 
         navigator.geolocation.getCurrentPosition(position => {   
             const lat = { latitude: position.coords.latitude}.latitude
             const lng =  { longitude: position.coords.longitude}.longitude 
@@ -76,8 +75,7 @@ export default class AddressForm extends Component {
             lng: lng 
           }, ()=> this.getAdditionalGeoData()) 
         }    
-      )
-      
+      ) 
     }
   
    //Handles form change
@@ -90,25 +88,23 @@ export default class AddressForm extends Component {
    //Submits new data
     handleAddressFormSubmit =(e)=>{
       e.preventDefault()
+      const token = localStorage.getItem("token")
+      const headers = {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      }
       console.log("SUBMITTING NEW ADDRESSE:", this.state )
-
-      fetch(`${BASE_URL}/addresses`,{
-        method: "POST",
-        headers: {
-          "Content-Type": "Application/json",
-          Accept: "Application/json"
-        },
-        body: JSON.stringify(this.state )
-      }).then(res => {
-        return res.json()
-      })
-      .then(res => console.log(res))   
+      axios.post("http://localhost:3001/addresses",{address: this.state}, {headers}
+      ).then( res => console.log(res))
+ 
+     
     }
+
     componentDidMount() {
       this.getRegistrantLocation() 
       
     }
-
+   
 
 
   render(){
