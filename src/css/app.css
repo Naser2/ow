@@ -47,20 +47,17 @@ table {
   border-spacing: 0; }
 
 body {
+  height: 100%;
   font-family: 'Open Sans', sans-serif;
   background: #2b98e7;
   color: #b0b3ce;
   font-size: 13px; }
 
-a {
-  color: #2b98e7;
-  text-decoration: none; }
-
 * {
   box-sizing: border-box; }
 
 .app-layout {
-  max-width: 1000px;
+  max-width: 600px;
   margin: 0 auto; }
   @media (min-width: 992px) {
     .app-layout {
@@ -68,8 +65,7 @@ a {
 
 .app-container {
   position: relative;
-  overflow: hidden;
-  padding: 20px 0 0 0; }
+  overflow: hidden; }
   .app-container .app-header {
     padding-bottom: 30px;
     text-align: center; }
@@ -98,6 +94,8 @@ a {
         @media (max-width: 768px) {
           .app-container .app-header .app-site-info .site-slogan {
             display: none; } }
+  .app-container .app-content {
+    margin-top: '20px'; }
   @media (min-width: 992px) {
     .app-container .app-header {
       float: left;
