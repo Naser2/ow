@@ -33,8 +33,9 @@ import { Row, Col, Card, CardHeader, CardBody } from "reactstrap";
       longitude = -88.081807
     }
     const mapBasicStyle = {
-      width: '40vw',
-      height: '50vh'
+      width: '28vw',
+      height: '45vh',
+      // 'box-sizing': "border-box",
     }
     if (!this.props.loaded){
       return <div>Loading...</div>
@@ -46,9 +47,12 @@ import { Row, Col, Card, CardHeader, CardBody } from "reactstrap";
          <div className="content">Hello 
          <Row>
           <Col xs={6}>
-          <Card>
-            <CardHeader style={{backgroundColor:"#e039c2e0",  width: '42vw'}}>Google Maps</CardHeader>
-            <CardBody style={{ width: '35vw', height: '51vh', padding: "0.25rem"}} >
+          <CardHeader style={{backgroundColor:"blue",  width: '29vw', height: '5vh'}}>Google Maps</CardHeader>
+          <Card style={{ width: "32em", height: '47vh' , padding: "0.25rem"  }}>
+          
+            {/* , padding: "0.25rem" */}
+           
+            <CardBody style={{ width: "90vh", height: '51vh', 'box-sizing': "border-box"}} >
             <Map 
             
               center={{
@@ -57,7 +61,7 @@ import { Row, Col, Card, CardHeader, CardBody } from "reactstrap";
               }}
             style={mapBasicStyle}
             google={this.props.google}
-            zoom={16}
+            zoom={18}
             > 
             
             <Marker onClick={this.onMarkerClick}
@@ -83,7 +87,7 @@ import { Row, Col, Card, CardHeader, CardBody } from "reactstrap";
 }
 
 export default GoogleApiWrapper ({
-  apiKey: "AIzaSyBbYvUAa7yUlJBZq3w7QS9mA-Nfb3kkYFo"
+  apiKey: process.env.REACT_APP_OW_JS_API_KEY
 })(Container)
 
 
