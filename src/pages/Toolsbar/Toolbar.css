@@ -1,6 +1,7 @@
 
 .toolbar {
   background: rgb(19,99,209);
+ /* diplay:  */
   /* position: fixed; */
   top:0;
   left:0;
@@ -8,25 +9,35 @@
   height: 110px;
   padding-top: 30px;
   padding-bottom: 30px;
+  color: white
   /* background: rgb(20,117,244); */
+  
 
 }
-.toolbar_navigation{
+.toolbar__navigation {
   display: flex;
   height: 100%;
   align-items: center;
 }
 .toolbar_logo {
- margin-left: 1rem; 
+ /* background-image: url("/assets/img/ow_icon_cloud_80.png"); */
+ margin-left: 4rem; 
  /* This is to space the toggle button */
 }
 .toolbar_logo a{
   color:white;
   text-decoration: none;
-  font-size: 1.5em
+  font-size: 1.5em;
+ 
+  /* border-radius: 50%; */
+  /* border: 1px solid #333333; */
+  /* width: 150px;  */
+  /* float: left; */
+  /* margin-top: 10px; */
+  /* margin-left: 30px; */
 }
 
-.spacer{
+.spacer {
   flex:0.2;
 }
 
@@ -35,13 +46,18 @@
   margin: 0;
   padding: 0;
   display: flex;
+ 
   /* color:red;    --- OVERIDEN by Custom SASS 
   text-decoration: none;
  */
 }
-.toolbar_navigation_items li{
+.toolbar_navigation_items li {
   padding: 0 0.5rem;
-  font-size: 1rem; 
+  font-size: 1rem;
+  font-weight: bold; 
+}
+.toolbar_navigation_items a {
+  color: aliceblue
 }
 .toolbar_navigation_items a:hover,
 .toolbar_navigation_items a:active {
