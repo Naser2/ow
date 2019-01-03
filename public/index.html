@@ -8,9 +8,10 @@
     <script src="https://maps.googleapis.com/maps/api/js"></script>
     <!-- temp Bootstrap -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
     <!-- temp Font Awesome -->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
+    <!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous"> -->
     <!-- <link rel="stylesheet" href="/assets/css/App.css" > -->
 
     <link rel="ma>nifest" href="%PUBLIC_URL%/manifest.json">
@@ -22,28 +23,50 @@
     <title>OneWay App</title>
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
     <meta name="viewport" content="width=device-width" />
-
+<!-- 
     <link href="assets/css/bootstrap.css" rel="stylesheet" />
-    <link href="assets/css/landing-page.css" rel="stylesheet"/>
+    <link href="assets/css/landing-page.css" rel="stylesheet"/> -->
 
     <!--     Fonts and icons     -->
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400,300' rel='stylesheet' type='text/css'>
     <link href="assets/css/pe-icon-7-stroke.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://bootswatch.com/4/litera/bootstrap.min.css">
     <link
     rel="stylesheet"
       href="//cdn.jsdelivr.net/npm/semantic-ui@2.4.1/dist/semantic.min.css"
         />
 
+
+
+ <!-- SPECIAL PROF Begins  -->
+ <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600' rel='stylesheet' type='text/css'>
+ <link href="assets/css/toolkit.css" rel="stylesheet">
+ 
+ <link href="assets/css/application.css" rel="stylesheet">
+   
+       <style>
+        
+         body {
+           width: 1px;
+           min-width: 100%;
+           *width: 100%;
+         }
+       </style>
+   
+    <!-- SPECIAL PROF END  -->
+
+
+    
     <!-- END -->
 
     <title>OneWay App</title>
   </head>
 
    <!-- Bootstrap JS -->
-      <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+      <!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script> -->
 
        <!-- BODY BEGINS CUSTOM -->
         <body 
@@ -65,12 +88,15 @@
               center:{lat:42.3601,lng:71.0589}
              }
           var map = new google.maps.Map(document.getElementById('setMapData'), options)
+          
       }
     </script> 
     <!-- <noscript>
       You need to enable JavaScript to run this app.
     </noscript> -->
     <div id="root"></div>
-
+  <footer class="mt-5 p-3 text-center bg-light">
+      <div class="footerStuff">Oway  &copy;</div>
+  </footer>
   </body>
 </html>
