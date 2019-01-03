@@ -1,13 +1,19 @@
+
 import React, { Component, Fragment } from 'react';
 import { Header, Image, Container } from 'semantic-ui-react';
 import axios from 'axios';
 // import UserAdressSearch from './usersComponents/UserAdressSearch';
 import { Card, CardHeader, CardBody, Row, Col } from "reactstrap";
-
+import Gravatar from 'react-gravatar'
 import UserHeader from "/Users/techman/ow/src/usersComponents/UserHeader.js"
 import SmallMapCard from '../components/Layout/SmallMapCard';
 import FullScreenMap from '../components/Layout/FullScreenMap';
+import '../v4/docs/assets/css/application.css';
+import '../v4/docs/assets/css/toolkit.css';
 
+
+
+ 
 // import { PanelHeader, FormInputs, CardAuthor, CardSocials } from "../components.1";
 
 
@@ -15,10 +21,22 @@ import FullScreenMap from '../components/Layout/FullScreenMap';
 // import userAvatar from "../public/assets/img/John.png";
 
 import Cont from '../Container'
+import Example from '../components/Layout/mapCard';
+import someComp from '../v4/docs/assets/img/someComp';
+
 
 export default class UserProfile extends Component {
 
   state ={
+    user: {
+      id: "",
+      first_name: "" ,
+      last_name: "",
+      phone_number: "",
+      email: "",
+      created_at:"",
+     
+  },
     addresses:[],
     aboutMe:false,
     showForm:false,
@@ -112,7 +130,7 @@ export default class UserProfile extends Component {
     console.log("SUBMITTING NEW ADDRESSE:", this.state )
     axios.put(`http://localhost:3001/addresses/${this.state.id}`,{address: this.state}, {headers}
     ).then( res => {
-      console.log(res)
+      console.log("RES AFTER POSTING NEW AFFRESS:", res)
       this.getUserAddresses();
     }
       )
@@ -137,6 +155,28 @@ export default class UserProfile extends Component {
   }
 
 
+  getUser =() => {
+    const token = localStorage.getItem("token")
+    const headers = {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    }
+    axios.get(`http://localhost:3001/users/7`, {headers}).then( res => {
+     this.setState({user: res.data});
+      console.log("USER OBJ:", res.data);
+ 
+      this.setState({
+        user: {id:res.data.user.id,
+            first_name: res.data.user.first_name ,
+            last_name: res.data.user.last_name,
+            phone_number: res.data.user.phone_number,
+            email: res.data.user.email,
+            created_at:res.data.user.created_at,
+        }
+       });
+    })
+  }
+
   getUserSavedAddresses =() => {
     const token = localStorage.getItem("token")
     const headers = {
@@ -155,335 +195,792 @@ export default class UserProfile extends Component {
   componentDidMount(){
     this.getUserAddresses();
     this.getUserSavedAddresses();
+    this.getUser();
   }
 
   render() {
-    const addresseObj =  this.state.addresses.map( address => {
-      return (<span><h1 key={address.id}>{address.fullAddress}</h1> 
-      <button onClick={()=>{this.displayForm(address)} }>Edit</button>
-      <button onClick={()=>{this.handleDelete(address.id)}} >Delete</button>
-      </span>)
+    console.log("USER: ", this.state.user.first_name)
+ 
+    console.log("USER APROFILE: ", this.state.addresses)
+    const addressObj =  this.state.addresses.map( address => {
+      return (
+        <li>
+          <span class="text-muted icon icon-home mr-3" style={{"font-size":"20px"}}></span>
+          Address: 
+          <small> <a href="#somevalid"  
+          style={{          
+              "font-size":"15px",
+            //  height:" 43px",
+            // 'line-height': "3.05", //Space bellow && above
+            // 'white-space': "nowrap"  //Makes 1 line
+            }}>
+            {address.fullAddress}
+            </a>
+
+           <i href="#showpnmap" key={address.id} 
+              style={{ 
+                    color: "rgb(56,90,151)",
+                    'font-size': "14px",
+                    'font-weight': "600",
+                    height:" 43px",
+                    'line-height': "3.05",
+                    padding: "0 17px",
+                    position: "relative",
+                    "vertical-align": "middle",
+                    'white-space': "nowrap",
+              }}>Edit</i>
+           </small>
+        </li>)
      })
 
-     const savedAddresseObj =  this.state.savedAddresses.map( savedAddress => {
-      return (<span><h1 key={savedAddress.id}>{savedAddress.address.fullAddress}</h1> 
-
-
-      </span>)
+     const savedAddressesObj =  this.state.savedAddresses.map( savedAddress => {
+      return (
+            <li class="list-group-item" key={savedAddress.id}>
+            <i class="fa fa-map" aria-hidden="true"></i>
+            <a href="#">{savedAddress.address.fullAddress}</a>
+            </li>
+            )
      })
     console.log(FullScreenMap)
 
     return (
-      <div>
-      <Fragment >
-        <div class="ui card" style={{float:"left"}}><div class="content">
-        <UserHeader/>
-        <div class="something" style={{paddingTop: "1.08571429em"}}></div>
-        <div class="header">John {this.state.first_name}   | Jackson {this.state.last_name}</div>
-        <div class="something" style={{paddingTop: "1.08571429em"}}></div>
-        
-        <div class="something" style={{'border-top':" 1px solid rgba(34,36,38,.1)"}}></div>
-        <div class="meta"><span class="date">Joined in {this.state.createdAt} 2015</span></div><div class="description">John {this.state.first_name} is a musician living in Nashville Tenessee.{this.state.bio}</div>
-        <div class="ui card"><div class="content" onClick={this.displayAboutMe}>
-          <div class="header" >About Me</div></div>
-              <div class="content" style={this.state.aboutMe ? {} : { display: 'none' }} ><div class="description">John is a violinist with 2 years experience in the wedding industry. He enjoys the outdoors and currently resides in upstate New York.{this.state.description}</div>      
-          </div>
-        </div>
-        {/* USER DETAILS */}
-       <div role="list" class="ui list">
-              <div role="listitem" class="item"><i aria-hidden="true" class="marker icon"></i>
-                <div class="content">
-                <div class="ui heart rating" role="radiogroup" tabindex="-1"><i tabindex="0" aria-checked="true" aria-posinset="1" aria-setsize="3" class="active icon" role="radio"></i>
-             </div>
+      <div id="profile-main">
 
-                 Favorites</div></div>
-                  <div role="listitem" class="item"><i aria-hidden="true" class="home icon"></i>
-                    <div class="content" style={{color:"orange"}}>Address: {addresseObj} 
-                    
-                    {/* <div>
-                      <h4 class="ui red header">Red</h4><h4 class="ui orange header">Orange</h4>
-                      <h4 class="ui yellow header">Yellow</h4><h4 class="ui olive header">Olive</h4>
-                      <h4 class="ui green header">Green</h4><h4 class="ui teal header">Teal</h4>
-                      <h4 class="ui blue header">Blue</h4><h4 class="ui purple header">Purple</h4>
-                      <h4 class="ui violet header">Violet</h4><h4 class="ui pink header">Pink</h4>
-                      <h4 class="ui brown header">Brown</h4><h4 class="ui grey header">Grey</h4>
-                      </div> */}
+ {/* <someComp/> */}
+        {/* Profile &middot;  */}
+      
+
+{/* <body class="with-top-navbar"> */}
+  
+
+  <div class="growl" id="app-growl"></div>
+
+
+          {/* <nav class="navbar navbar-expand-md fixed-top navbar-dark bg-primary app-navbar">
+            <a class="navbar-brand" href="index.html">
+              <img src={require("../v4/docs/assets/img/brand-white.png" )}alt="brand" />
+            </a>
+
+            <button
+              class="navbar-toggler navbar-toggler-right d-md-none"
+              type="button"
+              data-toggle="collapse"
+              data-target="#navbarResponsive"
+              aria-controls="navbarResponsive"
+              aria-expanded="false"
+              aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+            <Fragment>
+              <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                  <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="profile/index.html">Profile</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" data-toggle="modal" href="#msgModal">Messages</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="docs/index.html">Docs</a>
+                </li>
+
+                <li class="nav-item d-md-none">
+                  <a class="nav-link" href="notifications/index.html">Notifications</a>
+                </li>
+                <li class="nav-item d-md-none">
+                  <a class="nav-link" data-action="growl">Growl</a>
+                </li>
+                <li class="nav-item d-md-none">
+                  <a class="nav-link" href="login/index.html">Logout</a>
+                </li>
+              </ul>
+            </Fragment>
+
+              <form class="form-inline float-right d-none d-md-flex">
+                <input class="form-control" type="text" data-action="grow" placeholder="Search" />
+              </form>
+
+              <Fragment>
+              <ul id="#js-popoverContent" class="nav navbar-nav float-right mr-0 d-none d-md-flex">
+                <li class="nav-item">
+                  <a class="app-notifications nav-link" href="notifications/index.html">
+                    <span class="icon icon-bell"></span>
+                  </a>
+                </li>
+
+                <li class="nav-item ml-2">
+                  <button class="btn btn-default navbar-btn navbar-btn-avatar" data-toggle="popover">
+                    <img class="rounded-circle" src={require("../v4/docs/assets/img/avatar-dhg.png")} />
+                  </button>
+                </li>
+              </ul>
+              </Fragment>
+              <someComp/>
+              <Fragment>
+              <ul class="nav navbar-nav d-none" id="js-popoverContent">
+                <li class="nav-item"><a class="nav-link" href="#" data-action="growl">Growl</a></li>
+                <li class="nav-item"><a class="nav-link" href="login/index.html">Logout</a></li>
+              </ul>
+              </Fragment>
+            </div>
+          </nav> */}
+
+            <div class="modal fade" id="msgModal" tabindex="-1" role="dialog" aria-labelledby="msgModal" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  
+                  <div class="modal-header">
+                    <h5 class="modal-title">Messages</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                  </div>
+
+                  <div class="modal-body p-0 js-modalBody">
+                    <div class="modal-body-scroller">
+                      <div class="media-list media-list-users list-group js-msgGroup">
+                        <a href="#" class="list-group-item list-group-item-action">
+                          <div class="media">
+                            <img class="rounded-circle media-object d-flex align-self-start mr-3" src={require("../v4/docs/assets/img/avatar-fat.jpg")}/>
+                            <div class="media-body">
+                              <strong>Jacob Thornton</strong> and <strong>1 other</strong>
+                              <div class="media-body-secondary">
+                                Aenean eu leo quam. Pellentesque ornare sem lacinia quam &hellip;
+                              </div>
+                            </div>
+                          </div>
+                        </a>
+                        <a href="#" class="list-group-item list-group-item-action">
+                          <div class="media">
+                            <img class="rounded-circle media-object d-flex align-self-start mr-3" src={require("../v4/docs/assets/img/avatar-mdo.png")}/>
+                            <div class="media-body">
+                              <strong>Mark Otto</strong> and <strong>3 others</strong>
+                              <div class="media-body-secondary">
+                                Brunch sustainable placeat vegan bicycle rights yeah…
+                              </div>
+                            </div>
+                          </div>
+                        </a>
+                        <a href="#" class="list-group-item list-group-item-action">
+                          <div class="media">
+                            <img class="rounded-circle media-object d-flex align-self-start mr-3" src={require("../v4/docs/assets/img/avatar-dhg.png")}/>
+                            <div class="media-body">
+                              <strong>Dave Gamache</strong>
+                              <div class="media-body-secondary">
+                                Brunch sustainable placeat vegan bicycle rights yeah…
+                              </div>
+                            </div>
+                          </div>
+                        </a>
+                        <a href="#" class="list-group-item list-group-item-action">
+                          <div class="media">
+                            <img class="rounded-circle media-object d-flex align-self-start mr-3" src={require("../v4/docs/assets/img/avatar-fat.jpg")} />
+                            <div class="media-body">
+                              <strong>Jacob Thornton</strong> and <strong>1 other</strong>
+                              <div class="media-body-secondary">
+                                Aenean eu leo quam. Pellentesque ornare sem lacinia quam &hellip;
+                              </div>
+                            </div>
+                          </div>
+                        </a>
+                        <a href="#" class="list-group-item list-group-item-action">
+                          <div class="media">
+                            <img class="rounded-circle media-object d-flex align-self-start mr-3" src={require("../v4/docs/assets/img/avatar-mdo.png")} />
+                            <div class="media-body">
+                              <strong>Mark Otto</strong> and <strong>3 others</strong>
+                              <div class="media-body-secondary">
+                                Brunch sustainable placeat vegan bicycle rights yeah…
+                              </div>
+                            </div>
+                          </div>
+                        </a>
+                        <a href="#" class="list-group-item list-group-item-action">
+                          <div class="media">
+                            <img class="rounded-circle media-object d-flex align-self-start mr-3" src={require("../v4/docs/assets/img/avatar-dhg.png")}/>
+                            <div class="media-body">
+                              <strong>Dave Gamache</strong>
+                              <div class="media-body-secondary">
+                                Brunch sustainable placeat vegan bicycle rights yeah…
+                              </div>
+                            </div>
+                          </div>
+                        </a>
+                        <a href="#" class="list-group-item list-group-item-action">
+                          <div class="media">
+                            <img class="rounded-circle media-object d-flex align-self-start mr-3" src="../v4/docs/assets/img/avatar-fat.jpg"/>
+                            <div class="media-body">
+                              <strong>Jacob Thornton</strong> and <strong>1 other</strong>
+                              <div class="media-body-secondary">
+                                Aenean eu leo quam. Pellentesque ornare sem lacinia quam &hellip;
+                              </div>
+                            </div>
+                          </div>
+                        </a>
+                        <a href="#" class="list-group-item list-group-item-action">
+                          <div class="media">
+                            <img class="rounded-circle media-object d-flex align-self-start mr-3" src="../v4/docs/assets/img/avatar-mdo.png"/>
+                            <div class="media-body">
+                              <strong>Mark Otto</strong> and <strong>3 others</strong>
+                              <div class="media-body-secondary">
+                                Brunch sustainable placeat vegan bicycle rights yeah…
+                              </div>
+                            </div>
+                          </div>
+                        </a>
+                        <a href="#" class="list-group-item list-group-item-action">
+                          <div class="media">
+                            <img class="rounded-circle media-object d-flex align-self-start mr-3" src={require("../v4/docs/assets/img/avatar-dhg.png")}/>
+                            <div class="media-body">
+                              <strong>Dave Gamache</strong>
+                              <div class="media-body-secondary">
+                                Brunch sustainable placeat vegan bicycle rights yeah…
+                              </div>
+                            </div>
+                          </div>
+                        </a>
+                      </div>
+
+                      <div class="d-none m-3 js-conversation">
+
+                      <Fragment>
+                        <ul class="media-list media-list-conversation">
+                          <li class="media media-current-user mb-4">
+                            <div class="media-body">
+                              <div class="media-body-text">
+                                Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Nulla vitae elit libero, a pharetra augue. Maecenas sed diam eget risus varius blandit sit amet non magna. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Sed posuere consectetur est at lobortis.
+                              </div>
+                              <div class="media-footer">
+                                <small class="text-muted">
+                                  <a href="#">Dave Gamache</a> at 4:20PM
+                                </small>
+                              </div>
+                            </div>
+                            <img class="rounded-circle media-object d-flex align-self-start ml-3" src={require("../v4/docs/assets/img/avatar-dhg.png")}/>
+                          </li>
+
+                          <li class="media mb-4">
+                            <img class="rounded-circle media-object d-flex align-self-start mr-3" src="../v4/docs/assets/img/avatar-fat.jpg"/>
+                            <div class="media-body">
+                              <div class="media-body-text">
+                              Cras justo odio, dapibus ac facilisis in, egestas eget quam. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Praesent commodo cursus magna, vel scelerisque nisl consectetur et.
+                              </div>
+                              <div class="media-body-text">
+                              Vestibulum id ligula porta felis euismod semper. Aenean lacinia bibendum nulla sed consectetur. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Nullam quis risus eget urna mollis ornare vel eu leo. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.
+                              </div>
+                              <div class="media-body-text">
+                              Cras mattis consectetur purus sit amet fermentum. Donec sed odio dui. Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Nulla vitae elit libero, a pharetra augue. Donec id elit non mi porta gravida at eget metus.
+                              </div>
+                              <div class="media-footer">
+                                <small class="text-muted">
+                                  <a href="#">Fat</a> at 4:28PM
+                                </small>
+                              </div>
+                            </div>
+                          </li>
+
+                          <li class="media mb-4">
+                            <img class="rounded-circle media-object d-flex align-self-start mr-3" src="../v4/docs/assets/img/avatar-mdo.png"/>
+                            <div class="media-body">
+                              <div class="media-body-text">
+                              Etiam porta sem malesuada magna mollis euismod. Donec id elit non mi porta gravida at eget metus. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Etiam porta sem malesuada magna mollis euismod. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Aenean lacinia bibendum nulla sed consectetur.
+                              </div>
+                              <div class="media-body-text">
+                              Curabitur blandit tempus porttitor. Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit.
+                              </div>
+                              <div class="media-footer">
+                                <small class="text-muted">
+                                  <a href="#">Mark Otto</a> at 4:20PM
+                                </small>
+                              </div>
+                            </div>
+                          </li>
+
+                          <li class="media media-current-user mb-4">
+                            <div class="media-body">
+                              <div class="media-body-text">
+                                Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Nulla vitae elit libero, a pharetra augue. Maecenas sed diam eget risus varius blandit sit amet non magna. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Sed posuere consectetur est at lobortis.
+                              </div>
+                              <div class="media-footer">
+                                <small class="text-muted">
+                                  <a href="#">Dave Gamache</a> at 4:20PM
+                                </small>
+                              </div>
+                            </div>
+                            <img class="rounded-circle media-object d-flex align-self-start ml-3" src={require("../v4/docs/assets/img/avatar-dhg.png")}/>
+                          </li>
+
+                          <li class="media mb-4">
+                            <img class="rounded-circle media-object d-flex align-self-start mr-3" src="../v4/docs/assets/img/avatar-fat.jpg"/>
+                            <div class="media-body">
+                              <div class="media-body-text">
+                              Cras justo odio, dapibus ac facilisis in, egestas eget quam. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Praesent commodo cursus magna, vel scelerisque nisl consectetur et.
+                              </div>
+                              <div class="media-body-text">
+                              Vestibulum id ligula porta felis euismod semper. Aenean lacinia bibendum nulla sed consectetur. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Nullam quis risus eget urna mollis ornare vel eu leo. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.
+                              </div>
+                              <div class="media-body-text">
+                              Cras mattis consectetur purus sit amet fermentum. Donec sed odio dui. Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Nulla vitae elit libero, a pharetra augue. Donec id elit non mi porta gravida at eget metus.
+                              </div>
+                              <div class="media-footer">
+                                <small class="text-muted">
+                                  <a href="#">Fat</a> at 4:28PM
+                                </small>
+                              </div>
+                            </div>
+                          </li>
+
+                          <li class="media mb-4">
+                            <img class="rounded-circle media-object d-flex align-self-start mr-3" src="../v4/docs/assets/img/avatar-mdo.png"/>
+                            <div class="media-body">
+                              <div class="media-body-text">
+                              Etiam porta sem malesuada magna mollis euismod. Donec id elit non mi porta gravida at eget metus. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Etiam porta sem malesuada magna mollis euismod. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Aenean lacinia bibendum nulla sed consectetur.
+                              </div>
+                              <div class="media-body-text">
+                              Curabitur blandit tempus porttitor. Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit.
+                              </div>
+                              <div class="media-footer">
+                                <small class="text-muted">
+                                  <a href="#">Mark Otto</a> at 4:20PM
+                                </small>
+                              </div>
+                            </div>
+                          </li>
+                        </ul>
+                        </Fragment>
 
                       </div>
-                </div>
-                <div role="listitem" class="item"><i aria-hidden="true" class="mail icon"></i>
-                   <div class="content">
-                     <a href="mailto:john@testmyskills.com">john@testmyskills.com</a>
-                   </div>
-                 <div class="content" style={{color:"white"}}>Cell: +1(234)-556=7654 {this.state.phone}</div>
-              </div>
-              <div role="listitem" class="item">
-              </div>
-                 <div role="listitem" class="item"><i aria-hidden="true" class="linkify icon"></i>
-                  <div class="content"><a href="http:eoudboacdo.com">findmehere.com</a>
+
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
-       {/* UDER DETAILS END  */}
-        
-        </div>
-  
-          <div class="extra content"><a><i aria-hidden="true" class="flag icon"></i>rated these places</a>
-          </div>
 
-        </div>
- 
-      <div>
-     
-            
-          
-      <Fragment>
-      <div id="smallMapCard" style={{'box-sizing': "border-box"}}>
-    <SmallMapCard map={ <Cont />} />
-     {/* <Cont /> */}
-      </div>
-      
-        <Fragment>
-          <div id="addressSearch"  
-          style={{ float:"right",
-             paddingLeft: "50.78571429em",
-             paddingBottom: "80.78571429em",
-            // paddingTop: "0.08571429em",
-            // paddingLeft: "55.78571429em",
-            // "border-top": "none!important",
-            '-webkit-box-flex': "1",
-            '-ms-flex-positive': 1,
-            'flex-grow': 1,
-            border: "none",
-            background: "0 0",
-            margin: 0,
-            padding:" 1em 1em",
-        }}>
+            <div class="modal fade" id="userModal" tabindex="-1" role="dialog" aria-labelledby="userModal" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h4 class="modal-title">Users</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                  </div>
+
+                  <div class="modal-body p-0">
+                    <div class="modal-body-scroller">
+                      <ul class="media-list media-list-users list-group">
+                        <li class="list-group-item">
+                          <div class="media w-100">
+                            <img class="media-object d-flex align-self-start mr-3" src="../v4/docs/assets/img/avatar-fat.jpg" />
+                            <div class="media-body">
+                              
+                              <button class="btn btn-secondary btn-sm float-right">
+                                <span class="glyphicon glyphicon-user"></span> Follow
+                              </button>
+
+                              <strong>Jacob Thornton</strong>
+                              <p>@fat - San Francisco</p>
+                            </div>
+                          </div>
+                        </li>
+                        <li class="list-group-item">
+                          <div class="media w-100">
+                            <img class="media-object d-flex align-self-start mr-3" src={require("../v4/docs/assets/img/avatar-dhg.png")}  />
+                            <div class="media-body">
+                             
+                              <button class="btn btn-secondary btn-sm float-right">
+                                <span class="glyphicon glyphicon-user"></span> Follow
+                              </button>
+
+                              <strong>Dave Gamache</strong>
+                              <p>@dhg - Palo Alto</p>
+                            </div>
+                          </div>
+                        </li>
+                        <li class="list-group-item">
+                          <div class="media w-100">
+                            <img class="media-object d-flex align-self-start mr-3" src="../v4/docs/assets/img/avatar-mdo.png" />
+                            <div class="media-body">
+
+                              <button class="btn btn-secondary btn-sm float-right">
+                                <span class="glyphicon glyphicon-user"></span> Follow
+                              </button>
+
+                              <strong>Mark Otto</strong>
+                              <p>@mdo - San Francisco</p>
+                            </div>
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="container pt-4 pb-5">
+              <div class="row">
+                <div class="col-lg-3">
+                  <div class="card card-profile mb-4">
+                    <div class="card-header" 
+                    style={{
+                      backgroundImage: "url(" + "https://images.pexels.com/photos/34153/pexels-photo.jpg?auto=compress&cs=tinysrgb&h=350" + ")"
+                      }}></div>
+                    <div class="card-body text-center">
+                     
+                      <a href="profile/index.html">
+                        <img class="card-profile-img" src={require("../v4/docs/assets/img/avatar-dhg.png")} />
+                      </a>
+
+                      <h6 class="card-title">
+                        <a class="text-inherit" href="profile/index.html">{this.state.user.first_name} {this.state.user.last_name}</a>
+                      </h6>
+
+                      <p class="mb-4">I wish i was a little bit taller, wish i was a baller, wish i had a girl… also.</p>
+
+                      <ul class="card-menu">
+                        <li class="card-menu-item">
+                          <a href="#userModal" class="text-inherit" data-toggle="modal">
+                            Email
+                            <h6 class="my-0">{this.state.user.email}</h6>
+                          </a>
+                        </li>
+
+                        <li class="card-menu-item">
+                          <a href="#userModal" class="text-inherit" data-toggle="modal">
+                            Phone
+                            <h6 class="my-0">{this.state.user.phone_number}</h6>
+                          </a>
+                        </li>
+
+                      </ul>
+
+                    </div>
+                  </div>
+
+                  <div class="card d-md-block d-lg-block mb-4">
+                    <div class="card-body">
+                      <h6 class="mb-3"  
+                      style={{ color: "rgb(56,90,151)",    
+                                      'font-size': "18px",
+                                      'font-weight': "600",
+                                       height:" 23px",
+                                       textAlign: "center",
+                                       paddingRight: "17px"
+                             }}>About 
+         <small> <a href="someplace"
+                        style={{ 
+                          color: "rgb(56,90,151)",
+                          'border-left': "2px solid #e9eaed",
+                          height:" 43px",
+                        //  'line-height': "1.05",
+                          paddingLeft: "17px",
+                         
+                          }}>Edit
+               </a></small></h6>
+                      <ul class="list-unstyled list-spaced">
+                       <li>
+                       <span class="iconic iconic-envelope-closed" title="envelope closed" aria-hidden="true">Email: </span>
+
+                       </li>
+                       
+                       
+                       
+                       
+                        <li><span class="text-muted icon icon-calendar mr-3" style={{
+                                "font-size":"20px",
+                             }}></span>Recent Trips <a href="#"   style={{
+                               "font-size":"17px",
+                              'font-weight': "300",
+                               paddingLeft: "5px"
+                             }}>View</a></li>
+                        <li>
+                          <span class="text-muted icon icon-users mr-3" style={{
+                                "font-size":"20px",
+                             }}></span>Favorites: <a href="#"  style={{
+                               "font-size":"17px",
+                               'font-weight': "300",
+                               paddingLeft: "5px"
+                             }}>These places</a>
+                        </li>
+                        <li>
+                        <span><i class="material-icons"
+                         style={{
+                           "font-size":"14px",
+                            "font-size":"20px",
+                        
+                            color: "gray", 
+                            paddingRight: "16px"
+                             }}>
+                             work</i>Works at: </span> <a href="#"
+                              style={{
+                                "font-size":"16px",
+                                'font-weight': "350",
+                               paddingLeft: "5px"
+                             }}>
+                             Some place</a>
+                          </li>
+                        <ul>
+                           {addressObj}
+                       </ul>
+                        
+                        {/* <li><span class="text-muted icon icon-location-pin mr-3"></span>From <a href="#">Seattle, WA</a></li> */}
+
+                      </ul>
+                    </div>
+                  </div>
+
+                  <div class="card d-md-block d-lg-block mb-4">
+                    <div class="card-body">
+                      <h6 class="mb-3">Photos <small>· <a href="#">Edit</a></small></h6>
+                      <div data-grid="images" data-target-height="150">
+                        <div>
+                          <img data-width="640" data-height="640" data-action="zoom" src="../v4/docs/assets/img/instagram_5.jpg"/>
+                        </div>
+
+                        <div>
+                          <img data-width="640" data-height="640" data-action="zoom" src="../v4/docs/assets/img/instagram_6.jpg"/>
+                        </div>
+
+                        <div>
+                          <img data-width="640" data-height="640" data-action="zoom" src="../v4/docs/assets/img/instagram_7.jpg"/>
+                        </div>
+
+                        <div>
+                          <img data-width="640" data-height="640" data-action="zoom" src="../v4/docs/assets/img/instagram_8.jpg"/>
+                        </div>
+
+                        <div>
+                          <img data-width="640" data-height="640" data-action="zoom" src="../v4/docs/assets/img/instagram_9.jpg"/>
+                        </div>
+
+                        <div>
+                          <img data-width="640" data-height="640" data-action="zoom" src="../v4/docs/assets/img/instagram_10.jpg"/>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-lg-6">
+
+                  <ul class="list-group media-list media-list-stream mb-4">
+
+                    <li class="media list-group-item p-4">
+                      <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search..."/>
+                        <div class="input-group-btn">
+                          <button type="button" class="btn btn-secondary align-self-stretch">
+                            {/* <span class="icon icon-camera"></span> */}
+                          </button>
+                        </div>
+                      </div>
+                    </li>
+
+                    <li class="media list-group-item p-4">
+                      <img
+                        class="media-object d-flex align-self-start mr-3"
+                        src={require("../v4/docs/assets/img/avatar-dhg.png")}/>
+                      <div class="media-body">
+                        <div class="media-heading">
+                          <small class="float-right text-muted">4 min</small>
+                          <h6>Search Location</h6>
+                        </div>
+
+                        <p>
+                          Aenean lacinia bibendum nulla sed consectetur. Vestibulum id ligula porta felis euismod semper. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
+                        </p>
+
+                        <div class="media-body-inline-grid" data-grid="images">
+                          <div style={{"display": "none"}}>
+                            <img data-action="zoom" data-width="1050" data-height="700" src="../v4/docs/assets/img/unsplash_1.jpg"/>
+                          </div>
+
+                          <div style={{"display": "none"}}>
+                            <img data-action="zoom" data-width="640" data-height="640" src=".../v4/docs/assets/img/instagram_1.jpg"/>
+                          </div>
+
+                          <div style={{"display": "none"}}>
+                            <img data-action="zoom" data-width="640" data-height="640" src="../v4/docs/assets/img/instagram_13.jpg" />
+                          </div>
+
+                          <div style={{"display": "none"}}>
+                            <img data-action="zoom" data-width="1048" data-height="700" src="../v4/docs/assets/img/unsplash_2.jpg" />
+                          </div>
+                        </div>
+
+                        <ul class="media-list mb-2">
+                          <li class="media mb-3">
+                            <img class="media-object d-flex align-self-start mr-3" src="../v4/docs/assets/img/avatar-fat.jpg" />
+                            <div class="media-body">
+                              <strong>Jacon Thornton: </strong>
+                              Donec id elit non mi porta gravida at eget metus. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Donec ullamcorper nulla non metus auctor fringilla. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Sed posuere consectetur est at lobortis.
+                            </div>
+                          </li>
+                          <li class="media">
+                            <img class="media-object d-flex align-self-start mr-3" src="../v4/docs/assets/img/avatar-mdo.png" />
+                            <div class="media-body">
+                              <strong>Mark Otto: </strong>
+                              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.
+                            </div>
+                          </li>
+                        </ul>
+                      </div>
+                    </li>
+
+                    <li class="media list-group-item p-4">
+                      <img
+                        class="media-object d-flex align-self-start mr-3"
+                        src="../v4/docs/assets/img/avatar-fat.jpg" />
+                      <div class="media-body">
+                        <div class="media-body-text">
+                          <div class="media-heading">
+                            <small class="float-right text-muted">12 min</small>
+                            <h6>Jacob Thornton</h6>
+                          </div>
+                          <p>
+                            Donec id elit non mi porta gravida at eget metus. Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                          </p>
+                        </div>
+                      </div>
+                    </li>
+
+                    <li class="media list-group-item p-4">
+                      <img
+                        class="media-object d-flex align-self-start mr-3"
+                        src="../v4/docs/assets/img/avatar-mdo.png" />
+                      
+                      <div class="media-body">
+                        <div class="media-heading">
+                          <small class="float-right text-muted">34 min</small>
+                          <h6>Mark Otto</h6>
+                        </div>
+
+                        <p>
+                          Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
+                        </p>
+
+                        <div class="media-body-inline-grid" data-grid="images">
+                          <img style={{"display": "none"}} data-width="640" data-height="640" data-action="zoom" src="../v4/docs/assets/img/instagram_3.jpg" />
+                        </div>
+
+                        <ul class="media-list">
+                          <li class="media">
+                            <img
+                              class="media-object d-flex align-self-start mr-3"
+                              src={require("../v4/docs/assets/img/avatar-dhg.png")} />
+                            <div class="media-body">
+                              <strong>Dave Gamache: </strong>
+                              Donec id elit non mi porta gravida at eget metus. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Donec ullamcorper nulla non metus auctor fringilla. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Sed posuere consectetur est at lobortis.
+                            </div>
+                          </li>
+                        </ul>
+                      </div>
+                    </li>
+                   </ul>
+
+                </div>
+                <div class="col-lg-3">
+                  <div class="alert alert-warning alert-dismissible d-none d-lg-block" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <a class="alert-link" href="profile/index.html">Visit your profile!</a> Check your self, you aren't looking well.
+                  </div>
+
+                  <div class="card mb-4 d-none d-lg-block">
+                    <div class="card-body">
+                      <h6 class="mb-3">Saved Addresses</h6>
+                      <div data-grid="images" data-target-height="150">
+                        <img class="media-object" data-width="640" data-height="640" data-action="zoom" src="../v4/docs/assets/img/instagram_2.jpg"/>
+                      </div>
 
 
-                   
-    <div class="ui basic center aligned segment" >
-    <div class="ui action left icon input" 
-           style={{'minHeight': "1em",             
-               'boxShadow': "0 0 0 0 rgba(34,36,38,.15) inset",
-                outline: "0",
-                border: "none",
-                verticalAlign: "baseline",
-                // background: "#e0e1e2 none",
-                fontFamily: "Lato,'Helvetica Neue',Arial,Helvetica,sans-serif",
-            
-                'fontSize': "1rem",
-
-                fontWeight: "700",
-                lineHeight: "2em",
-                fontStyle: "normal",
-                // not useful it seems
-                textAlign: "center",
-                textDecoration: "none",
-
-            }}
-            >
-   
-    <input type="text" placeholder="Search in your addresses.."  
-         style={{
-                borderTopRightRadius: 0,
-                borderBottomRightRadius: 0,
-                borderRightColor: "transparent!important",
-                //Top 3 control input right corner top && bottom radius & colors
-                //https://stackoverflow.com/questions/35341502/how-to-use-border-radius-only-for-1-corner-react-native
-
-                  paddingLeft: "2.67142857em!important",
-                  // paddingRight: "1em!important",
-                  boxShadow: "none",
-                  margin: 0,
-                  flex: "1 0 auto",
-                  outline: 0,
-                  textAlign: "left",
-                  lineHeight: "2em",
-                  fontFamily: "Lato,'Helvetica Neue',Arial,Helvetica,sans-serif",
-                  padding: ".67857143em 1em",
-                  background: "#fff",
-                  border: "1px solid rgba(34,36,38,.15)",
-                  color: "rgba(0,0,0,.87)",
-                  borderRadius: ".28571429rem",
-                  maxWidth: "100%",
-                  overflow: "visible"
-                 }}
-                 />
-
-    <i aria-hidden="true" class="search icon"  type="image/x-icon" 
-                style={{
-                  pointerEvents: "none",
-                  right: "auto",
-                  left: "1px",
-                  borderRadius: ".28571429rem 0 0 .28571429rem",
-                  cursor: "default",
-                  position: "absolute",
-                  lineHeight: "1",
-                  textAlign: "center", //not working
-                  top: 0,
-                  right: 0,
-                  margin: 0,
-                  height: "100%",
-                  width: "2.67142857em",
-                  opacity: ".5",
-                  content: "\f002",
-                  // borderRadius: "0 .28571429rem .28571429rem 0",
-                  '-webkit-transition':" opacity .3s ease",
-                  transition: "opacity .3s ease", //Not sure if this is working [Test aagain ]
-                  fontSize: "1em"
-                 }}
-          ></i>
-          
-          <button class="ui blue button" 
-                style={{
-                  float:"left ",
-                  paddingTop: ".78571429em",
-                  paddingBottom: ".78571429em",
-                  
-                  margin: 0,
-                  borderRadius: "0 .28571429rem .28571429rem 0",
-                  backgroundColor: "#2185d0",
-                  color: "#fff",
-                  textShadow:" none",
-                  backgroundImage: "none",
-                  padding: ".98571429em 1.6em .98571429em", // this affects the search button pading top bottom lenght(right & left)  ex: top val, length bottom val
-
-                  // ALL BUTTONS - .ui.button 
-                  'minHeight': "1em",
-                  'boxShadow': "0 0 0 0 rgba(34,36,38,.15) inset",
-                  outline: "0",
-                  border: "none",
-                  verticalAlign: "baseline",
-                  fontFamily: "Lato,'Helvetica Neue',Arial,Helvetica,sans-serif",
-                  fontSize: "100%",
-                  fontWeight: "700",
-                  lineHeight: "2em",
-                  fontStyle: "normal",
-                  // not useful it seems
-                  textAlign: "center",
-                  textDecoration: "none",
+                      <ul class="list-group" >
+                        {savedAddressesObj}
+                       
                     
-                //Newly Added 
-                  textRendering: "auto",
-                  // color: "initial", 
-                  letterSpacing: "normal",
-                  wordSpacing: "normal",
-                  textIndent:"0px",
-                  font:" 400 11px system-ui",
-                
+                    <li class="list-group-item"> Location: {"USA"}</li>
+                    <li class="list-group-item">Member Since: {"this.sate.created_at"}</li>
 
-                  //Not Important
-                  left: "0",
-                  // position: "absolute",
-                  'text-align': "center",
-                  top: "50%",
-                  // width: "100%",
-                  ' margin-top':" -.5em"
-                }}
-                >
-
-         Search
-    </button>
-    </div>
+                    <li class="list-group-item">{<Fragment>
+                      <i class="fas fa-dove" style={{color: "#339af0"}}>
+                      </i>
+                      <a href="mailto:john@testmyskills.com">john@tweeter.com</a>
+                      </Fragment>}
+                    </li>
+                      </ul>
 
 
+                      <button class="btn btn-outline-primary btn-sm">Buy a ticket</button>
+                    </div>
+                  </div>
 
+                  <div class="card mb-4 d-none d-lg-block">
+                    <div class="card-body">
+                    <h6 class="mb-3">Recent Trips<small>· <a href="#">View All</a></small></h6>
+                    <ul class="media-list media-list-stream">
+                      <li class="media mb-2">
+                        <img
+                          class="media-object d-flex align-self-start mr-3"
+                          src="../v4/docs/assets/img/avatar-fat.jpg"/>
+                        <div class="media-body">
+                          <strong>Jacob Thornton</strong> @fat
+                          <div class="media-body-actions">
+                            <button class="btn btn-outline-primary btn-sm">
+                              <span class="icon icon-add-user"></span> Follow</button>
+                          </div>
+                        </div>
+                      </li>
+                      <li class="media">
+                        <a class="media-left" href="#">
+                          <img
+                            class="media-object d-flex align-self-start mr-3"
+                            src="../v4/docs/assets/img/avatar-mdo.png"/>
+                        </a>
+                        <div class="media-body">
+                          <strong>Mark Otto</strong> @mdo
+                          <div class="media-body-actions">
+                            <button class="btn btn-outline-primary btn-sm">
+                              <span class="icon icon-add-user"></span> Follow
+                              </button> 
+                            
 
-    <div class="ui horizontal divider"></div>
+                          </div>
+                        </div>
+                      </li>
+                    </ul>
+                    </div>
+                      <div class="card-footer">
+                      {this.state.user.first_name} really likes these nerds, no one knows why though.
+                      </div>
+                  </div>
+
+                  <div class="card card-link-list">
+                    <div class="card-body">
+                      © 2018 oway
+                      <a href="#">About</a>
+                      <a href="#">Help</a>
+                      <a href="#">Terms</a>
+                      <a href="#">Privacy</a>
+                      <a href="#">Cookies</a>
+                      <a href="#">Ads </a>
+                      <a href="#">Info</a>
+                      <a href="#">Brand</a>
+                      <a href="#">Blog</a>
+                      <a href="#">Status</a>
+                      <a href="#">Apps</a>
+                      <a href="#">Jobs</a>
+                      <a href="#">Advertise</a>
+                    </div>
+                  </div> 
+
+                </div>
+              </div>
+            </div>
+
     
-    <button class="ui teal icon left labeled button"
-            style={{
-                backgroundColor:" #E95D3E",
-                // backgroundColor:"#008080", dark teal 
-                  color:"#ffffff", textShadow: "none", backgroundImage: "none",
-                  borderRadius: "0 .28571429rem .28571429rem 0",
-                  padding: ".98571429em 1.6em .98571429em",
-                  border:"#ffffff",
-                  // float:"left"
-                }}
-                >
-    <i aria-hidden="true" class="add icon">
-    
-    </i>Create New Address</button></div>
-          </div>
-        </Fragment>
-        
-      </Fragment>
-     
-      </div>
-  
-
-     {savedAddresseObj}
-
-    </Fragment>
-      { this.state.showForm &&
-       <div className="address-update-form">
-       <div className="form AddressBox " style={{ padding: "20px 200px",}}>
-           <form onSubmit={this.handleAddressFormSubmit}   >
-
-           <input id="street" style={{overflow: "auto", margin: "12px",'borderCollapse': "collapse",
-         }} className="form-control" type="street" placeholder="Street" name="street"
-           value={this.state.street}
-           onChange={ (e)=> this.handleAddressFormChange(e) }></input>
-
-           <input id="neighborhood" style={{overflow: "auto", margin: "12px", 'borderCollapse': "collapse"}} className="form-control" type="neighborhood" placeholder="Phone" name="neighborhood"
-           value={this.state.neighborhood}
-           onChange={ (e)=> this.handleAddressFormChange(e) }></input> 
-          
-
-           <input id="city" style={{overflow: "auto", margin: "12px",'borderCollapse': "collapse",
-         }} className="form-control" type="city" placeholder="City" name="city"
-           value={this.state.city}
-           onChange={ (e)=> this.handleAddressFormChange(e) }></input>
-        
-         <input id="state" style={{overflow: "auto", margin: "12px",'borderCollapse': "collapse",
-         }} className="form-control" type="state" placeholder="State" name="state"
-           value={this.state.state}
-           onChange={ (e)=> this.handleAddressFormChange(e) }></input>
-          {/* <PhoneInput
-          inputComponent={ SmartInput }
-          placeholder="Enter phone number"
-          value={ this.state.value }
-          onChange={ value => this.setState({ value }) }
-           /> */}
-
       
-
-           <input id="door_number" style={{overflow: "auto",  margin: "12px",  'marginBlockEnd': "2.33em"}} className="form-control" type="door_number" placeholder="Door Number" name="door_number"
-           value={this.state.door_number}
-           onChange={ (e)=> this.handleAddressFormChange(e) }></input>
-
-            <input id="country" style={{overflow: "auto", margin: "12px", 'borderCollapse': "collapse",
-         }} className="form-control" type="country" placeholder="Country" name="country"
-           value={this.state.country}
-           onChange={ (e)=> this.handleAddressFormChange(e) }></input>
-
-           <input className="btn btn-default btn-login" style={{
-
-             'marginRight': "auto",
-             'marginLeft': "auto",
-             display: "block",
-             padding: "8px 16px",
-             'fontSize':" 16px",
-             color: "#ffff",
-              'background-color': "#3fc1c9",
-              'background-color':"#1273de",
-             'backgroundColor': "#fccb00",
-             'border': "0",
-             'borderRadius': "2px",
-             cursor: "pointer",
-             transition: "background-color. 15s ease-in",
-             'marginTop': "16px"}}
-             type="submit" value="Get An Address"></input>
-             <button onClick={this.hideEditForm}>Cancel</button>
-            </form>
-        </div>
-       </div>
-      }
-      </div>
       
-    
+      </div>
         )
        }
     }
