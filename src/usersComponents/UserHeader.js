@@ -8,7 +8,7 @@ export default class UserHeader extends Component {
       <Image circular src='/assets/img/mike.jpg' style={{
             borderRadius: "500em",
             display:" inline-block",
-            width: "8.5em",
+            width: "9.5em",
             height: "auto",
             verticalAlign: 'middle',
             fontFamily:" Lato , Helvetica Neue, Arial,Helvetica, sans-serif",

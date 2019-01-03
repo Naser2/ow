@@ -30,7 +30,7 @@ export default class AddressForm extends Component {
    
       getAdditionalGeoData = () => {
         let cardinal 
-        axios.get(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${this.state.lat},${this.state.lng}&key=AIzaSyCItICGm9dV9G_ToVLWNM-dmUNrGYCpy88
+        axios.get(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${this.state.lat},${this.state.lng}&key=AIzaSyA2FCoGUKHs1BzQ5V8Yy7LsvtfW5xuE5VQ
         `
         ).then(res => {
           
@@ -138,7 +138,7 @@ export default class AddressForm extends Component {
           value={this.state.street}
           onChange={ (e)=> this.handleAddressFormChange(e) }></input>
 
-          <input id="neighborhood" style={{overflow: "auto", margin: "12px", 'borderCollapse': "collapse"}} className="form-control" type="neighborhood" placeholder="Phone" name="neighborhood"
+          <input id="neighborhood" style={{overflow: "auto", margin: "12px", 'borderCollapse': "collapse"}} className="form-control" type="neighborhood" placeholder="neighborbhood" name="neighborhood"
           value={this.state.neighborhood}
           onChange={ (e)=> this.handleAddressFormChange(e) }></input> 
           
@@ -147,6 +147,8 @@ export default class AddressForm extends Component {
         }} className="form-control" type="city" placeholder="City" name="city"
           value={this.state.city}
           onChange={ (e)=> this.handleAddressFormChange(e) }></input>
+  
+          
         
         <input id="state" style={{overflow: "auto", margin: "12px",'borderCollapse': "collapse",
         }} className="form-control" type="state" placeholder="State" name="state"

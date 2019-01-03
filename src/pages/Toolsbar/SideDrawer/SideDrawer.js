@@ -1,14 +1,15 @@
 import React from 'react';
 import "./SideDrawer.css";
+import backdrop from '../../BackDrop/Backdrop';
 // import {Link} from 'react-router-dom'
 
 
 const  SideDrawer = (props) =>{
-  let drawerClasses = ['side-drawer']
+  let drawerClasses = 'side-drawer';
 
   if (props.show) {
-    drawerClasses = ['side-drawer open']
-    console.log("I received my SHOW props in SideDrawer")
+    drawerClasses = 'side-drawer open';
+    console.log("I received my SHOW props: ", props.show, " in SideDrawer")
   }
   
   return (

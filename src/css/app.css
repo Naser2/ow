@@ -57,8 +57,11 @@ body {
   box-sizing: border-box; }
 
 .app-layout {
-  max-width: 600px;
+  max-width: 1000px;
   margin: 0 auto; }
+  @media (max-width: 768px) {
+    .app-layout {
+      background: #eceff5; } }
   @media (min-width: 992px) {
     .app-layout {
       padding: 100px 50px 50px 50px; } }
@@ -68,7 +71,8 @@ body {
   overflow: hidden; }
   .app-container .app-header {
     padding-bottom: 30px;
-    text-align: center; }
+    text-align: center;
+    float: left; }
     .app-container .app-header .app-site-info {
       color: #FFFFFF; }
       .app-container .app-header .app-site-info h1 {
@@ -95,10 +99,10 @@ body {
           .app-container .app-header .app-site-info .site-slogan {
             display: none; } }
   .app-container .app-content {
-    margin-top: '20px'; }
+    margin-top: '20px';
+    float: right; }
   @media (min-width: 992px) {
     .app-container .app-header {
-      float: left;
       padding-top: 100px;
       text-align: left; }
     .app-container .app-content {
@@ -203,16 +207,98 @@ body {
     background: #FFFFFF;
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
-    border-radius: 5px;
     padding: 10px 15px;
     text-transform: uppercase;
-    margin: 20px 0 0 0; }
+    margin: 20px 0 0 0;
+    transition: 200ms cubic-bezier(0.08, 0.52, 0.52, 1) background-color, 200ms cubic-bezier(0.08, 0.52, 0.52, 1) box-shadow, 200ms cubic-bezier(0.08, 0.52, 0.52, 1) transform;
+    border: 1px solid;
+    border-radius: 2px;
+    -webkit-font-smoothing: antialiased;
+    font-weight: bold;
+    justify-content: center;
+    padding: 0 8px;
+    position: relative;
+    cursor: pointer;
+    display: inline-block;
+    text-decoration: none;
+    white-space: nowrap; }
     .app-form-actions .app-button.primary {
       background: #1363ce;
-      color: white; }
+      border-radius: 2px;
+      line-height: 42px;
+      padding: 0 24px;
+      transition: 200ms cubic-bezier(0.08, 0.52, 0.52, 1) background-color, 200ms cubic-bezier(0.08, 0.52, 0.52, 1) box-shadow, 200ms cubic-bezier(0.08, 0.52, 0.52, 1) transform;
+      color: white;
+      text-transform: capitalize; }
+    .app-form-actions .app-button.login-prime {
+      background: #1363ce;
+      width: 302px;
+      border-radius: 2px;
+      line-height: 42px;
+      transition: 200ms cubic-bezier(0.08, 0.52, 0.52, 1) background-color, 200ms cubic-bezier(0.08, 0.52, 0.52, 1) box-shadow, 200ms cubic-bezier(0.08, 0.52, 0.52, 1) transform;
+      color: white;
+      text-transform: capitalize; }
+    .app-form-actions .app-button.create-account {
+      text-transform: capitalize;
+      width: " 100px";
+      width: 302px;
+      height: 45px;
+      text-align: center;
+      display: block;
+      font-weight: 800;
+      border-radius: 1px;
+      font-size: 14px;
+      line-height: 42px;
+      padding: 0 24px;
+      border: 1px solid #2b98e7;
+      background: #FFFFFF;
+      color: #FFFFFF;
+      -webkit-border-radius: 5px;
+      -moz-border-radius: 5px;
+      border-radius: 1px;
+      text-transform: capitalize;
+      margin: 0px 60px 60px 60px;
+      background: #47b535;
+      -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+      line-height: 42px;
+      padding: 0 24px;
+      width: 50%; }
+      @media (max-width: 768px) {
+        .app-form-actions .app-button.create-account {
+          display: flex;
+          background: #00a400;
+          color: #fff;
+          line-height: 27px;
+          text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.35);
+          text-align: center;
+          border-radius: 40px; } }
     .app-form-actions .app-button.app-button-link {
       background: none;
       border: 0 none;
       color: #2b98e7; }
+
+.app-top-header h1 {
+  cursor: pointer; }
+
+.login {
+  margin: 0 auto;
+  width: 600px;
+  background-color: #fff;
+  border: 1px solid #dddfe2;
+  border-radius: 1px;
+  margin-bottom: 400px;
+  padding-left: 10%;
+  padding-right: 10%; }
+  @media (max-width: 992px) {
+    .login {
+      padding-left: 0;
+      padding-right: 0;
+      display: block;
+      width: 360px;
+      padding-top: 5px;
+      padding-bottom: 45px;
+      cursor: pointer;
+      -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+      font-family: Helvetica, Arial, sans-serif; } }
 
 /*# sourceMappingURL=app.css.map */

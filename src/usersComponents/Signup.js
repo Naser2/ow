@@ -33,8 +33,8 @@ handleSubmit =(e)=>{
     return (
 
         <div className="app-card" style={{
-          margin: "0 auto",
-          width:"600px",
+          // margin: "0 auto",
+          // width:"600px",
           height: "100%",
           // Fb width: "396px" - // padding: "22px 108px 26px",
           // margin: "auto",

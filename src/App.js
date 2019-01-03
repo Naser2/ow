@@ -21,18 +21,20 @@ import Backdrop from './pages/BackDrop/Backdrop';
 
 
 class App extends Component {
-
-
     state = {
       sideDrawerOpen: false
       }
  
+
 
   drawerToggleClickHandler = () => {
     console.log("drawerClickHandler I WORK")
     this.setState((prevState) => {
        return {sideDrawerOpen: !prevState.sideDrawerOpen};
     });
+    this.setState( {
+      sideDrawerOpen: !this.state.sideDrawerOpen
+   });
   
   };
   backdropClickHandler = () => {
@@ -41,27 +43,22 @@ class App extends Component {
       sideDrawerOpen: false
     });
   }
+  
   render() {
-    // console.log(GitMapData)
-
-    let backdrop;
-    if (this.state.SideDrawerOpen) {
-       console.log("I Should show Drawer")
-       backdrop = <Backdrop click={ this.backdropClickHandler}/>
-    } else {
-      console.log("Nothing is being Executed")
-    }
-
+    const backdrop = <Backdrop click={ this.backdropClickHandler}/>
+    const  sidedrawer = <SideDrawer show={this.state.sideDrawerOpen}/>
 
     return (
-      <div className="main" style={{height:"100%" }}>
+      <div className="main" style={{width:"100%"}}>
         <Router>
-          <div className="App"> 
-            <ToolBar drawerClickHandler={this.drawerToggleClickHandler} />
-            <SideDrawer show={this.state.sideDrawerOpen}/>
-             {backdrop}
-           
-            <div className="container" style={{marginTop:"64px"}} >
+        
+          <div className="App" style={{width:"100%", right:"0"}} > 
+            <ToolBar drawerClickHandler={this.drawerToggleClickHandler} history={this.props.history} />
+            {sidedrawer}
+
+            {this.state.sideDrawerOpen ? [backdrop]: null}
+
+            <div className="container" style={{marginTop:"25px"}} >
               <Switch>
                 <Route  exact path="/Home1"   component={Layout} />
                 <Route  exact path= "/home2" component={Landing} />
