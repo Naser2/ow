@@ -53,7 +53,7 @@ class App extends Component {
         <Router>
         
           <div className="App" style={{width:"100%", right:"0"}} > 
-            <ToolBar drawerClickHandler={this.drawerToggleClickHandler} />
+            <ToolBar drawerClickHandler={this.drawerToggleClickHandler} history={this.props.history} />
             {sidedrawer}
 
             {this.state.sideDrawerOpen ? [backdrop]: null}
