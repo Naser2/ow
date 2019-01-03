@@ -52,7 +52,7 @@ import { Row, Col, Card, CardHeader, CardBody } from "reactstrap";
           
             {/* , padding: "0.25rem" */}
            
-            <CardBody style={{ width: "90vh", height: '51vh', 'box-sizing': "border-box"}} >
+            <CardBody style={{ width: "40vh", height: '51vh', 'box-sizing': "border-box"}} marginRight="20px" >
             <Map 
             
               center={{
