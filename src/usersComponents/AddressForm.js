@@ -7,7 +7,7 @@ import UserProfile from './UserProfile';
 // import PhoneInput from 'react-phone-number-input/react-responsive-ui';
 // import PhoneInput, { formatPhoneNumber } from 'react-phone-number-input'
 // import PhoneInput, { formatPhoneNumber, isValidPhoneNumber } from 'react-phone-number-input'
-const BASE_URL = "http://localhost:3001"
+const BASE_URL = `${process.env.REACT_APP_BACKEND_URL}`
 
 
 export default class AddressForm extends Component {
@@ -30,7 +30,7 @@ export default class AddressForm extends Component {
    
       getAdditionalGeoData = () => {
         let cardinal 
-        axios.get(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${this.state.lat},${this.state.lng}&key=AIzaSyA2FCoGUKHs1BzQ5V8Yy7LsvtfW5xuE5VQ
+        axios.get(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${this.state.lat},${this.state.lng}&key=AIzaSyCIjTOc_oZa4jneI__tFlvOZIk53EVu_Ps
         `
         ).then(res => {
           
@@ -94,7 +94,7 @@ export default class AddressForm extends Component {
         'Authorization': `Bearer ${token}`
       }
       console.log("SUBMITTING NEW ADDRESSE:", this.state )
-      axios.post("http://localhost:3001/addresses",{address: this.state}, {headers}
+      axios.post(`${process.env.REACT_APP_BACKEND_URL}/addresses`,{address: this.state}, {headers}
       ).then( res => console.log(res))
  
      
