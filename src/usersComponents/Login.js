@@ -20,9 +20,15 @@ export default class LogIn extends Component {
   e.preventDefault()
   // console.log("LOGIN EMAIL " + this.state.email  +
   // " PASSWORD "  + this.state.password)
-  axios.post("http://localhost:3001/user_token", {auth: this.state})
-  .then(res => localStorage.setItem("token",res.data.jwt))
-  .finally(this.props.history.push("/profile"))
+  axios.post(`${process.env.REACT_APP_BACKEND_URL}/user_token`, {auth: this.state})
+  .then(res => {
+    localStorage.setItem("token",res.data.jwt);
+  }).catch(err => {
+    console.log('some err', err);
+  })
+  .finally(() => {
+    this.props.history.push("/profile")
+  })
   
 }
 
