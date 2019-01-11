@@ -35,7 +35,7 @@ export default class Home extends Component {
       'Authorization': `Bearer ${token}`
     }
 
-    axios.post("http://localhost:3001/user/addresses/save", {
+    axios.post(`${process.env.REACT_APP_BACKEND_URL}/user/addresses/save`, {
       "address": {
         city: "MEXI",
         country: " MEXICO ",
@@ -60,7 +60,7 @@ export default class Home extends Component {
       'Authorization': `Bearer ${token}`
     }
 
-    axios.post("http://localhost:3001/user/addresses/save/new", {
+    axios.post(`${process.env.REACT_APP_BACKEND_URL}/user/addresses/save/new`, {
       "address": {
         city:city,
         neighborbhood: neighborbhood,
@@ -146,7 +146,7 @@ export default class Home extends Component {
 
 
     //BACKEND 
-    axios.get(`http://localhost:3001/addresses/search?query=${this.state.query}`).then(res => {
+    axios.get(`${process.env.REACT_APP_BACKEND_URL}/addresses/search?query=${this.state.query}`).then(res => {
       
       if (res.data.length) {
         console.log('fromm apiiiii', res);

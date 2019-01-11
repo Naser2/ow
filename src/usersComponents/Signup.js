@@ -24,7 +24,7 @@ handleSubmit =(e)=>{
   e.preventDefault()
   // console.log("submitting Name " + this.state.first_name + "  LAST " + this.state.last_name +
   // " Phone  " + this.state.phone  +  " PW   " + this.state.password)
-  axios.post("http://localhost:3001/users", {user: this.state})
+  axios.post(`${process.env.REACT_APP_BACKEND_URL}/users`, {user: this.state})
   .then(res => console.log(res))
   .finally(this.props.history.push("/login"))
 }

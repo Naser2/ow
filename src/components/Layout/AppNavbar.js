@@ -6,9 +6,6 @@ import { SketchPicker } from 'react-color';
 
 export default class AppNavbar extends Component {
   render() {
-    const style ={
-      background: "rgba(27,202,255,.8)"
-    }
     return ( 
         <nav className="navbar navbar-expand-md navbar-dark bg-primary mb-4">
           <div  className="container">
