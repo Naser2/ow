@@ -1,15 +1,21 @@
 import React from 'react'
 // import "node_modules/video-react/dist/video-react.css"; // import css
 import { Player } from 'video-react';
-// import "~video-react/styles/scss/video-react"; // 
+import ReactPlayer from 'react-player'
 
  const VideoComponent = (props) => {
+   const Url = <ReactPlayer url='https://www.youtube.com/watch?v=DWLKhcw7T2A' play />;
+   console.log(Url)
   return (
-    <Player
-      playsInline
-      poster="/assets/poster.png"
-      src="https://media.w3.org/2010/05/sintel/trailer_hd.mp4"
-    />
+
+    Url
+    // <Player
+    //   playsInline
+    //   poster="/assets/poster.png"
+    //   src = {Url}
+    
+    // />
+    
   );
 };
 export default  VideoComponent
