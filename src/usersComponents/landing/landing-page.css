@@ -66,6 +66,7 @@ body {
 
 a {
   color: #2ca8ff;
+  font-weight:400
 }
 a:hover, a:focus {
   color: #109cff;
@@ -223,6 +224,7 @@ a:focus, a:active {
   color: white;
   background-color: #2ca8ff;
   opacity: 1;
+  font-weight: 600;
   filter: alpha(opacity=100);
 }
 .btn-info.btn-fill:hover, .btn-info.btn-fill:focus, .btn-info.btn-fill:active, .btn-info.btn-fill.active, .open > .btn-info.btn-fill.dropdown-toggle {
@@ -764,7 +766,7 @@ a:focus, a:active {
   border-bottom: 1px solid #dddddd;
 }
 .landing-page .carousel-indicators {
-  bottom: -50px;
+  /* bottom: -50px; */
 }
 .landing-page .carousel-indicators li {
   margin: 1px 10px;
@@ -1180,9 +1182,9 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#de8e0009', e
    }
 
    .landing-page .section-features .card{
-        width: 100%;
+        /* width: 100%; */
         min-height: 390px;
-        padding: 10px 30px;
+        /* padding: 10px 30px; */
         border: 1px solid #DDDDDD;
         border-radius: 10px;
         margin-top: 30px;
@@ -1273,7 +1275,14 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#de8e0009', e
    
    /* @media (min-width: 992px): */
    .col-md-offset-1 {
-       margin-left: 8.33333333%;
+    /* display: inline-block; */
+    /* white-space: nowrap; */
+       /* margin-left: 70.33333333%; */
+       margin-left: 100px;
+       margin-right: 20px;
+       /* float: right; */
+       /* margin-left:31.333333%;
+       height: 600px */
    }
    .landing-page .section-testimonial .carousel-inner  h3{
     font-weight: 300;

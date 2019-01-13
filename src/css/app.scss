@@ -18,15 +18,8 @@ body {
 //   background:rgb(236, 239, 245)
 // }
  
-
-  // margin: 0;
-  // padding: 0;
- 
 }
-// a{
-//   color: white;
-//   text-decoration: none;
-// }
+
 * {
   box-sizing: border-box;
 }
@@ -52,6 +45,8 @@ body {
 
   .app-header {
     padding-bottom: 30px;
+    // padding-right: 210px;//TRBL
+    // paddingLeft: '40px',
     text-align: center;
     float: left;
     .app-site-info {
@@ -99,7 +94,7 @@ body {
       text-align: left;
     }
     .app-content {
-      float: right;
+      // float: right;
       
     }
   }
