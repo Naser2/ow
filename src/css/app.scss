@@ -1,6 +1,6 @@
 @import "https://fonts.googleapis.com/css?family=Open+Sans:300i,400,800";
 @import "reset";
-@import "variables";
+@import "variable";
 
 
 
@@ -14,56 +14,77 @@ body {
   color: $body-text-color;
   font-size: 13px;
 
-//  @media(max-width: $screen-sm)  { WORKS
-//   background:rgb(236, 239, 245)
-// }
+//  @media(max-width: $screen-sm){ 
+  // background:rbg(236,239, 245)
+//  }
  
 }
 
-* {
-  box-sizing: border-box;
-}
+// * {
+//   box-sizing: border-box;
+// }
+
 
 .app-layout {
   max-width: 1000px;
   // width: 100%;
   margin: 0 auto;
- ;
-
- @media(max-width: $screen-sm)  {
-  background:rgb(236, 239, 245)
-}
+//  @media(max-width: $screen-sm)  {
+//   background:rgb(236, 239, 245);
+//  }
   @media(min-width: $screen-md) {
-    padding: 100px 50px 50px 50px;
+    // padding: 100px 50px 50px 50px;
   }
 }
 
 .app-container {
+  .makeThisSearchReusable {
+    color: red;
+    @media (min-width: $screen-sm) {
+      width: 350px; 
+      color: red;
+      flex-wrap: wrap;  //remove bottom 3 if doesn work 
+      -webkit-box-align: stretch;
+       padding-right: 2.67142857em!important;
+    
+
+        border-radius: 500rem;
+        
+        font-family: Lato,'Helvetica Neue',Arial,Helvetica,sans-serif;
+    }
+  }
   position: relative;//  CHECK THIS 
   overflow: hidden;
   // padding: 20px 0 0 0;
-
+  .app-content {
+    margin-top:20px;
+    float: right;
+  }
   .app-header {
-    padding-bottom: 30px;
-    // padding-right: 210px;//TRBL
-    // paddingLeft: '40px',
-    text-align: center;
     float: left;
+    padding-bottom: 30px;
+    padding-right: 0px;//TRBL
+    // padding-left: 40px;
+    text-align: center;
+  
     .app-site-info {
      
       color: #FFFFFF;
       h1 {
         margin: 0;
         padding: 0;
-        font-size: 60px;
-        font-weight: 800;
+        // font-size: 60px;
+        // font-weight: 800;
 
+      }
+      h2{
+        font-size: 30px;
       }
       .site-title {
         margin: 20px 0 0 0;
         padding: 0;
-        font-size: 50px;
-        font-weight: 300;
+        // font-size: 50px;
+        // font-weight: 300;
         color: rgba(255, 255, 255, .9);
         @media (max-width: $screen-sm) {
           display: none;
@@ -73,34 +94,37 @@ body {
         @media (max-width: $screen-sm) {
           display: none;
         }
+        font-size: 25px;
         margin-top: 5px;
         padding: 0;
-        font-size: 30px;
-        font-weight: 300;
-        color: rgba(255, 255, 255, .6);
+        // font-size: 30px;
+        // font-weight: 300;
+        font-weight:bold;
+        color: rgba(255, 255, 255, 0.6);
       }
     }
 
   }
-  .app-content {
-    margin-top:'20px';
-    float: right;
-
-  }
+  
 
   @media (min-width: $screen-md) {
     .app-header {
-      padding-top: 100px;
-      text-align: left;
+      // padding-top: 100px;
+      float: left;
     }
     .app-content {
-      // float: right;
+      float: right;
       
     }
+    // .app-card {
+    //   float: right;
+      
+    // }
   }
 }
 
 .app-card {
+  // float: right;
   overflow: hidden;
   position: relative;
   background: #FFFFFF;
@@ -108,7 +132,7 @@ body {
   -moz-border-radius: 5px;
   border-radius: 5px;
   @media (min-width: $screen-sm) {
-    width: 350px;
+    width: 350px; //Control app-card aka form width && by default affects header
   }
   .app-card-header {
     padding:  20px;
@@ -122,14 +146,14 @@ body {
       padding: 20px;
     }
   }
-  // &.app-card-uploading, &.app-card-upload-sent {
+  &.app-card-uploading, &.app-card-upload-sent {
     .app-card-content {
       .app-card-content-inner {
         padding: 30px;
       }
     }
   }
-// }
+}
 
 .upload-profile-photo-main {
   width: 100%;
@@ -273,7 +297,7 @@ body {
       color: rgb(255, 255, 255);
       text-transform: capitalize;
       @media (max-width: $screen-sm) {
-        // border-radius: 40px;
+        border-radius: 40px;
       }
     }
     &.login-prime {
@@ -290,10 +314,10 @@ body {
       color: rgb(255, 255, 255);
       text-transform: capitalize;
       @media (max-width: $screen-sm) {
-        // border-radius: 40px;
+        border-radius: 40px;
       } 
     }
-    &.create-account {
+    &.create-account { //Fix Create Account button
       text-transform: capitalize;
       width: " 100px";
       width: 302px;
@@ -391,6 +415,3 @@ body {
   }
 
 /////////////////////////////////////////////
-
-
-
