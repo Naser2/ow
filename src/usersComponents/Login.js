@@ -46,7 +46,7 @@ export default class LogIn extends Component {
               'line-height': "22px",
                margin: "30px 120px 30px 120px", //T(0)R(15)B(15)L(15
                color: "rgb(29,33,40)",
-              }}>Log Into O-W</h2>
+              }}>Log into One Way</h2>
 
               <div  className="app-form-item">
              
