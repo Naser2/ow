@@ -53,58 +53,58 @@ body {
   color: #b0b3ce;
   font-size: 13px; }
 
-* {
-  box-sizing: border-box; }
-
 .app-layout {
   max-width: 1000px;
   margin: 0 auto; }
-  @media (max-width: 768px) {
-    .app-layout {
-      background: #eceff5; } }
-  @media (min-width: 992px) {
-    .app-layout {
-      padding: 100px 50px 50px 50px; } }
 
 .app-container {
   position: relative;
   overflow: hidden; }
+  .app-container .makeThisSearchReusable {
+    color: red; }
+    @media (min-width: 768px) {
+      .app-container .makeThisSearchReusable {
+        width: 350px;
+        color: red;
+        flex-wrap: wrap;
+        -webkit-box-align: stretch;
+        padding-right: 2.67142857em !important;
+        border-radius: 500rem;
+        font-family: Lato,'Helvetica Neue',Arial,Helvetica,sans-serif; } }
+  .app-container .app-content {
+    margin-top: 20px;
+    float: right; }
   .app-container .app-header {
+    float: left;
     padding-bottom: 30px;
-    text-align: center;
-    float: left; }
+    padding-right: 0px;
+    text-align: center; }
     .app-container .app-header .app-site-info {
       color: #FFFFFF; }
       .app-container .app-header .app-site-info h1 {
         margin: 0;
-        padding: 0;
-        font-size: 60px;
-        font-weight: 800; }
+        padding: 0; }
+      .app-container .app-header .app-site-info h2 {
+        font-size: 30px; }
       .app-container .app-header .app-site-info .site-title {
         margin: 20px 0 0 0;
         padding: 0;
-        font-size: 50px;
-        font-weight: 300;
         color: rgba(255, 255, 255, 0.9); }
         @media (max-width: 768px) {
           .app-container .app-header .app-site-info .site-title {
             display: none; } }
       .app-container .app-header .app-site-info .site-slogan {
+        font-size: 25px;
         margin-top: 5px;
         padding: 0;
-        font-size: 30px;
-        font-weight: 300;
+        font-weight: bold;
         color: rgba(255, 255, 255, 0.6); }
         @media (max-width: 768px) {
           .app-container .app-header .app-site-info .site-slogan {
             display: none; } }
-  .app-container .app-content {
-    margin-top: '20px';
-    float: right; }
   @media (min-width: 992px) {
     .app-container .app-header {
-      padding-top: 100px;
-      text-align: left; }
+      float: left; }
     .app-container .app-content {
       float: right; } }
 
@@ -125,7 +125,7 @@ body {
       padding: 10px 20px; }
   .app-card .app-card-content .app-card-content-inner {
     padding: 20px; }
-  .app-card .app-card-content .app-card-content-inner {
+  .app-card.app-card-uploading .app-card-content .app-card-content-inner, .app-card.app-card-upload-sent .app-card-content .app-card-content-inner {
     padding: 30px; }
 
 .upload-profile-photo-main {
@@ -230,6 +230,9 @@ body {
       transition: 200ms cubic-bezier(0.08, 0.52, 0.52, 1) background-color, 200ms cubic-bezier(0.08, 0.52, 0.52, 1) box-shadow, 200ms cubic-bezier(0.08, 0.52, 0.52, 1) transform;
       color: white;
       text-transform: capitalize; }
+      @media (max-width: 768px) {
+        .app-form-actions .app-button.primary {
+          border-radius: 40px; } }
     .app-form-actions .app-button.login-prime {
       background: #1363ce;
       width: 302px;
@@ -238,6 +241,9 @@ body {
       transition: 200ms cubic-bezier(0.08, 0.52, 0.52, 1) background-color, 200ms cubic-bezier(0.08, 0.52, 0.52, 1) box-shadow, 200ms cubic-bezier(0.08, 0.52, 0.52, 1) transform;
       color: white;
       text-transform: capitalize; }
+      @media (max-width: 768px) {
+        .app-form-actions .app-button.login-prime {
+          border-radius: 40px; } }
     .app-form-actions .app-button.create-account {
       text-transform: capitalize;
       width: " 100px";
