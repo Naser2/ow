@@ -58,6 +58,7 @@ class App extends Component {
       }}>
         <Router>
         
+      SpecialMapCard
           <div className="App" 
           style={{
             width:"100%",
@@ -68,6 +69,7 @@ class App extends Component {
           //   "padding": "0",
             }} 
             > 
+      
             <ToolBar drawerClickHandler={this.drawerToggleClickHandler} history={this.props.history} />
             {sidedrawer}
 

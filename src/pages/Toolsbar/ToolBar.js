@@ -46,6 +46,7 @@ const toolBar = props => {
 
         <div className="toolbar_navigation_items">
           <ul>
+
             <li><a href="/home1" className="Nav_link"> Home</a></li>
             <li><a href="/home2" className="Nav_link"> home2</a></li>
             <li><a href="/register-place" className="Nav_link"> Create-Address</a></li>
@@ -55,7 +56,8 @@ const toolBar = props => {
             {/* <li><a href="/dashboard" className="Nav_link"> Dashboard</a></li> */}
             {/* <li><a href="/HotSpotsPage" className="Nav_link"> Places</a></li> */}
             {/* <li><a href="/UserAddressBook" className="Nav_link"> AddressBook</a></li> */}
-            {/* <li>
+
+             {/* <li>
                   <button class="ui teal icon left labeled button"
                   style={{
                       backgroundColor:" #E95D3E",

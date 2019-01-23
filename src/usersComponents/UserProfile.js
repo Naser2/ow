@@ -1,6 +1,8 @@
 
 import React, { Component, Fragment } from 'react';
+
 import ReactModal from 'react-responsive-modal';
+
 
 import {
   FacebookShareCount,
@@ -103,8 +105,10 @@ class UserProfile extends Component {
     postal_code: '',
     country: '',
     openModal: false,
+
     modalAddress: {},
     editModalOpen: false
+
   };
 
 
@@ -142,9 +146,11 @@ class UserProfile extends Component {
 
   hideEditForm = () => {
     this.setState({
+
       id: '',
       lat: '',
       lng: '',
+
       door_number: '',
       cardinal: '',
       street: '',
@@ -164,7 +170,9 @@ class UserProfile extends Component {
       'Authorization': `Bearer ${token}`
     }
     console.log("Delete  ADDRESSE:", id)
+
     axios.delete(`${process.env.REACT_APP_BACKEND_URL}/addresses/${id}`, { headers }
+
     ).then(res => {
       console.log(res)
       this.getUserAddresses();
@@ -190,7 +198,9 @@ class UserProfile extends Component {
       'Authorization': `Bearer ${token}`
     }
     console.log("SUBMITTING NEW ADDRESSE:", this.state)
+
     axios.put(`${process.env.REACT_APP_BACKEND_URL}/addresses/${this.state.id}`, { address: this.state }, { headers }
+
     ).then(res => {
       console.log("RES AFTER POSTING NEW AFFRESS:", res)
       this.getUserAddresses();
@@ -201,13 +211,17 @@ class UserProfile extends Component {
 
 
   getUserAddresses = () => {
+
     console.log(process.env.REACT_APP_BACKEND_URL)
+
     const token = localStorage.getItem("token")
     const headers = {
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${token}`
     }
+
     axios.get(`${process.env.REACT_APP_BACKEND_URL}/user/addresses`, { headers }).then(res => {
+
       this.setState({ addresses: res.data });
       console.log("USER ADDRESS RES:", res.data);
 
@@ -222,7 +236,6 @@ class UserProfile extends Component {
     const token = localStorage.getItem("token")
     const id = this.state.user.id
     
-
      console.log("USER TOKEN:", token)
     //  console.log("USER ID:", id)
     if(token != null){
@@ -274,6 +287,7 @@ class UserProfile extends Component {
       country: address.country,
     }, () => { this.onOpenModal() })
 
+
   }
 
   getUserSavedAddresses = () => {
@@ -282,6 +296,7 @@ class UserProfile extends Component {
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${token}`
     }
+
     axios.get(`${process.env.REACT_APP_BACKEND_URL}/user/addresses/saved`, { headers }).then(res => {
 
       this.setState({
@@ -311,7 +326,6 @@ class UserProfile extends Component {
     })
   }
 
-
   render() {
     const { modalAddress } = this.state;
     const addressObj = this.state.addresses.map(address => {
@@ -328,9 +342,11 @@ class UserProfile extends Component {
             }}>
             {address.fullAddress}
           </a>
+
           
             <button href="#showpnmap" key={address.id}
             onClick={()=>{this.openEditModal(address)}}
+
               style={{
                 color: "rgb(56,90,151)",
                 'font-size': "14px",
@@ -341,7 +357,9 @@ class UserProfile extends Component {
                 position: "relative",
                 "vertical-align": "middle",
                 'white-space': "nowrap",
+
               }}>Edit</button>
+
           </small>
         </li>)
     });
@@ -349,7 +367,9 @@ class UserProfile extends Component {
     const savedAddressesObj = this.state.savedAddresses.map(savedAddress => {
       return (
         <li class="list-group-item" key={savedAddress.id}>
+
           <i class="fa fa-map" aria-hidden="true"></i> 
+
           <Link onClick={() => this.setState({ openModal: true, modalAddress: { lat: savedAddress.address.lat, lng: savedAddress.address.lng, address: savedAddress.address.fullAddress } })} to="#">{savedAddress.address.fullAddress}</Link>
         </li>
       )
@@ -369,6 +389,7 @@ class UserProfile extends Component {
 
         {/* <someComp/> */}
         {/* Profile &middot;  */}
+
 
         <ReactModal open={this.state.editModalOpen} onClose={this.onCloseModal} center>
           <div style={{height: "550px"}}>
@@ -535,6 +556,7 @@ class UserProfile extends Component {
                 </FacebookShareButton>
               </div>
 
+
               <div className="Demo__some-network">
                 <TwitterShareButton
                   url={shareUrl}
@@ -549,6 +571,7 @@ class UserProfile extends Component {
                   &nbsp;
           </div>
               </div>
+
 
               <div className="Demo__some-network">
                 <TelegramShareButton
@@ -607,7 +630,6 @@ class UserProfile extends Component {
 
 
         <div class="growl" id="app-growl"></div>
-
 
         {/* <nav class="navbar navbar-expand-md fixed-top navbar-dark bg-primary app-navbar">
             <a class="navbar-brand" href="index.html">
@@ -691,7 +713,9 @@ class UserProfile extends Component {
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
               </div>
 
+
               <div class="modal-body p-0 js-modalBody" >
+
                 <div class="modal-body-scroller">
                   <div class="media-list media-list-users list-group js-msgGroup">
                     <a href="#" class="list-group-item list-group-item-action">
@@ -1204,6 +1228,7 @@ class UserProfile extends Component {
                     class="media-object d-flex align-self-start mr-3"
                     src="../v4/docs/assets/img/avatar-mdo.png" />
 
+
                   <div class="media-body">
                     <div class="media-heading">
                       <small class="float-right text-muted">34 min</small>
@@ -1330,6 +1355,7 @@ class UserProfile extends Component {
             </div>
           </div>
         </div>
+
 
 
 
