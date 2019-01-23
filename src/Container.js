@@ -44,7 +44,7 @@ import { Row, Col, Card, CardHeader, CardBody } from "reactstrap";
       <div>
 
         <PanelHeader size="sm" />
-         <div className="content">Hello 
+         <div className="contentt">Hello 
          <Row>
           <Col xs={6}>
           <CardHeader style={{backgroundColor:"blue",  width: '29vw', height: '5vh'}}>Google Maps</CardHeader>
