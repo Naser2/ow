@@ -4,6 +4,7 @@ import aaa from '../../node_modules/sweetalert/dist/sweetalert.css'
 import Header from '../components/Layout/Header';
 import HomeForm from './HomeForm';
 import axios from 'axios';
+import ModalExampleDimmer from './ModalSearch';
 // import StandaloneSearchBox from 'react-google-maps/lib/components/places/StandaloneSearchBox';
 
 
@@ -35,7 +36,7 @@ export default class Home extends Component {
       'Authorization': `Bearer ${token}`
     }
 
-    axios.post("http://localhost:3001/user/addresses/save", {
+    axios.post(`${process.env.REACT_APP_BACKEND_URL}/user/addresses/save`, {
       "address": {
         city: "MEXI",
         country: " MEXICO ",
@@ -60,7 +61,7 @@ export default class Home extends Component {
       'Authorization': `Bearer ${token}`
     }
 
-    axios.post("http://localhost:3001/user/addresses/save/new", {
+    axios.post(`${process.env.REACT_APP_BACKEND_URL}/user/addresses/save/new`, {
       "address": {
         city:city,
         neighborbhood: neighborbhood,
@@ -146,7 +147,7 @@ export default class Home extends Component {
 
 
     //BACKEND 
-    axios.get(`http://localhost:3001/addresses/search?query=${this.state.query}`).then(res => {
+    axios.get(`${process.env.REACT_APP_BACKEND_URL}/addresses/search?query=${this.state.query}`).then(res => {
       
       if (res.data.length) {
         console.log('fromm apiiiii', res);
@@ -162,7 +163,7 @@ export default class Home extends Component {
 
           this.setState({
             formatted: formatted
-          }, () => console.log("GOOGLE RES:", res.data.results[0].formatted_address)) // Should save addresses search in DB in the future
+          }, () => console.log("GOOGLE RES:", res.data.results[0].formatted_address, "FORMATTED:", formatted)) // Should save addresses search in DB in the future
         })
       }
     })
@@ -181,72 +182,23 @@ export default class Home extends Component {
 
 
   render() {
+    console.log("FORMATTED:", this.formated, "THIS STATE FORMATTED:",this.state.formated)
     console.log('ttttttttt', this.state);
-    
-    //   const searchResult = this.state.addresses.map( ad => {
-    //     return (
-    //       <ul>
-    //         <li class="list-group-item" > Found: {this.state.formattedAddress}</li> 
-    //             <li class="list-group-item"> {ad.country}</li>
-    //             <li class="list-group-item" >
-    //             <i class="fa fa-map" aria-hidden="true"></i>
-    //             <a href="#"   >{ad}</a>
-    //         </li>
-
-    //       </ul>
-
-    //     )
-    // })
-
-
-    // const searchResult = ( 
-    //                    <ul>
-    //                     <li class="list-group-item" > Found: {this.state.formattedAddress}</li> 
-    //                         <li class="list-group-item"> {this.state.addresses.country}</li>
-    //                         <li class="list-group-item" >
-    //                         <i class="fa fa-map" aria-hidden="true"></i>
-    //                         <a href="#"   >{this.state.addresses}</a>
-    //                    </li>
-
-    {/* <div>
-                    {address.fullAddress}
-                    <button onClick={()=>this.saveAddress(address.id)}>Save Address</button>
-                    <button onClick={()=>this.viewAddress(address.lat, address.lng)}>View on Map</button>
-
-                   </div> */}
-    {/* </ul>
-                       ) */}
-
-
-
-
-    // for(let i = 0; i < this.state.formattedAddresses.legnth; i ++){
-    //   return searchResult += `<li class="list-group-item" >
-    //   <a href="#">${this.state.formattedAddresses[i]}</a>
-    //   </li> `
-    // }
-
-
-
-
-
-    // console.log("SEARCH RESULT :", this.state.addresses)
 
 
     const { formatted } = this.state;
     return (
       <div className="main-pages-div">
-
+    
         <SweetAlert
           show={this.state.newAddressSaved}
           title="New Address"
           text="New Address Saved Successfully"
-          onConfirm={() => this.setState({ newAddressSaved: false })}
-        />
+          onConfirm={() => this.setState({ newAddressSaved: false })}/>
 
         <div className={'app-container'} >
           <Fragment>
-
+          <div class="search-cointainer">
             <div class="ui basic center aligned segment"  >
               <div class="ui action left icon input"
                 style={{
@@ -258,7 +210,7 @@ export default class Home extends Component {
                   // background: "#e0e1e2 none",
                   fontFamily: "Lato,'Helvetica Neue',Arial,Helvetica,sans-serif",
 
-                  'fontSize': "1rem",
+                  'fontSize': "2rem",//size
 
                   fontWeight: "700",
                   lineHeight: "2em",
@@ -270,18 +222,19 @@ export default class Home extends Component {
                 }}
               >
 
-                <input type="text" placeholder="Search in your addresses.."
+                <input type="text" placeholder="Find places ..."
                   onChange={this.handleSearchChange}
                   name="query"
                   value={this.state.query}
                   style={{
-                    borderTopRightRadius: 0,
-                    borderBottomRightRadius: 0,
-                    borderRightColor: "transparent!important",
-                    //Top 3 control input right corner top && bottom radius & colors
-                    //https://stackoverflow.com/questions/35341502/how-to-use-border-radius-only-for-1-corner-react-native
+                   'border-radius': '2.4571429rem',
+                   width:'400px', //width
+                   height:'60px',
 
-                    paddingLeft: "2.67142857em!important",
+                    borderRightColor: "transparent!important",
+
+
+                    paddingLeft: "4.67142857em!important",
                     // paddingRight: "1em!important",
                     boxShadow: "none",
                     margin: 0,
@@ -294,13 +247,15 @@ export default class Home extends Component {
                     background: "#fff",
                     border: "1px solid rgba(34,36,38,.15)",
                     color: "rgba(0,0,0,.87)",
-                    borderRadius: ".28571429rem",
+                    // borderRadius: ".28571429rem",
                     maxWidth: "100%",
                     overflow: "visible"
                   }}
                 />
 
-                <i aria-hidden="true" class="search icon" type="image/x-icon"
+                {/* <i aria-hidden="true" class="search icon"> */}
+                {/*                 
+                type="image/x-icon"
                   style={{
                     pointerEvents: "none",
                     right: "auto",
@@ -311,7 +266,7 @@ export default class Home extends Component {
                     lineHeight: "1",
                     textAlign: "center", //not working
                     top: 0,
-                    right: 0,
+                    // right: 0,
                     margin: 0,
                     height: "100%",
                     width: "2.67142857em",
@@ -322,7 +277,9 @@ export default class Home extends Component {
                     transition: "opacity .3s ease", //Not sure if this is working [Test aagain ]
                     fontSize: "1em"
                   }}
-                ></i>
+                > */}
+                {/* </i> */}
+                {/* <i aria-hidden="true" class="spinner loading icon"></i> */}
 
                 <button class="ui blue button"
                   onClick={this.handleSearchBar}
@@ -330,9 +287,8 @@ export default class Home extends Component {
                     float: "left ",
                     paddingTop: ".78571429em",
                     paddingBottom: ".78571429em",
-
                     margin: 0,
-                    borderRadius: "0 .28571429rem .28571429rem 0",
+                    // borderRadius: "0 .28571429rem .28571429rem 0",
                     backgroundColor: "#2185d0",
                     color: "#fff",
                     textShadow: " none",
@@ -347,9 +303,10 @@ export default class Home extends Component {
                     verticalAlign: "baseline",
                     fontFamily: "Lato,'Helvetica Neue',Arial,Helvetica,sans-serif",
                     fontSize: "100%",
-                    fontWeight: "700",
+                    fontWeight: "800",
                     lineHeight: "2em",
-                    fontStyle: "normal",
+                    // lineHeight: "8em",
+                    fontStyle: "bold",
                     // not useful it seems
                     textAlign: "center",
                     textDecoration: "none",
@@ -360,7 +317,7 @@ export default class Home extends Component {
                     letterSpacing: "normal",
                     wordSpacing: "normal",
                     textIndent: "0px",
-                    font: " 400 11px system-ui",
+                    font: " 900 16px system-ui", 
 
 
                     //Not Important
@@ -369,41 +326,88 @@ export default class Home extends Component {
                     'text-align': "center",
                     top: "50%",
                     // width: "100%",
-                    ' margin-top': " -.5em"
+                    ' margin-top': " -.5em",
+                     'borderTopRightRadius': '2.4571429rem',
+                     'borderBottomRightRadius':'2.4571429rem',
                   }}
-                >
-
-                  Search
-      </button>
+                >Search</button>
+                
               </div>
-
-              {
-
-                formatted && (
+              {formatted && (
                   <ul>
 
-                    <li class="list-group-item"> {}</li>
+                  
+
+                   
+              <button class="ui button"
+                   style={{ 
+                    backgroundColor:'white',
+                    height:'4rem', 
+                    width: '35rem', marginTop:'0.1rem'}}> <a href="#mmm">{formatted}   
+             </a></button> <div class="ui vertical divider" style={{height:'9px', color:'black'}}></div>
+
+              <button class="ui button"
+                   style={{ backgroundColor:'rgb(232,232,232)',
+                    height:'4rem', 
+                    color:'white',
+                    width: '35rem', marginTop:'0.1.6rem'}}>
+                     <ModalExampleDimmer address={this.state.formatted}/> 
+
+                      <button class="ui rgb(44,184,75) button" 
+                      style={{ backgroundColor:'rgb(44,184,75)', 
+                      color:'white',
+                      width:'90px',
+                      marginLeft:'4px',
+                      marginRight:'4px'
+                      }}>Share</button>
+      
+                      <button class="ui teal button" 
+                      style={{
+                        marginLeft:'5px', 
+                        }}>invite <i class="fas fa-plus" style={{marginLeft:'4px'}}></i></button>
+                        <button class="ui primary button" style={{float:'right', width:'90px'}}>Save </button>
+                     </button>
+               
+
+            
+                   
+  
+            
+                   
+           
+
+                    {/*                     
+                    <div class="ui menu" style={{ backgroundColor:'white',
+                    height:'6rem', 
+                    width: '35rem'}}><div class="item"><button class="ui primary button">View up</button></div><div class="item"><button class="ui button">Save</button></div><div class="item"><button class="ui button">Share</button></div>{formatted}</div>
+                     */}
+                     
+                    {/* <li class="list-group-item"> {}</li>
                     <li class="list-group-item" >
                       <i class="fa fa-map" aria-hidden="true"></i>
-                      <a href="#"   >{formatted}</a>
-                    </li>
+                      <a href="#mmm">{formatted}</a>
+                    </li> 
 
-                    {this.state.addressSaved ? '' : <button onClick={() => this.saveNonExisitingAddress(this.state.address.id)}>Save Address</button>}
+                    {this.state.addressSaved ?  
+
+                    <div class="header">No results found.</div> : 
+                    
+                    <button onClick={() => this.saveNonExisitingAddress(this.state.address.id)}>Save Address</button>}
                     <button onClick={() => this.viewAddress()}>View on Map</button>
-
+*/}
                   </ul>
                 )}
-
-
-              <div class="ui horizontal divider"></div>
+              
+              </div>
+              {/* <div><div class="ui inverted menu"><a class="red active item">Red</a><a class="orange active item">Orange</a><a class="yellow active  item">Yellow</a><a class="olive active item">Olive</a><a class="green active item">Green</a><a class="teal active item">Teal</a></div><div class="ui inverted menu"><a class="blue active item">Blue</a><a class="violet active item">Violet</a><a class="purple active item">Purple</a><a class="pink active item">Pink</a><a class="brown active item">Brown</a><a class="grey active item">Grey</a></div></div> */}
             </div>
 
           </Fragment>
-          {/* <StandaloneSearchBox></StandaloneSearchBox> */}
           Container Begin
              <Header />
-          <div className={'app-content'}>
-            <HomeForm />
+             
+          <div className='app-content'>
+            <HomeForm  />
           </div>
 
           End Container

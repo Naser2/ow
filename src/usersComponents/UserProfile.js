@@ -1,5 +1,9 @@
 
 import React, { Component, Fragment } from 'react';
+
+import ReactModal from 'react-responsive-modal';
+
+
 import {
   FacebookShareCount,
   GooglePlusShareCount,
@@ -101,7 +105,10 @@ class UserProfile extends Component {
     postal_code: '',
     country: '',
     openModal: false,
-    modalAddress: {}
+
+    modalAddress: {},
+    editModalOpen: false
+
   };
 
 
@@ -111,6 +118,15 @@ class UserProfile extends Component {
       aboutMe: !this.state.aboutMe
     })
   }
+
+  onOpenModal = () => {
+    this.setState({ editModalOpen: true });
+  };
+
+  onCloseModal = () => {
+    this.hideEditForm()
+    this.setState({ editModalOpen: false });
+  };
 
   displayForm = (address) => {
     console.log(" SHow FORM ")
@@ -130,8 +146,10 @@ class UserProfile extends Component {
 
   hideEditForm = () => {
     this.setState({
-      showForm: false,
+
       id: '',
+      lat: '',
+      lng: '',
 
       door_number: '',
       cardinal: '',
@@ -152,7 +170,9 @@ class UserProfile extends Component {
       'Authorization': `Bearer ${token}`
     }
     console.log("Delete  ADDRESSE:", id)
-    axios.delete(`http://localhost:3001/addresses/${id}`, { headers }
+
+    axios.delete(`${process.env.REACT_APP_BACKEND_URL}/addresses/${id}`, { headers }
+
     ).then(res => {
       console.log(res)
       this.getUserAddresses();
@@ -178,7 +198,9 @@ class UserProfile extends Component {
       'Authorization': `Bearer ${token}`
     }
     console.log("SUBMITTING NEW ADDRESSE:", this.state)
-    axios.put(`http://localhost:3001/addresses/${this.state.id}`, { address: this.state }, { headers }
+
+    axios.put(`${process.env.REACT_APP_BACKEND_URL}/addresses/${this.state.id}`, { address: this.state }, { headers }
+
     ).then(res => {
       console.log("RES AFTER POSTING NEW AFFRESS:", res)
       this.getUserAddresses();
@@ -189,12 +211,17 @@ class UserProfile extends Component {
 
 
   getUserAddresses = () => {
+
+    console.log(process.env.REACT_APP_BACKEND_URL)
+
     const token = localStorage.getItem("token")
     const headers = {
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${token}`
     }
-    axios.get("http://localhost:3001/user/addresses", { headers }).then(res => {
+
+    axios.get(`${process.env.REACT_APP_BACKEND_URL}/user/addresses`, { headers }).then(res => {
+
       this.setState({ addresses: res.data });
       console.log("USER ADDRESS RES:", res.data);
 
@@ -207,25 +234,60 @@ class UserProfile extends Component {
 
   getUser = () => {
     const token = localStorage.getItem("token")
-    const headers = {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${token}`
-    }
-    axios.get(`http://localhost:3001/users/7`, { headers }).then(res => {
-      this.setState({ user: res.data });
-      console.log("USER OBJ:", res.data);
+    const id = this.state.user.id
+    
+     console.log("USER TOKEN:", token)
+    //  console.log("USER ID:", id)
+    if(token != null){
+      const headers = {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      }
+      axios.get(`${process.env.REACT_APP_BACKEND_URL}/users/current`, { headers }).then(
+        
+        
+        res => {
+          if(res.data != null){ 
+              this.setState({ user: res.data });
+              console.log("USER OBJ:", res.data);
+        
+              this.setState({
+                user: {
+                  id: res.data.user.id,
+                  first_name: res.data.user.first_name,
+                  last_name: res.data.user.last_name,
+                  phone_number: res.data.user.phone_number,
+                  email: res.data.user.email,
+                  created_at: res.data.user.created_at,
+                }
+              });   
+    
+          }else{
+            
+          }
+  
+      })
+    } else{ console.log("DID NOT HAVE ID OR TOKEN ")}
 
-      this.setState({
-        user: {
-          id: res.data.user.id,
-          first_name: res.data.user.first_name,
-          last_name: res.data.user.last_name,
-          phone_number: res.data.user.phone_number,
-          email: res.data.user.email,
-          created_at: res.data.user.created_at,
-        }
-      });
-    })
+  }
+
+  openEditModal = (address) => {
+    console.log(address)
+    this.setState({
+      id: address.id,
+      lat: address.lat,
+      lng: address.lng,
+      door_number: address.door_number,
+      cardinal: address.cardinal,
+      street: address.street,
+      neighborhood: address.neighborhood,
+      city: address.city,
+      state: address.state,
+      postal_code: address.postal_code,
+      country: address.country,
+    }, () => { this.onOpenModal() })
+
+
   }
 
   getUserSavedAddresses = () => {
@@ -234,7 +296,8 @@ class UserProfile extends Component {
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${token}`
     }
-    axios.get("http://localhost:3001/user/addresses/saved", { headers }).then(res => {
+
+    axios.get(`${process.env.REACT_APP_BACKEND_URL}/user/addresses/saved`, { headers }).then(res => {
 
       this.setState({
         savedAddresses: res.data
@@ -251,6 +314,16 @@ class UserProfile extends Component {
     this.setState({
       openModal: !this.state.openModal
     });
+  }
+
+  editLatAndLng = (coord) => {
+    const { latLng } = coord;
+    const lat = latLng.lat();
+    const lng = latLng.lng();
+    this.setState({
+      lat,
+      lng
+    })
   }
 
   render() {
@@ -270,7 +343,10 @@ class UserProfile extends Component {
             {address.fullAddress}
           </a>
 
-            <i href="#showpnmap" key={address.id}
+          
+            <button href="#showpnmap" key={address.id}
+            onClick={()=>{this.openEditModal(address)}}
+
               style={{
                 color: "rgb(56,90,151)",
                 'font-size': "14px",
@@ -281,7 +357,9 @@ class UserProfile extends Component {
                 position: "relative",
                 "vertical-align": "middle",
                 'white-space': "nowrap",
-              }}>Edit</i>
+
+              }}>Edit</button>
+
           </small>
         </li>)
     });
@@ -289,7 +367,9 @@ class UserProfile extends Component {
     const savedAddressesObj = this.state.savedAddresses.map(savedAddress => {
       return (
         <li class="list-group-item" key={savedAddress.id}>
-          <i class="fa fa-map" aria-hidden="true"></i>
+
+          <i class="fa fa-map" aria-hidden="true"></i> 
+
           <Link onClick={() => this.setState({ openModal: true, modalAddress: { lat: savedAddress.address.lat, lng: savedAddress.address.lng, address: savedAddress.address.fullAddress } })} to="#">{savedAddress.address.fullAddress}</Link>
         </li>
       )
@@ -305,10 +385,129 @@ class UserProfile extends Component {
     const shareUrl = 'http://google.com'
 
     return (
-      <div id="profile-main">
+      <div id="profile-main" style={{backgroundColor: " #ccefff"}}>
 
         {/* <someComp/> */}
         {/* Profile &middot;  */}
+
+
+        <ReactModal open={this.state.editModalOpen} onClose={this.onCloseModal} center>
+          <div style={{height: "550px"}}>
+          {console.log(process.env.REACT_APP_OW_JS_API_KEY)}
+          <Map
+              initialCenter={{
+              lat: this.state.lat,
+              lng: this.state.lng
+            }}
+            style={mapBasicStyle}
+            google={this.props.google}
+            zoom={18}
+          >
+
+            <Marker
+              onClick={this.onMarkerClick}
+                draggable={true} 
+                position={{ lat: this.state.lat, lng: this.state.lng }}
+                onDragend={(t, map, coord) => { this.editLatAndLng(coord) }}
+              name={'Current location'}
+            />
+
+            {/* <InfoWindow onClose={this.onInfoWindowClose}> */}
+            {/* <div> */}
+            {/* Selected to show here!! */}
+            {/* <h1>{this.state.selectedPlace.name}</h1> */}
+            {/* </div> */}
+            {/* </InfoWindow> */}
+          </Map>
+          </div>
+
+          <div className="container" style={{
+            position: "relative",
+            padding: "40px 40x",
+            background: "#eee",
+            paddingBlockStart: "20px",
+            paddingBlockEnd: "20px",
+            // 'boxSizing': "border-box",
+            'backgroundColor': "white",
+            'boxShadow': "0px 0px 15px black",
+            'borderRadius': "5px"
+
+          }}>
+            <div className="row"  >
+              <div className="col-sm-4"></div>
+              <div className="col-sm-4">
+                <a className="btn big-register" style={{ margin: "60px 80x" }} >Edit your address</a></div>
+              <div className="col-sm-4"></div>
+            </div>
+
+            <div className="form AddressBox " style={{ padding: "20px 200px", }}>
+              <form onSubmit={this.handleAddressFormSubmit} >
+
+                <input id="street" style={{
+                  overflow: "auto", margin: "12px", 'borderCollapse': "collapse",
+                }} className="form-control" type="street" placeholder="Street" name="street"
+                  value={this.state.street}
+                  onChange={(e) => this.handleAddressFormChange(e)}></input>
+
+                <input id="neighborhood" style={{ overflow: "auto", margin: "12px", 'borderCollapse': "collapse" }} className="form-control" type="neighborhood" placeholder="neighborbhood" name="neighborhood"
+                  value={this.state.neighborhood}
+                  onChange={(e) => this.handleAddressFormChange(e)}></input>
+
+
+                <input id="city" style={{
+                  overflow: "auto", margin: "12px", 'borderCollapse': "collapse",
+                }} className="form-control" type="city" placeholder="City" name="city"
+                  value={this.state.city}
+                  onChange={(e) => this.handleAddressFormChange(e)}></input>
+
+
+
+                <input id="state" style={{
+                  overflow: "auto", margin: "12px", 'borderCollapse': "collapse",
+                }} className="form-control" type="state" placeholder="State" name="state"
+                  value={this.state.state}
+                  onChange={(e) => this.handleAddressFormChange(e)}></input>
+                {/* <PhoneInput
+         inputComponent={ SmartInput }
+         placeholder="Enter phone number"
+         value={ this.state.value }
+         onChange={ value => this.setState({ value }) }
+          /> */}
+
+
+
+                <input id="door_number" style={{ overflow: "auto", margin: "12px", 'marginBlockEnd': "2.33em" }} className="form-control" type="door_number" placeholder="Door Number" name="door_number"
+                  value={this.state.door_number}
+                  onChange={(e) => this.handleAddressFormChange(e)}></input>
+
+                <input id="country" style={{
+                  overflow: "auto", margin: "12px", 'borderCollapse': "collapse",
+                }} className="form-control" type="country" placeholder="Country" name="country"
+                  value={this.state.country}
+                  onChange={(e) => this.handleAddressFormChange(e)}></input>
+
+                <input className="btn btn-default btn-login" style={{
+
+                  'marginRight': "auto",
+                  'marginLeft': "auto",
+                  display: "block",
+                  padding: "8px 16px",
+                  'fontSize': " 16px",
+                  color: "#ffff",
+                  // 'background-color': "#3fc1c9",
+                  // 'background-color':"#1273de",
+                  'backgroundColor': "#fccb00",
+                  'border': "0",
+                  'borderRadius': "2px",
+                  cursor: "pointer",
+                  transition: "background-color. 15s ease-in",
+                  'marginTop': "16px"
+                }}
+                  type="submit" value="Edit"></input>
+              </form>
+            </div>
+          </div>
+        </ReactModal>
 
         <Modal isOpen={this.state.openModal} toggle={this.toggle} className={this.props.className}>
           <ModalHeader toggle={this.toggle}>{modalAddress.address}</ModalHeader>
@@ -357,6 +556,7 @@ class UserProfile extends Component {
                 </FacebookShareButton>
               </div>
 
+
               <div className="Demo__some-network">
                 <TwitterShareButton
                   url={shareUrl}
@@ -371,6 +571,7 @@ class UserProfile extends Component {
                   &nbsp;
           </div>
               </div>
+
 
               <div className="Demo__some-network">
                 <TelegramShareButton
@@ -429,7 +630,6 @@ class UserProfile extends Component {
 
 
         <div class="growl" id="app-growl"></div>
-
 
         {/* <nav class="navbar navbar-expand-md fixed-top navbar-dark bg-primary app-navbar">
             <a class="navbar-brand" href="index.html">
@@ -513,7 +713,9 @@ class UserProfile extends Component {
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
               </div>
 
-              <div class="modal-body p-0 js-modalBody">
+
+              <div class="modal-body p-0 js-modalBody" >
+
                 <div class="modal-body-scroller">
                   <div class="media-list media-list-users list-group js-msgGroup">
                     <a href="#" class="list-group-item list-group-item-action">
@@ -1026,6 +1228,7 @@ class UserProfile extends Component {
                     class="media-object d-flex align-self-start mr-3"
                     src="../v4/docs/assets/img/avatar-mdo.png" />
 
+
                   <div class="media-body">
                     <div class="media-heading">
                       <small class="float-right text-muted">34 min</small>
@@ -1075,7 +1278,7 @@ class UserProfile extends Component {
 
 
                     <li class="list-group-item"> Location: {"USA"}</li>
-                    <li class="list-group-item">Member Since: {"this.sate.created_at"}</li>
+                    <li class="list-group-item">Member Since: {this.state.created_at}</li>
 
                     <li class="list-group-item">{<Fragment>
                       <i class="fas fa-dove" style={{ color: "#339af0" }}>
@@ -1152,6 +1355,7 @@ class UserProfile extends Component {
             </div>
           </div>
         </div>
+
 
 
 

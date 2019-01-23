@@ -5,8 +5,8 @@ import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
 
 import Dashboard from './components/Layout/Dashboard'
 import Signup from './usersComponents/Signup';
-import Login from './usersComponents/Login'
-import Landing from './usersComponents/Landing'
+import Login from './usersComponents/Login';
+import Landing from './usersComponents/landing/Landing';
 import UserProfile from './usersComponents/UserProfile';
 import GitMapData from './components/GitMapData';
 // import User from './usersComponents/User'
@@ -49,29 +49,53 @@ class App extends Component {
     const  sidedrawer = <SideDrawer show={this.state.sideDrawerOpen}/>
 
     return (
-      <div className="main" style={{width:"100%"}}>
+      <div className="main" style={{
+        width:"100%",
+        backgroundColor: "red",
+      // marginLeft: "0",
+      // marginRight: "0",
+      // "padding": "0",
+      }}>
         <Router>
         
-          <div className="App" style={{width:"100%", right:"0"}} > 
+      SpecialMapCard
+          <div className="App" 
+          style={{
+            width:"100%",
+            // backgroundColor: "black",
+            backgroundColor: "rgba(43, 152, 231,1)",
+            marginLeft: "0",
+            marginRight: "0",
+          //   "padding": "0",
+            }} 
+            > 
+      
             <ToolBar drawerClickHandler={this.drawerToggleClickHandler} history={this.props.history} />
             {sidedrawer}
 
             {this.state.sideDrawerOpen ? [backdrop]: null}
 
-            <div className="container" style={{marginTop:"25px"}} >
+            <div className="container" style={{
+              
+              marginTop:"25px", 
+              // width:'100%',
+              margin: "0",
+              "padding": "0",
+          
+          }} >
               <Switch>
                 <Route  exact path="/Home1"   component={Layout} />
                 <Route  exact path= "/home2" component={Landing} />
                 <Route  exact path= "/GitMapData" component={GitMapData} />
                 <Route exact path="/map" component={Container} />
-                <Route exact path="/map-data" component={GitMapData} /> 
+                {/* <Route exact path="/map-data" component={GitMapData} />  */}
                 <Route exact path="/dashboard" component={Dashboard} />
                 <Route exact path="/profile" component={UserProfile} />
                 <Route exact path="/register-place" component={AddressForm} /> 
-                <Route exact path="/signup" component={Signup} /> 
+                {/* <Route exact path="/signup" component={Signup} />  */}
                 <Route exact path="/login" component={Login} /> 
-                <Route exact path="/HotSpotsPage" component={HotspotsPage} /> 
-                <Route exact path="/UserAddressBook" component={UserAddressBook} /> 
+                {/* <Route exact path="/HotSpotsPage" component={HotspotsPage} />  */}
+                {/* <Route exact path="/UserAddressBook" component={UserAddressBook} />  */}
               </Switch>
             </div>
           </div>

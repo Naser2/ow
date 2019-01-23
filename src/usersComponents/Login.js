@@ -20,7 +20,8 @@ export default class LogIn extends Component {
   e.preventDefault()
   // console.log("LOGIN EMAIL " + this.state.email  +
   // " PASSWORD "  + this.state.password)
-  axios.post("http://localhost:3001/user_token", {auth: this.state})
+  axios.post(`${process.env.REACT_APP_BACKEND_URL}/user_token`, {auth: this.state})
+
   .then(res => {
     localStorage.setItem("token",res.data.jwt);
   }).catch(err => {
@@ -46,7 +47,7 @@ export default class LogIn extends Component {
               'line-height': "22px",
                margin: "30px 120px 30px 120px", //T(0)R(15)B(15)L(15
                color: "rgb(29,33,40)",
-              }}>Log Into O-W</h2>
+              }}>Log into One Way</h2>
 
               <div  className="app-form-item">
              
